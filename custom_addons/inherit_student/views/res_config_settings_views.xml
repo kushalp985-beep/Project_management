@@ -1,0 +1,18 @@
+<odoo>
+    <record id="res_config_settings_view_form_inherit_student" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.student</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='user_default_rights']" position="after">
+                <block title="Student Management" name="student_management_settings">
+                    <setting id="student_notes_setting"
+                            string="Student Notes">
+                        <field name="student_notes"/>
+                    </setting>
+                </block>
+            </xpath>    
+        </field>
+    </record>
+</odoo>
+    

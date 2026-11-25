@@ -1,0 +1,91 @@
+<odoo>
+
+    <record id="subject_list_view" model="ir.ui.view">
+        <field name="name">subject.list.view</field>
+        <field name="model">student.subject</field>
+        <field name="arch" type="xml">
+            <list>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="subject_type"/>
+                        <field name="maximum_marks"/>
+                        <field name="passing_marks"/>
+                        <field name="subject_teacher_id" widget="many2many_tags"/>
+                        <field name="standard_ids" widget="many2many_tags"/>
+                        <field name="class_ids" widget="many2many_tags"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="subject_form_view" model="ir.ui.view">
+        <field name="name">subject.form.view</field>
+        <field name="model">student.subject</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="subject_type"/>
+                        <field name="maximum_marks"/>
+                        <field name="passing_marks"/>
+                        <field name="subject_teacher_id" widget="many2many_tags"/>
+                        <field name="standard_ids" widget="many2many_tags"/>
+                        <field name="class_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+ 
+    <record id="action_subject" model="ir.actions.act_window">
+        <field name="name">Subjects</field>
+        <field name="res_model">student.subject</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+
+ 
+    <menuitem id="subject_menu"
+              name="Subjects"
+              parent="student_management_menu"
+              action="action_subject"/>
+
+    <record id="student_subject_kanban_view" model="ir.ui.view">
+        <field name="name">student.subject.kanban</field>
+        <field name="model">student.subject</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="code"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <div class="fw-bold fs-5">
+                                <field name="name"/>
+                            </div>
+
+                            <div class="mt-2">
+                                <strong>Subject Code: </strong>
+                                <field name="code"/>
+                            </div>
+
+                            <div class="mt-2">
+                                <strong>Description: </strong>
+                            </div>
+
+                            <div class="mt-2">
+                                <field name="active"
+                                       widget="boolean"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+              
+
+</odoo>

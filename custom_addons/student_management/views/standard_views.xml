@@ -1,0 +1,105 @@
+<odoo>
+
+
+    <record id="standard_list_view" model="ir.ui.view">
+        <field name="name">standard.list.view</field>
+        <field name="model">student.standard</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="standard_form_view" model="ir.ui.view">
+       <field name="name">standard.form.view</field>
+       <field name="model">student.standard</field>
+       <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </group>
+
+                <notebook>
+                    <page string="Classes">
+                        <field name="standard_line_ids">
+                            <list>
+                                <field name="class_name"/>
+                                <field name="teacher_id"/>
+                            </list>
+                        </field>
+                    </page>
+
+                    <page string="Subjects">
+                        <field name="subject_ids">
+                            <list>
+                                <field name="name"/>
+                                <field name="code"/>
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+
+    <record id="standard_kanban_view" model="ir.ui.view">
+        <field name="name">standard.kanban.view</field>
+        <field name="model">student.standard</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="description"/>
+
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+
+                                <div>
+                                    <strong>Description:</strong>
+                                    <field name="description"/>
+                                </div>
+
+                                <div>
+                                    <strong>Class Teacher:</strong>
+                                    <field name="class_teacher"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+
+    <record id="action_standard" model="ir.actions.act_window">
+        <field name="name">Standards</field>
+        <field name="res_model">student.standard</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+
+
+    <menuitem
+        id="standard_menu"
+        name="Standards" 
+        parent="student_management_menu"
+        action="action_standard"/>
+
+
+</odoo>

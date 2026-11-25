@@ -1,0 +1,218 @@
+<odoo>
+
+    <record id="student_list_view" model="ir.ui.view">
+        <field name="name">student.list.view</field>
+        <field name="model">student.management</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="roll_number"/>
+                <field name="mobile"/>
+                <field name="gender"/>
+                <field name="email"/>
+                <field name="street"/>
+                <field name="city"/>
+                <field name="state_id"/>
+                <field name="country_id"/>
+                <field name="notes"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="student_form_view" model="ir.ui.view">
+    <field name="name">student.management.form</field>
+    <field name="model">student.management</field>
+    <field name="arch" type="xml">
+        <form>
+
+ <header>
+    <button name="action_open_document_wizard"
+        type="object"
+        string="Student Documents"
+        class="btn-primary"
+        icon="fa-file"/>
+
+
+
+    <button name="action_send_email"
+        type="object"
+        string="Send by email"
+        class="btn-primary ms-2"
+        icon="fa-envelope"/>
+
+        <field name="state" widget="statusbar"
+           statusbar_visible="draft,sent"/>
+ </header>
+     
+ <sheet>
+        <div class="oe_button_box" name="button_box">
+
+    <button name="action_view_marks_sheets"
+            type="object"
+            class="oe_stat_button"
+            icon="fa-book">
+        <field name="marksheet_ids"
+               widget="statinfo"
+               string="Marks Sheets"/>
+    </button>
+    <button name="action_open_student_html_report"
+            type="object"
+            class="oe_stat_button"
+            icon="fa-file-pdf-o">
+        <div class="o_stat_info">
+            <span class="o_stat_text">Student Report</span>
+        </div>
+    </button>
+   </div>
+
+                <field name="photo"
+                       widget="image"
+                       class="oe_avatar"/>
+                <div class="oe_title">
+                    <label for="name"/>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </div>
+                <group>
+                    <group>
+                        <label for="street" string="Address"/>
+                        <div class="o_address_format">
+                                <field name="street" placeholder="Street..." class="o_address_street"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="city" placeholder="City" class="o_address_city"/>
+                                <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip" />
+                                <div name="partner_address_country" class="d-flex justify-content-between">
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                                </div>
+                            </div>
+                    </group>
+                    
+                    <group>                     
+                        <field name="standard_id"/>
+                        <field name="class_line_id"
+                          domain="[('standard_id', '=', standard_id)]"/>
+                        <field name="class_teacher_id" readonly="1"/>
+                        <field name="roll_number"/>
+                        <field name="admission_date"/>
+                        <field name="date_of_birth"/>
+                        <field name="gender"
+                               widget="radio"
+                               options="{'horizontal': true}"/>
+                         <field name="mobile" widget="phone" options="{'enable_sms': false}"/>
+                         <field name="email" widget="email" options="{'enable_sms': false}"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Notes">
+                        <group>
+                            <field name="notes"/>
+                        <group>
+                            <field name="class_line_id"/>
+                       </group>
+                       <group>
+                            <field name="subject_ids"
+                              widget="many2many_tags"/> 
+                       </group>
+                        </group>
+                    </page>
+                   <page string="Documents">
+                        <group>
+                           <field name="document_name" readonly="1"/>
+                           <field name="document_attachment_ids" widget="many2many_binary" readonly="1"/>
+                           <field name="document_notes" readonly="1"/>
+                     </group>
+                   </page>
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+    <record id="student_kanban_view" model="ir.ui.view">
+        <field name="name">student.kanban.view</field>
+        <field name="model">student.management</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="photo"/>
+                <field name="standard_id"/>
+                <field name="roll_number"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-4">
+                                    <field name="photo"
+                                           widget="image"
+                                           class="oe_avatar"/>
+                                </div>
+                                <div class="col-8">
+                                    <strong>
+                                     <field name="name"/>
+                                    </strong>
+                                    <div>
+                                        <field name="roll_number"/>
+                                    </div>
+                                    <div>
+                                        <field name="mobile"/>
+                                    </div>
+                                    <div>
+                                        <field name="email"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_student_records"
+            model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">student.management</field>
+        <field name="view_mode">kanban,list,form,pivot,calendar</field>
+    </record>
+
+    <record id="student_pivot_view" model="ir.ui.view">
+    <field name="name">student.management.pivot</field>
+    <field name="model">student.management</field>
+    <field name="arch" type="xml">
+        <pivot string="Student Analysis">
+            <field name="gender" type="row"/>
+            <field name="standard_id" type="col"/>
+        </pivot>
+    </field>
+</record>
+
+<record id="student_calendar_view" model="ir.ui.view">
+    <field name="name">student.management.calendar</field>
+    <field name="model">student.management</field>
+    <field name="arch" type="xml">
+        <calendar string="Student Birthdays"
+                  date_start="date_of_birth"
+                  mode="month">
+
+            <field name="name"/>
+            <field name="date_of_birth"/>
+            <field name="gender"/>
+            <field name="standard_id"/>
+
+        </calendar>
+    </field>
+</record>
+
+    <menuitem id="student_management_menu"
+              name="Students"/>
+
+    <menuitem id="menu_student_records"
+              name="Students"
+              parent="student_management_menu"
+              action="action_student_records"/>
+
+</odoo>
