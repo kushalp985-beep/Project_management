@@ -1,8 +1,0 @@
-<odoo>
-    <record id="seq_student_admission" model="ir.sequence">
-        <field name="name">Student Admission Number</field>
-        <field name="code">student.management</field>
-        <field name="prefix">STU</field>
-        <field name="padding">4</field>
-    </record>
-</odoo>
