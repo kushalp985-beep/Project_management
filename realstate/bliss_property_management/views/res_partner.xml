@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="action_tenant_contract" model="ir.actions.act_window">
+        <field name="name">Tenants Contracts</field>
+        <field name="res_model">property.contract</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('partner_id', '=', active_id)]</field>
+        <field name="context">{'default_partner_id': active_id}</field>
+    </record>
+    <record id="view_partner_form_custo" model="ir.ui.view">
+        <field name="name">res.partner.form.property</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//span[@name='address_name']" position="before">
+                <field name="contact_type" widget="radio" options="{&quot;horizontal&quot;:true}"/>
+                <field name="arabic_name"/>
+                <field name="code" required="True"/>
+                <field name="gender" invisible="is_company == True"/>
+                <field name="birthdate" invisible="is_company == True"/>
+                <field name="nationality" options="{&quot;no_open&quot;:true,&quot;no_create&quot;:true}"/>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/group[1]" position="after">
+                <group name="owner_details" string="Owner Details"
+                       invisible="contact_type != &quot;owner&quot;">
+                    <group name="studio_group_ak_left">
+                        <field name="ejari_number"/>
+                    </group>
+                </group>
+                <group name="passpoer_emirate_id_details">
+                    <group name="passport_details" string="Passport Details">
+                        <field name="passport_number"/>
+                        <field name="passport_issue_date"/>
+                        <field name="passport_expiration_date"/>
+                        <field name="passport_image"/>
+                    </group>
+                    <group name="emerate_id_details" string="Emirate ID / Visa Details">
+                        <field name="emirateId_number"/>
+                        <field name="emirateId_issue_date"/>
+                        <field name="emirateId_expiration_date"/>
+                        <field name="emirateId_image"/>
+                        <field name="visa_issue_date" invisible="nationality == 2"/>
+                        <field name="visa_expiration_date" invisible="nationality == 2"/>
+                    </group>
+                </group>
+            </xpath>
+            <xpath expr="//div[@class='oe_button_box']" position="inside">
+                <button name="%(action_tenant_contract)d" type="action"
+                        class="oe_stat_button" icon="fa-files-o">
+                    <field name="contract_count" widget="statinfo" string="Contracts"/>
+                </button>
+            </xpath>
+
+
+        </field>
+    </record>
+
+
+</odoo>

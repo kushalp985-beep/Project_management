@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="property_inquiry_wizard_form" model="ir.ui.view">
+        <field name="name">property.inquiry.wizard.form</field>
+        <field name="model">property.inquiry.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Unit Records">
+                <group>
+                    <group>
+                        <field name="search_mode" widget="radio"/>
+                        <field name="unit_id" invisible="search_mode != 'unit_wise'"
+                               required="search_mode == 'unit_wise'"
+                               options="{'no_create': True}"/>
+                        <field name="owner_id" invisible="search_mode != 'owner_wise'"
+                               required="search_mode == 'owner_wise'"
+                               options="{'no_create': True}"/>
+                        <field name="tenant_id" invisible="search_mode != 'tenant_wise'"
+                               required="search_mode == 'tenant_wise'"
+                               options="{'no_create': True}"/>
+                    </group>
+                    <group string="Filters">
+                        <field name="unit_id" invisible="search_mode == 'unit_wise'"
+                               options="{'no_create': True}"/>
+                        <field name="owner_id" invisible="search_mode == 'owner_wise'"
+                               options="{'no_create': True}"/>
+                        <field name="tenant_id" invisible="search_mode == 'tenant_wise'"
+                               options="{'no_create': True}"/>
+                        <field name="building_id" options="{'no_create': True}"/>
+                        <field name="floor_no"/>
+                        <field name="contract_status"/>
+                        <field name="payment_status"/>
+                        <field name="cheque_status"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_print_pdf" type="object" string="Print PDF"
+                            class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_property_inquiry_wizard" model="ir.actions.act_window">
+        <field name="name">Unit Records</field>
+        <field name="res_model">property.inquiry.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

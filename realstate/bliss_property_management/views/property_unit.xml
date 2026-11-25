@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="action_to_contract_unit" model="ir.actions.act_window">
+        <field name="name">Contract</field>
+        <field name="res_model">property.contract</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('unit_id', '=', active_id)]</field>
+        <field name="context">{'default_unit_id': active_id}</field>
+    </record>
+
+    <record id="property_unit_form" model="ir.ui.view">
+        <field name="name">property.unit.form</field>
+        <field name="model">property.unit</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="state" widget="statusbar" readonly="1"/>
+                </group>
+                <sheet string="property unit">
+                    <div class="oe_button_box" name="button_box">
+                        <button type="action" name="%(action_to_contract_unit)d" class="oe_stat_button"
+                                icon="fa-files-o">
+                            <field name="contract_count" widget="statinfo" string="Contracts"/>
+                        </button>
+                        <button type="object" name="action_view_unit_issues" class="oe_stat_button"
+                                icon="fa-wrench">
+                            <field name="issue_count" widget="statinfo" string="Issues"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" required="True"/>
+                            <field name="unit_no" required="True"/>
+                            <field name="unit_usage_id" can_create="False" can_write="False" no_open="True"
+                                   options="{'no_create': True}"/>
+                            <field name="unit_subtype_id" can_create="False" can_write="False" no_open="True"
+                                   options="{'no_create': True}"/>
+                            <field name="suit_area_size"/>
+                            <field name="common_area_size"/>
+                            <field name="approval_ref_no"/>
+                            <field name="dewa"/>
+                            <field name="property_ref_number"/>
+                            <field name="property_type"/>
+                        </group>
+                        <group>
+                            <field name="project_id" options="{'no_create': True}"/>
+                            <field name="building_id" can_create="False" can_write="False" required="True"
+                                   no_open="True" options="{'no_create': True}"
+                                   domain="[('project_id', '=', project_id)]"/>
+                            <field name="floor_no"/>
+                            <field name="unit_type_id" can_create="False" can_write="False" no_open="True"
+                                   options="{'no_create': True}"/>
+                            <field name="status" invisible="1"/>
+                            <field name="total_area_size"/>
+                            <!-- <field name="reference_no"/> -->
+                            <field name="currency_id" invisible="1"/>
+                            <field name="management_fee"/>
+                            <field name="rent_amount"/>
+                            <field name="analytic_account_id"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="property_unit_tree" model="ir.ui.view">
+        <field name="name">property.unit.tree</field>
+        <field name="model">property.unit</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="property unit">
+                <field name="name"/>
+                <field name="unit_no"/>
+                <field name="building_id" optional="show"/>
+<!--                <button type="action" name="%(action_to_contract_unit)d" class="oe_stat_button"-->
+<!--                                icon="fa-files-o"/>-->
+            </list>
+        </field>
+    </record>
+    <record id="property_unit_kanban" model="ir.ui.view">
+        <field name="name">property.unit.kanban</field>
+        <field name="model">property.unit</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_property_unit" sample="1">
+                <field name="name"/>
+                <field name="building_id"/>
+                <field name="unit_no"/>
+                <field name="floor_no"/>
+                <field name="unit_usage_id"/>
+                <field name="unit_type_id"/>
+                <field name="state"/>
+                <field name="suit_area_size"/>
+                <field name="total_area_size"/>
+                <field name="common_area_size"/>
+                <field name="contract_count"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click oe_kanban_card">
+                            <div class="o_kanban_image">
+                                <img t-if="record.building_id" alt="building"
+                                     src="/bliss_property_management/static/Img/image.png" style="height: 100px;" />
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <span>
+                                        <b>Code</b>
+                                        :
+                                    </span>
+                                    <field name="name"/>
+                                </strong>
+                                <br/>
+                                <div class="o_kanban_primary_bottom">
+                                    <div class="o_field_char">
+                                        <span>
+                                            <b>State</b>
+                                            :
+                                        </span>
+                                        <field name="state_id"/>
+                                    </div>
+                                    <div class="o_field_char">
+                                        <span>
+                                            <b>Building</b>
+                                            :
+                                        </span>
+                                        <field name="building_id"/>
+                                    </div>
+                                    <div class="o_field_char">
+                                        <span>
+                                            <b>Floor no</b>
+                                            :
+                                        </span>
+                                        <field name="floor_no"/>
+                                    </div>
+                                    <div class="o_field_char">
+                                        <span>
+                                            <b>Plot Area</b>
+                                            :
+                                        </span>
+                                        <field name="total_area_size"/>
+                                    </div>
+                                </div>
+                                <div align="right">
+                                    <field name="state" decoration-success="state == 'available'"
+                                           decoration-warning="state == 'reserved'"
+                                           decoration-primary="state == 'booked'"
+                                           decoration-danger="state == 'rented'" widget="badge" />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click oe_kanban_card">
+                            <div class="o_kanban_image">
+                                <img t-if="record.building_id" alt="building"
+                                     src="/bliss_property_management/static/Img/image.png" style="height: 100px;" />
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <span>
+                                        <b>Code</b>
+                                        :
+                                    </span>
+                                    <field name="name"/>
+                                </strong>
+                                <br/>
+                                <div class="o_kanban_primary_bottom">
+                                    <div class="o_field_char">
+                                        <span>
+                                            <b>State</b>
+                                            :
+                                        </span>
+                                        <field name="state_id"/>
+                                    </div>
+                                    <div class="o_field_char">
+                                        <span>
+                                            <b>Building</b>
+                                            :
+                                        </span>
+                                        <field name="building_id"/>
+                                    </div>
+                                    <div class="o_field_char">
+                                        <span>
+                                            <b>Floor no</b>
+                                            :
+                                        </span>
+                                        <field name="floor_no"/>
+                                    </div>
+                                    <div class="o_field_char">
+                                        <span>
+                                            <b>Plot Area</b>
+                                            :
+                                        </span>
+                                        <field name="total_area_size"/>
+                                    </div>
+                                </div>
+                                <div align="right">
+                                    <field name="state" decoration-success="state == 'available'"
+                                           decoration-warning="state == 'reserved'"
+                                           decoration-primary="state == 'booked'"
+                                           decoration-danger="state == 'rented'" widget="badge" />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="property_unit_search" model="ir.ui.view">
+        <field name="name">property.unit.search</field>
+        <field name="model">property.unit</field>
+        <field name="arch" type="xml">
+            <search string="Property unit Search">
+                <field name="name"/>
+                <field name="unit_no"/>
+                <searchpanel>
+                    <field name="owner_id" string="Owner" icon="fa-filter" enable_counters="1"/>
+                    <field name="state_id" string="Emirate" icon="fa-filter" enable_counters="1"/>
+                    <field name="state" string="State" icon="fa-filter" enable_counters="1" select="multi"/>
+                    <field name="status" string="Status" icon="fa-filter" enable_counters="1" select="multi"/>
+                    <field name="unit_usage_id" string="Contract Type" icon="fa-filter" enable_counters="1"
+                           select="multi"/>
+                    <field name="unit_type_id" string="Property Type" icon="fa-filter" enable_counters="1"
+                           select="multi"/>
+                    <field name="project_id" string="Project" icon="fa-filter" enable_counters="1"/>
+                    <field name="building_id" string="Building" icon="fa-filter" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="action_property_inquiry_report" model="ir.actions.report">
+        <field name="name">Unit Records</field>
+        <field name="model">property.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">bliss_property_management.property_inquiry</field>
+        <field name="report_file">bliss_property_management.property_inquiry</field>
+        <field name="print_report_name">'Unit Records - %s' % (object.code)</field>
+        <field name="paperformat_id" ref="bliss_property_management.custom_paper_format"/>
+    </record>
+
+</odoo>

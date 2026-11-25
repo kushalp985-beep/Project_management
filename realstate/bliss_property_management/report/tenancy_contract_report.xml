@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_tenancy_contract_report" model="ir.actions.report">
+            <field name="name">Tenancy Contract</field>
+            <field name="model">property.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bliss_property_management.report_tenancy_contract_document</field>
+            <field name="report_file">bliss_property_management.report_tenancy_contract_document</field>
+            <field name="paperformat_id" ref="bliss_property_management.custom_paper_format"/>
+            <field name="binding_model_id" ref="bliss_property_management.model_property_contract"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'Tenancy Contract - %s' % (object.code)</field>
+        </record>
+    </data>
+</odoo>

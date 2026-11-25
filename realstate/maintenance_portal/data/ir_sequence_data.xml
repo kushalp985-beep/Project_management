@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Property Sequence -->
+        <record id="maintenance_request_sequence" model="ir.sequence">
+            <field name="name">Maintenance Request</field>
+            <field name="code">maintenance.request</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">MR/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <!-- <record id="menu_maintenance_request_record" model="website.menu">
+            <field name="name">Maintanance Request</field>
+            <field name="url">/my/maintenance</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">10</field>
+        </record> -->
+    </data>
+</odoo>        

@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="property_security_deposit_tree_view" model="ir.ui.view">
+        <field name="name">property.security.deposit.tree.view</field>
+        <field name="model">property.security.deposit</field>
+        <field name="arch" type="xml">
+            <list string="Security Deposit">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="security_dep"/>
+            </list>
+        </field>
+    </record>
+    <record id="contract_termination_form" model="ir.ui.view">
+        <field name="name">contract.termination.form</field>
+        <field name="model">contract.termination</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_bill_check" type="object" string="Bill Checked" class="btn-primary" invisible="1"/>
+                    <button name="action_inspection_check" type="object" string="Inspection Checked"
+                            class="btn-primary" invisible="state_term != 'new'"/>
+                    <button name="action_unit_maintenance" type="object" string="Maintenance In Progress" invisible="1"
+                            class="btn-primary"/>
+                    <button name="action_approve_termination" type="object" string="Termination Approved" class="btn-primary" invisible="state_term != 'inspection_checked'"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset to Inspection Checked" class="btn-secondary" invisible="state_term != 'tapproved'"/>
+                    <button name="action_print_termination_record" type="object" string="Print Termination Record" class="btn-secondary" invisible="state_term != 'tapproved'"/>
+                    <button name="create_draft_entry" type="object" string="Create Draft Entry" class="btn-primary" invisible="state_term != 'tapproved'"/>
+                    <field name="state_term" widget="statusbar" statusbar_visible="new,inspection_checked,tapproved"/>
+                </header>
+                <sheet string="contract termination">
+
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_open_settlement_entry"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                        >
+                            <field name="move_count" widget="statinfo" string="Journal Entries"/>
+                        </button>
+
+
+
+                    </div>
+                    <group>
+                        <group string="Termination Dates">
+                            <field name="name"/>
+                            <field name="termination_date"/>
+                            <field name="date_stop"/>
+                            <field name="termination_type"/>
+                            <field name="contract_id"/>
+                            <field name="unit_id"/>
+                        </group>
+                         <group string="Termination Penality">
+                            <field name="value"/> 
+                            <field name="penality_months" invisible= "1"/>
+                            <field name="penality_amount_per_month" invisible= "1"/>
+                            <field name="is_inspected" invisible= "1" readonly="1"/>
+                             
+
+                        </group>
+                         
+                        <group string="Termination Calculation ">
+                            <field name="security_deposit"/>
+                            <field name="penality_amount"/>
+                            <field name="inspection_cost" invisible="is_inspected == False"/>
+                            <field name="ijari_canslation_fees"/>
+                            
+                        </group>
+                        <group string="Termination Calculation ">
+                            <field name="date_start" string="Dates" widget="daterange" options="{'end_date_field': 'date_stop'}"/>
+                            <field name="no_of_days" invisible= "1" />
+                            <field name="day_value" />
+                            <field name="consumed_period"/>
+                            <field name="other_cost"/>
+                            <field name="consumed_value"/>
+                            <field name="total_paid"/>
+                            <field name="settlement_amount"/>
+                        </group>
+                            
+                            <field name="contract_currency_id" invisible="1"/>
+                            <field name="total_costs" invisible="1"/>
+                            <field name="journal_id" invisible="1"/>
+                            
+                            <field name="balance_period" invisible="1"/>
+                            <field name="balance_value" invisible="1"/>
+                            <field name="to_be_paid" invisible="1"/>
+                            <field name="excluded_ids" widget="many2many_tags" invisible="1"/>
+                            
+                            
+
+                    <!-- </group>
+                    <group> -->
+                       
+                    </group>
+                    <notebook>
+
+                        <page string="Cheques">
+                            <group>
+                                <field name="not_paid_cheque_ids"/>
+                            </group>
+                        </page>
+
+                        <page string="Security Deposit">
+                            <group>
+                                <field name="contract_security_deposit_ids"/>
+                            </group>
+                        </page>
+
+                        <page string="Other">
+                            <group>
+                                <separator/>
+                            </group>
+                        </page>
+
+                        <page string="Inspection History">
+                            <group>
+                                <field name="inspection_line_ids" readonly="1">
+                                    <list>
+                                        <field name="inspection_date"/>
+                                        <field name="paint_condition"/>
+                                        <field name="door_condition"/>
+                                        <field name="light_condition"/>
+                                        <field name="appliance_remarks"/>
+                                        <field name="inspection_attachment_ids" widget="many2many_binary"/>
+                                    </list>
+                                </field>
+                            </group>
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+               
+                   
+                <chatter/>
+                <!-- <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div> -->
+            </form>
+        </field>
+    </record>
+    <record id="contract_termination_tree" model="ir.ui.view">
+        <field name="name">contract.termination.tree</field>
+        <field name="model">contract.termination</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="contract termination">
+                <field name="contract_currency_id" optional="hide"/>
+                <field name="termination_type"/>
+                <field name="termination_date"/>
+                <field name="date_stop"/>
+                <field name="contract_id"/>
+                <field name="security_deposit"/>
+                <field name="penality_amount"/>
+                <field name="total_costs"/>
+                <field name="state_term" decoration-success="state_term == 'tapproved'"
+                       decoration-info="state_term == 'inspection_checked'"
+                       decoration-danger="state_term == 'maintenance_inprogress'"
+                       decoration-primary="state_term == 'bill_check'"
+                       decoration-muted="state_term == 'new'" widget="badge"/>
+            </list>
+        </field>
+    </record>
+</odoo>

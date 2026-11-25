@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_reject_proposal_wizard" model="ir.ui.view">
+        <field name="name">contract.termination.wizard.form</field>
+        <field name="model">contract.termination.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Contract termination">
+                <sheet>
+                    <group>
+                        <field name="termination_type"/>
+                        <field name="termination_date"/>
+                    </group>
+                    <footer>
+                        <button name="action_create_contract_termination" string="Confirm" type="object" class="btn-primary"/>
+                        <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

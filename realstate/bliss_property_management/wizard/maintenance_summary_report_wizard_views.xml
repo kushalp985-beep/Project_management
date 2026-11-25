@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="maintenance_summary_report_wizard_form" model="ir.ui.view">
+        <field name="name">maintenance.summary.report.wizard.form</field>
+        <field name="model">maintenance.summary.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Maintenance Summary Report">
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="filter_state"/>
+                        <field name="maintenance_billing"/>
+                    </group>
+                    <group>
+                        <field name="project_id" options="{'no_create': True}"/>
+                        <field name="owner_id" options="{'no_create': True}"/>
+                        <field name="building_id" options="{'no_create': True}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_print_pdf" type="object" string="Download PDF"
+                            class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_maintenance_summary_report_wizard" model="ir.actions.act_window">
+        <field name="name">Maintenance Summary Report</field>
+        <field name="res_model">maintenance.summary.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

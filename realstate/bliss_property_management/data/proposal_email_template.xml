@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="proposal_email_template" model="mail.template">
+            <field name="name">Send proposal template</field>
+            <field name="model_id" ref="bliss_property_management.model_property_contract"/>
+            <!--            <field name="subject">{{ object.name }}</field>-->
+            <field name="email_from">{{ (object.user_id.email_formatted or object.company_id.email_formatted or
+                user.email_formatted) }}
+            </field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                       Dear <t t-esc="object.partner_id.name"/>, <br/><br/>
+                        I am writing to present a rental proposal for <t t-esc="object.unit_id.name"/>Unit.
+                        Please review the proposal at your earliest convenience. If you have any questions or require
+                        any modifications, do not hesitate to reach out to us.
+                        <br/><br/>
+                        Best regards,
+                    </p>
+                </div>
+            </field>
+            <!--        <field name="attachment_ids" eval="[(6, 0, [att.id for att in object.attachment_ids])]"/>-->
+            <field name="lang">{{ object.partner_id.lang }}</field>
+
+        </record>
+    </data>
+</odoo>

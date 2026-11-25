@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <data>
+     
+	     <record id="account_cheque_report_id" model="ir.actions.report">
+	        <field name="name">Account Cheque</field>
+	        <field name="model">account.cheque</field>
+	        <field name="report_type">qweb-pdf</field>
+	        <field name="report_name">bliss_property_management.account_cheque_template</field>
+	        <field name="report_file">bliss_property_management.account_cheque_template</field>
+	        <field name="binding_model_id" ref="model_account_cheque"/>
+	        <field name="binding_type">report</field>
+	     </record>
+
+	     <record id="dynamic_cheque_report" model="ir.actions.report">
+	        <field name="name">Print Dynamic Cheque</field>
+	        <field name="model">account.cheque</field>
+	        <field name="report_type">qweb-pdf</field>
+	        <field name="report_name">bliss_property_management.custom_report</field>
+	        <field name="report_file">bliss_property_management.custom_report</field>
+	        <field name="binding_model_id" ref="model_account_cheque"/>
+	        <field name="binding_type">report</field>
+	     </record>
+				
+     </data>
+</odoo>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="report_page1">
+
+                <div class="page" id="page1">
+                    <h2 class="text-center">RENTAL AGREEMENT</h2>
+                    <p class="text-center">
+                        <t t-esc="doc.name"/>
+                    </p>
+
+                    <h3>
+                        <u>PARTIES</u>
+                    </h3>
+                    <p>This Room Rental Agreement (hereinafter referred to as the “Agreement”) is entered into on
+                        __________ (the “Effective Date”), by and between _______________, with an address of
+                        _______________ (hereinafter referred to as the “Homeowner”) and _______________ with an
+                        address of _______________ (hereinafter referred to as the “Renter”) (collectively referred
+                        to as the “Parties”).
+                    </p>
+
+                    <h3>
+                        <u>ADDRESS</u>
+                    </h3>
+                    <p>The location of the room in consideration is located at the following residence and address
+                        _______________, hereinafter referred to as “Home”).
+                    </p>
+
+                    <h3>
+                        <u>RENTAL TERM</u>
+                    </h3>
+                    <p>The Parties agree that this rental term is on a monthly basis beginning on the date of
+                        signing this Agreement.
+                    </p>
+                    <p>The Parties further agree that the first month’s rent is to be prorated in case of this
+                        Agreement starting partway through the month whereas the monthly terms will proceed from the
+                        first day of each month ongoing.
+                    </p>
+                    <p>This Agreement is valid for one year upon its signing. Upon the end of the term of the
+                        Agreement, this Agreement will not be automatically renewed for a new term.
+                    </p>
+
+                    <h3>
+                        <u>RENT AND SECURITY DEPOSIT</u>
+                    </h3>
+                    <p>The Parties agree that the Renter will pay the Homeowner an amount of $_____________ per
+                        month due on or before the first day of each month.
+                    </p>
+                    <p>The Parties agree that the Homeowner requires a payment amounting to $_____________ as a
+                        security deposit for the faithful performance of the renter.
+                    </p>
+                    <p>The payment of the security deposit will be required to be submitted on the day of signing
+                        this Agreement.
+                    </p>
+                    <p>The security deposit will be returned to the renter ___________ days after the termination of
+                        this Agreement assuming no damage to the room has been made.
+                    </p>
+
+                    <h3>
+                        <u>UTILITIES</u>
+                    </h3>
+                    <br/>
+
+                    <h3>
+                        <u>MAINTENANCE AND REPAIRS</u>
+                    </h3>
+                    <br/>
+
+                    <h3>
+                        <U>HOUSE RULES</U>
+                    </h3>
+                    <br/>
+
+                    <h3>
+                        <U>TERMINATION</U>
+                    </h3>
+                    <br/>
+
+                    <h3>
+                        <U>GOVERNING LAW</U>
+                    </h3>
+                    <br/>
+
+                    <h3>
+                        <U>ENTIRE AGREEMENT</U>
+                    </h3>
+                    <br/>
+
+                    <h3>
+                        <U>SIGNATURES</U>
+                    </h3>
+                    <p>Homeowner: ________________________ Date: ________________</p>
+                    <p>Renter: ________________________ Date: ________________</p>
+                </div>
+
+        </template>
+
+
+
+
+
+        <template id="proposal_report">
+            <t t-call="web.html_container">
+                <t t-call="bliss_property_management.report_page1"/>
+
+                    </t>
+
+
+
+        </template>
+        <template id="report_for_proposal">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="bliss_property_management.proposal_report" t-lang="doc.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+        <record id="action_proposal_report" model="ir.actions.report">
+            <field name="name">Proposal Report</field>
+            <field name="model">property.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bliss_property_management.report_for_proposal</field>
+            <field name="report_file">bliss_property_management.report_for_proposal</field>
+            <field name="binding_model_id" ref="bliss_property_management.model_property_contract"/>
+            <field name="print_report_name">'Proposal - %s' % (object.name)</field>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

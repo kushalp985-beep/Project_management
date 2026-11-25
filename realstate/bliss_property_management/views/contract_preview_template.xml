@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="property_contract_preview_template" name="Sales Order" inherit_id="portal.portal_sidebar"
+                  primary="True">
+            <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+                <t t-set="o_portal_fullwidth_alert" groups="sales_team.group_sale_salesman">
+                    <t t-call="portal.portal_back_in_edit_mode"/>
+                </t>
+                <div class="row o_portal_sale_sidebar">
+                    <!-- Sidebar -->
+                    <t t-call="portal.portal_record_sidebar" id="sale_order_portal_sidebar">
+                        <t t-set="classes" t-value="'d-print-none col-lg-3 col-xl-4'"/>
+                        <t t-set="title">
+                            <h2 t-field="contract.id" data-id="id"/>
+                        </t>
+                        <t t-set="entries">
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-2" id="sale_order_sidebar_button">
+                                    <a t-if="contract.state !='signed'" role="button" class="btn btn-primary d-block"
+                                       data-bs-toggle="modal" data-bs-target="#modalaccept" href="#">
+                                        <i class="fa fa-check"/>
+                                        <t t-if="contract.state !='signed'">Sign</t>
+                                        <t t-else="">Accept &amp; Sign</t>
+                                    </a>
+                                    <a t-elif="contract.state !='signed'" role="button" id="o_sale_portal_paynow"
+                                       data-bs-toggle="modal" data-bs-target="#modalaccept" href="#"
+                                       t-att-class="'d-block %s' % ('btn btn-light' if sale_order.transaction_ids else 'btn btn-primary')">
+                                        <!--                                    <i class="fa fa-check"/> <t t-if="not sale_order.signature">Accept &amp; Pay</t><t t-else="">Pay Now</t>-->
+                                    </a>
+                                    <div class="o_download_pdf d-flex gap-1 flex-lg-column flex-xl-row">
+                                        <div class="flex-grow-1">
+                                            <a class="btn btn-secondary o_print_btn o_portal_invoice_print d-block"
+                                               t-att-href="contract.get_portal_url(report_type='pdf')"
+                                               id="print_invoice_report" title="View Details" target="_blank">
+                                                <i class="fa fa-print"/>
+                                                View Details
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="navspy flex-grow-1 ps-0" t-ignore="true" role="complementary">
+                                    <ul class="nav flex-column bs-sidenav"></ul>
+                                </div>
+                                <div t-if="contract.user_id">
+                                    <h6>
+                                        <small class="text-muted">Your contact</small>
+                                    </h6>
+                                    <div class="o_portal_contact_details d-flex flex-column gap-2">
+                                        <div class="d-flex justify-content-start align-items-center gap-2">
+                                            <img class="o_avatar o_portal_contact_img rounded"
+                                                 t-att-src="image_data_uri(contract.user_id.avatar_1024)"
+                                                 alt="Contact"/>
+                                            <div>
+                                                <h6 class="mb-0" t-out="contract.user_id.name"/>
+                                                <a href="#discussion"
+                                                   class="d-flex align-items-center gap-2 small fw-bold">
+                                                    Send message
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                    <!-- Page content -->
+                    <!-- <div id="quote_content" class="col-12 col-lg-9 col-xl-8 mt-5 mt-lg-0"> -->
+                    <div id="quote_content"
+                            class="col-12 col-lg-9 col-xl-8 mt-5 mt-lg-0"
+                            t-att-data-order-id="contract.id"
+                            t-att-data-token="contract.access_token">
+                        <!-- main content -->
+                        <!-- <div t-attf-class="#{'pb-5' if report_type == 'html' else ''}" id="portal_sale_content">
+                            <div t-call="#{contract._get_name_contract_content_view()}"/>
+                        </div> -->
+                        <div t-attf-class="#{'pb-5' if report_type == 'html' else ''}" id="portal_sale_content">
+                            <t t-call="bliss_property_management.sale_order_portal_content"/>
+                        </div>
+                        <!-- modal relative to the actions sign and pay -->
+                        <div role="dialog" class="modal fade" id="modalaccept">
+                            <div class="modal-dialog">
+                                <form id="accept" method="POST" t-att-data-order-id="contract.id"
+                                      t-att-data-token="contract.access_token"
+                                      class="js_accept_json modal-content js_website_submit_form">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <header class="modal-header">
+                                        <h4 class="modal-title">Validate</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </header>
+                                    <main class="modal-body" id="sign-dialog">
+                                        <p>
+                                            <span>By signing this proposal, I agree to the following terms:</span>
+                                            <ul>
+                                                <li>
+                                                    <!--                                                <span>Accepted on the behalf of:</span> <b t-field="sale_order.partner_id.commercial_partner_id"/>-->
+                                                </li>
+                                                <li>
+                                                    <!--                                                <span>For an amount of:</span> <b data-id="total_amount" t-field="sale_order.amount_total"/>-->
+                                                </li>
+                                                <!--                                            <li t-if="sale_order.payment_term_id">-->
+                                                <!--                                                <span>With payment terms:</span> <b t-field="sale_order.payment_term_id.note"/>-->
+                                                <!--                                            </li>-->
+                                            </ul>
+                                        </p>
+                                        <!--                                    <t t-call="portal.signature_form">-->
+                                        <!--                                        <t t-set="call_url" t-value="sale_order.get_portal_url(suffix='/accept')"/>-->
+                                        <!--                                        <t t-set="default_name" t-value="sale_order.partner_id.name"/>-->
+                                        <!--                                    </t>-->
+                                    </main>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </xpath>
+        </template>
+        <template id="sale_order_portal_content" name="Sales Order Portal Content">
+            <!-- Intro -->
+            <div id="introduction"
+                 t-attf-class="#{'border-bottom-0 pt-0 pb-3 bg-white' if report_type == 'html' else ''}">
+                <div class="row" id="intro_row">
+                    <h2 class="my-0 col-12 col-lg flex-grow-1 mb-1 mb-lg-0">
+                        <t t-out="contract.name"/>
+                    </h2>
+                </div>
+            </div> <br/><br/>
+            <div id="content">
+                <div id="informations" class="row">
+                    <div id="sale_info" class="col-12 col-lg-6 mb-4">
+                        <span id="sale_info_title">
+                            <h4 class="mb-1">Contract Information</h4>
+                            <hr class="mt-1 mb-2"/>
+                        </span>
+                        <table class="table table-borderless table-sm">
+                            <tbody style="white-space:nowrap" id="sale_info_table">
+                                <tr>
+                                    <th class="ps-0 pb-0">Date:</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.date_start" t-options='{"widget": "date"}'/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">End Date:</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.date_stop" t-options='{"widget": "date"}'/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- ======  Customer Information  ====== -->
+                    <div id="customer_info" class="col-12 col-lg-6 mb-4">
+                        <h4 class="mb-1">
+                            <t>
+                                Contract Tenant Address
+                            </t>
+                            <!--                        <small t-if="contract.partner_id == contract.partner_invoice_id == sale_order.env.user.partner_id">-->
+                            <!--                            <a class="small" t-attf-href="/my/account?redirect={{sale_order.get_portal_url()}}">-->
+                            <!--                                <i class="fa fa-fw fa-pencil"/>-->
+                            <!--                            </a>-->
+                            <!--                        </small>-->
+                        </h4>
+                        <hr class="mt-1 mb-2"/>
+                        <div t-field="contract.partner_id"
+                             t-options="{'widget': 'contact', 'fields': ['name', 'address', 'phone', 'email']}"/>
+                        <!--                    <span t-if="sale_order.partner_shipping_id != sale_order.partner_invoice_id"-->
+                        <!--                            id="shipping_address"-->
+                        <!--                            class="col-lg-6">-->
+                        <!--                        <br/>-->
+                        <!--                        <h4 class="mb-1">-->
+                        <!--                            Shipping Address-->
+                        <!--                        </h4>-->
+                        <!--                        <hr class="mt-1 mb-2"/>-->
+                        <!--                        <div t-field="sale_order.partner_shipping_id" t-options='{ "widget": "contact", "fields": [ "name", "address"]}'/>-->
+                        <!--                    </span>-->
+                    </div>
+
+                    <div id="sale_info" class="col-12 col-lg-6 mb-4">
+                        <span id="sale_info_title">
+                            <h4 class="mb-1">Unit Info</h4>
+                            <hr class="mt-1 mb-2"/>
+                        </span>
+                        <table class="table table-borderless table-sm">
+                            <tbody style="white-space:nowrap" id="sale_info_table">
+                                <tr>
+                                    <th class="ps-0 pb-0">Code</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.code"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">Unit</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.unit_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">Owner</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.owner_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">Tenant</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.partner_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">Responsible</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.user_id"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- ======  Customer Information  ====== -->
+                    <div id="customer_info" class="col-12 col-lg-6 mb-4">
+                        <h4 class="mb-1">
+                            <t>
+                                PRICING
+                            </t>
+
+                        </h4>
+                        <hr class="mt-1 mb-2"/>
+                        <table class="table table-borderless table-sm">
+                            <tbody style="white-space:nowrap" id="sale_info_table">
+                                <tr>
+                                    <th class="ps-0 pb-0">Period</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.period"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0"># of periods</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.period_nbr"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">Value</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.value"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">Tax Type</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.tax_type"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">VAT</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.tax_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">VAT</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.tax_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">Discount</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.discount"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">Tax Amount</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.tax_amount"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">Total_value</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.total_value"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">Total paid</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.total_paid"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="ps-0 pb-0">Total to be paid</th>
+                                    <td class="w-100 pb-0 text-wrap">
+                                        <span t-field="contract.to_be_paid"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="customer_info" class="col-12 col-lg-12 mb-4">
+                        <h4 class="mb-1">
+                            <t>
+                                RENTAL AGREEMENT
+                            </t>
+                        </h4>
+                        <hr class="mt-1 mb-2"/>
+                        <h4>
+                            <u>PARTIES</u>
+                        </h4>
+                        <p>This Room Rental Agreement (hereinafter referred to as the “Agreement”) is entered into on
+                            __________ (the “Effective Date”), by and between _______________, with an address of
+                            _______________ (hereinafter referred to as the “Homeowner”) and _______________ with an
+                            address of _______________ (hereinafter referred to as the “Renter”) (collectively referred
+                            to as the “Parties”).
+                        </p>
+
+                        <h4>
+                            <u>ADDRESS</u>
+                        </h4>
+                        <p>The location of the room in consideration is located at the following residence and address
+                            _______________, hereinafter referred to as “Home”).
+                        </p>
+
+                        <h4>
+                            <u>RENTAL TERM</u>
+                        </h4>
+                        <p>The Parties agree that this rental term is on a monthly basis beginning on the date of
+                            signing this Agreement.
+                        </p>
+                        <p>The Parties further agree that the first month’s rent is to be prorated in case of this
+                            Agreement starting partway through the month whereas the monthly terms will proceed from the
+                            first day of each month ongoing.
+                        </p>
+                        <p>This Agreement is valid for one year upon its signing. Upon the end of the term of the
+                            Agreement, this Agreement will not be automatically renewed for a new term.
+                        </p>
+
+                        <h4>
+                            <u>RENT AND SECURITY DEPOSIT</u>
+                        </h4>
+                        <p>The Parties agree that the Renter will pay the Homeowner an amount of $_____________ per
+                            month due on or before the first day of each month.
+                        </p>
+                        <p>The Parties agree that the Homeowner requires a payment amounting to $_____________ as a
+                            security deposit for the faithful performance of the renter.
+                        </p>
+                        <p>The payment of the security deposit will be required to be submitted on the day of signing
+                            this Agreement.
+                        </p>
+                        <p>The security deposit will be returned to the renter ___________ days after the termination of
+                            this Agreement assuming no damage to the room has been made.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <hr/>
+            <!-- chatter -->
+            <div id="sale_order_communication">
+                <h3>Communication history</h3>
+                <t t-set="object" t-value="contract"/>
+                <t t-call="portal.message_thread"/>
+            </div>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="unit_summary_report">
+        <t t-call="web.html_container">
+            <style>
+                .unit-summary-page {
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 11px;
+                    color: #212529;
+                    padding: 12px 16px;
+                }
+                .unit-summary-title {
+                    text-align: center;
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin: 0 0 12px 0;
+                }
+                .unit-summary-filters {
+                    border: 1px solid #1F4E78;
+                    padding: 8px 10px;
+                    margin-bottom: 14px;
+                    text-align: center;
+                }
+                .unit-summary-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    table-layout: fixed;
+                    margin-bottom: 12px;
+                }
+                .unit-summary-table th,
+                .unit-summary-table td {
+                    border: 1px solid #333333;
+                    padding: 6px 8px;
+                    vertical-align: middle;
+                    word-wrap: break-word;
+                }
+                .unit-summary-table thead th {
+                    background-color: #1F4E78;
+                    color: #ffffff;
+                    font-weight: bold;
+                    text-align: center;
+                }
+                .unit-summary-table .text-end {
+                    text-align: right;
+                }
+                .unit-summary-table .totals-row td {
+                    background-color: #FFF2CC;
+                    font-weight: bold;
+                }
+            </style>
+            <div class="unit-summary-page">
+                <h2 class="unit-summary-title" t-esc="report_title or 'Unit Summary Report'"/>
+                <div class="unit-summary-filters" t-if="project_label or building_label or owner_label or unit_label">
+                    <t t-if="project_label">
+                        <strong>Project:</strong> <span t-esc="project_label"/>
+                    </t>
+                    <t t-if="building_label">
+                        <t t-if="project_label"> | </t>
+                        <strong>Building:</strong> <span t-esc="building_label"/>
+                    </t>
+                    <t t-if="unit_label">
+                        <t t-if="project_label or building_label"> | </t>
+                        <strong>Unit:</strong> <span t-esc="unit_label"/>
+                    </t>
+                    <t t-if="owner_label">
+                        <t t-if="project_label or building_label or unit_label"> | </t>
+                        <strong>Owner:</strong> <span t-esc="owner_label"/>
+                    </t>
+                </div>
+                <table class="unit-summary-table">
+                    <thead>
+                        <tr>
+                            <th style="width:22%;">Building Name</th>
+                            <th style="width:18%;">Unit</th>
+                            <th t-if="show_management_fee" style="width:18%;">Management Fee</th>
+                            <th style="width:21%;">Paid Amount</th>
+                            <th style="width:21%;">Unpaid Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-if="not lines">
+                            <tr>
+                                <td t-att-colspan="show_management_fee and 5 or 4" class="text-center">No records found.</td>
+                            </tr>
+                        </t>
+                        <t t-foreach="lines" t-as="line">
+                            <tr>
+                                <td t-esc="line['building_name']"/>
+                                <td t-esc="line['unit_name']"/>
+                                <td t-if="show_management_fee" class="text-end" t-esc="line['management_fee_display']"/>
+                                <td class="text-end" t-esc="line['paid_display']"/>
+                                <td class="text-end" t-esc="line['unpaid_display']"/>
+                            </tr>
+                        </t>
+                        <tr class="totals-row">
+                            <td colspan="2" class="text-end">Totals</td>
+                            <td t-if="show_management_fee" class="text-end" t-esc="totals['total_management_fee_display']"/>
+                            <td class="text-end" t-esc="totals['total_paid_display']"/>
+                            <td class="text-end" t-esc="totals['total_unpaid_display']"/>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+</odoo>

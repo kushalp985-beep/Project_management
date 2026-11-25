@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mail_template_send_to_client" model="mail.template">
+        <field name="name">Mail: Send To Client</field>
+        <field name="model_id" ref="maintenance.model_maintenance_request"/>
+        <field name="subject">{{ object.name }}</field>
+        <field name="email_from">"{{ object.vendor_id.name }}" &lt;{{ (object.vendor_id.email or vendor_id.email) }}&gt;</field>
+        <field name="email_to">{{ object.user_id.email_formatted }}</field>
+        <field name="body_html" type="html">
+            <div> Dear <t t-out="object.user_id.name or ''"/>
+                your request has send to client</div>
+        </field>
+        <field name="lang">{{ object.user_id.lang}}</field>
+<!--        <field name="attachment_ids" eval="[(6, 0, [ref('mail_template_test_attachment')])]"/>-->
+    </record>
+</odoo>

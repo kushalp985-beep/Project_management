@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<odoo>
+<!--    <record id="res_users_view_form_inherit_add_field" model="ir.ui.view">-->
+<!--        <field name="name">res.users.view.form.inherit.add.field</field>-->
+<!--        <field name="model">res.users</field>-->
+<!--        <field name="inherit_id" ref="base.view_users_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='action_id']" position="after">-->
+<!--                <field name="main_type"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="res_partner_view_form_inherit_add_field" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit.add.field</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="is_vendor"/>
+                <field name="is_client"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

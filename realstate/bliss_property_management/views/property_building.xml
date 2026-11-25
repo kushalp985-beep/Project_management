@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="property_building_form" model="ir.ui.view">
+        <field name="name">property.building.form</field>
+        <field name="model">property.building</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet string="property building">
+                    <group>
+                        <group>
+                            <field name="name" required="True"/>
+                            <field name="project_id" required="True"
+                                   options="{'no_create': True}"/>
+                            <field name="owner_id" readonly="1"/>
+                            <field name="state_id" readonly="1"/>
+                            <field name="city_id" readonly="1"/>
+                            <field name="hold_type_id" required="True" widget="radio" options='{"horizontal":true}'/>
+                            <field name="land_no_id"/>
+                            <field name="municipality_no"/>
+                            <field name="building_name" required="True"/>
+                            <field name="arabic_name" required="True"/>
+                            <field name="ejari_building_name" required="True"/>
+                            <field name="ejari_building_name_arabic" required="True"/>
+                            <field name="address" required="True"/>
+                            <field name="unit_count"/>
+                            <field name="completion_date"/>
+                            <field name="building_usage_ids" widget="many2many_tags" />
+                            <field name="building_type_id" />
+                        </group>
+                        <group>
+                            <field name="floor_count"/>
+                            <field name="parking_count"/>
+                            <field name="buid_area_size"/>
+                            <field name="plot_area_size"/>
+                            <field name="leasable_area_size"/>
+                            <field name="commom_area_size"/>
+                            <field name="ejari_building_area_size" required="True"/>
+                            <field name="ejari_common_area_size" required="True"/>
+                            <field name="ejari_leasable_area_size" required="True"/>
+                            <field name="status"/>
+                            <field name="dewa"/>
+                            <field name="facilities" widget="many2many_tags"/>
+                            <field name="reference_number"/>
+                            <field name="approval_ref_no"/>
+                            <field name="analytic_account_id"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <group>
+                        <separator/>
+                    </group>
+                </sheet>
+                <chatter/>
+                <!-- <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div> -->
+            </form>
+        </field>
+    </record>
+    <record id="property_building_tree" model="ir.ui.view">
+        <field name="name">property.building.tree</field>
+        <field name="model">property.building</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="property building">
+                <field name="name"/>
+                <field name="building_name" required="True"/>
+                <field name="project_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="property_building_search" model="ir.ui.view">
+        <field name="name">property.building.search</field>
+        <field name="model">property.building</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="building_name"/>
+                <field name="project_id"/>
+                <group>
+                    <filter name="group_project" string="Project" context="{'group_by': 'project_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="contract_email_template" model="mail.template">
+            <field name="name">Contract template</field>
+            <field name="model_id" ref="bliss_property_management.model_property_contract"/>
+            <field name="subject">Rental Contract for {{ object.name }}</field>
+            <field name="email_from">{{ (object.user_id.email_formatted or object.company_id.email_formatted or
+                user.email_formatted) }}
+            </field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear <t t-esc="object.partner_id.name"/>, <br/><br/>
+                        Attached to this email, you will find the lease agreement for the
+                            <t t-esc="object.unit_id.name"/> Unit. Please review the document carefully. If you have any
+                        questions or need any
+                        clarifications, feel free to contact us at your earliest convenience. <br/><br/>
+                        Best regards,
+
+                    </p>
+                </div>
+            </field>
+<!--            <field name="report_template_ids" eval="[(4, ref('bliss_property_management.action_proposal_report'))]"/>-->
+            <field name="lang">{{ object.partner_id.lang }}</field>
+
+        </record>
+
+
+    </data>
+</odoo>

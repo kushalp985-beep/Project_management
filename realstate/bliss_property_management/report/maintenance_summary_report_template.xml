@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="maintenance_summary_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-set="report_docs" t-value="records or docs"/>
+                    <style>
+                        .maintenance-summary-page {
+                            font-family: Arial, Helvetica, sans-serif;
+                            font-size: 12px;
+                            color: #212529;
+                        }
+                        .maintenance-summary-page h2 {
+                            margin-bottom: 8px;
+                        }
+                        .maintenance-summary-page h4 {
+                            margin-top: 20px;
+                            margin-bottom: 10px;
+                            border-bottom: 2px solid #333;
+                            padding-bottom: 4px;
+                        }
+                        .maintenance-summary-filters {
+                            border: 1px solid #333;
+                            background-color: #f8f9fa;
+                            padding: 10px 12px;
+                            margin-bottom: 18px;
+                            text-align: center;
+                        }
+                        .maintenance-report-table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-bottom: 20px;
+                            table-layout: fixed;
+                        }
+                        .maintenance-report-table th,
+                        .maintenance-report-table td {
+                            border: 1px solid #333;
+                            padding: 7px 8px;
+                            vertical-align: middle;
+                            word-wrap: break-word;
+                        }
+                        .maintenance-report-table thead th {
+                            background-color: #d9d9d9;
+                            font-weight: bold;
+                            text-align: left;
+                        }
+                        .maintenance-report-table tbody tr:nth-child(even) {
+                            background-color: #f5f5f5;
+                        }
+                        .maintenance-report-table .row-total td {
+                            background-color: #e8e8e8;
+                            font-weight: bold;
+                        }
+                        .maintenance-report-table .row-completed td {
+                            background-color: #d4edda;
+                            font-weight: bold;
+                        }
+                        .maintenance-report-table .text-end {
+                            text-align: right;
+                        }
+                        .maintenance-report-table .text-center {
+                            text-align: center;
+                        }
+                    </style>
+                    <div class="page maintenance-summary-page">
+                        <h2 class="text-center" t-esc="report_title or 'Maintenance Summary'"/>
+                        <div class="maintenance-summary-filters">
+                            <t t-if="date_from or date_to">
+                                <strong>Period:</strong>
+                                <t t-if="date_from">
+                                    <span t-esc="date_from" t-options="{'widget': 'date'}"/>
+                                </t>
+                                <t t-else="">—</t>
+                                to
+                                <t t-if="date_to">
+                                    <span t-esc="date_to" t-options="{'widget': 'date'}"/>
+                                </t>
+                                <t t-else="">—</t>
+                            </t>
+                            <t t-if="filter_state_label">
+                                | <strong>Status:</strong> <span t-esc="filter_state_label"/>
+                            </t>
+                            <t t-if="billing_label">
+                                | <strong>Billing:</strong> <span t-esc="billing_label"/>
+                            </t>
+                        </div>
+
+                        <h4>Summary by Status</h4>
+                        <table class="maintenance-report-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 75%;">Status</th>
+                                    <th class="text-end" style="width: 25%;">Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="row-total">
+                                    <td>Total Requests</td>
+                                    <td class="text-end"><t t-esc="stats and stats.get('total', 0) or 0"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Pending (Draft + Assigned + In Progress)</td>
+                                    <td class="text-end"><t t-esc="stats and stats.get('pending', 0) or 0"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Draft</td>
+                                    <td class="text-end"><t t-esc="stats and stats.get('draft', 0) or 0"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Assigned</td>
+                                    <td class="text-end"><t t-esc="stats and stats.get('assigned', 0) or 0"/></td>
+                                </tr>
+                                <tr>
+                                    <td>In Progress</td>
+                                    <td class="text-end"><t t-esc="stats and stats.get('in_progress', 0) or 0"/></td>
+                                </tr>
+                                <tr class="row-completed">
+                                    <td>Completed</td>
+                                    <td class="text-end"><t t-esc="stats and stats.get('done', 0) or 0"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Cancelled</td>
+                                    <td class="text-end"><t t-esc="stats and stats.get('cancelled', 0) or 0"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Request Details</h4>
+                        <table class="maintenance-report-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 11%;">Reference</th>
+                                    <th style="width: 9%;">Date</th>
+                                    <th style="width: 12%;">Project</th>
+                                    <th style="width: 12%;">Building</th>
+                                    <th style="width: 8%;">Unit</th>
+                                    <th style="width: 14%;">Billing</th>
+                                    <th style="width: 9%;">Status</th>
+                                    <th class="text-end" style="width: 10%;">Amount</th>
+                                    <th style="width: 15%;">Employee</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="report_docs" t-as="rec">
+                                    <tr>
+                                        <td><span t-field="rec.name"/></td>
+                                        <td><span t-field="rec.complaint_date"/></td>
+                                        <td><span t-field="rec.project_id"/></td>
+                                        <td><span t-field="rec.building_id"/></td>
+                                        <td><span t-field="rec.unit_id"/></td>
+                                        <td><span t-field="rec.maintenance_billing"/></td>
+                                        <td><span t-field="rec.state"/></td>
+                                        <td class="text-end"><span t-field="rec.total_amount"/></td>
+                                        <td><span t-field="rec.employee_id"/></td>
+                                    </tr>
+                                </t>
+                                <tr t-if="not report_docs">
+                                    <td colspan="9" class="text-center">No records</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

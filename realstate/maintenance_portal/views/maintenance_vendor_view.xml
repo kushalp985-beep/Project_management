@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="maintenance_vendor_view_list" model="ir.ui.view">
+            <field name="name">maintenance.vendor.view.list</field>
+            <field name="model">maintenance.vendor</field>
+            <field name="arch" type="xml">
+                <list>                            
+                    <field name="name"/>
+                    <field name="amount"/>
+                </list>
+            </field>
+        </record>  
+
+        <record id="maintenance_vendor_action" model="ir.actions.act_window">
+            <field name="name">Maintenance Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">maintenance.vendor</field>
+            <field name="view_mode">list</field>
+
+        </record>
+
+        <menuitem id="maintenance_vendor_menu" name="Maintenance Vendor" parent="maintenance.menu_maintenance_configuration" action="maintenance_vendor_action" sequence="8"/>      
+</odoo>    

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+     <record id="view_property_contract_dashboard" model="ir.ui.view">
+    <field name="name">property.contract.stage.dashboard</field>
+    <field name="model">property.contract.stage</field>
+    <field name="arch" type="xml">
+
+        <kanban highlight_color="color"
+                class="o_stock_kanban"
+                records_draggable="0"
+                create="0"
+                group_create="false"
+                can_open="0">
+
+            <field name="color"/>
+            <field name="name"/>
+            <field name="contract_count"/>
+
+            <templates>
+
+                <!-- MENU (3 dots menu like inventory) -->
+                <t t-name="menu" t-if="!selection_mode">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="o_kanban_card_manage_title">
+                                    View
+                                </h5>
+
+                                <div>
+                                    <a name="action_view_contracts"
+                                       type="object">
+                                        All Contracts
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <h5 class="o_kanban_card_manage_title">
+                                    Create
+                                </h5>
+
+                                <div>
+                                    <a name="action_create_contract"
+                                       type="object">
+                                        New Contract
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div t-if="widget.editable"
+                             class="o_kanban_card_manage_settings row mt-3">
+                            <div class="col-8">
+                                <field name="color"
+                                       widget="kanban_color_picker"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+
+                <!-- CARD BODY -->
+                <t t-name="card">
+                    <div class="px-2">
+
+                        <!-- Stage Name -->
+                        <div class="fw-bold fs-4">
+                            <field name="name"/>
+                        </div>
+
+                        <!-- MAIN CONTENT -->
+                        <div class="row mt-3">
+
+                            <!-- Left Side Button -->
+                            <div class="col-6">
+                                <button class="btn btn-primary"
+                                        name="action_view_contracts"
+                                        type="object">
+                                    <span t-if="record.contract_count.raw_value &gt; 0">
+                                        <field name="contract_count"/>
+                                        Contracts
+                                    </span>
+                                    <span t-else="">
+                                        Open
+                                    </span>
+                                </button>
+                            </div>
+
+                            <!-- Right Side Stats -->
+                            <div class="col-6">
+
+                                <div t-if="record.contract_count.raw_value &gt; 0"
+                                     class="row">
+                                    <a class="col-8 offset-4 text-truncate"
+                                       name="action_view_contracts"
+                                       type="object">
+                                        <div class="row">
+                                            <span class="col-6">
+                                                Total
+                                            </span>
+                                            <field class="col-2 text-end"
+                                                   name="contract_count"/>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </t>
+
+            </templates>
+        </kanban>
+
+    </field>
+</record>
+
+
+    <record id="action_real_estate_dashboard" model="ir.actions.act_window">
+        <field name="name">Real Estate Dashboard</field>
+        <field name="res_model">property.contract.stage</field>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="view_property_contract_dashboard"/>
+        <field name="target">current</field>
+    </record>
+
+</odoo>

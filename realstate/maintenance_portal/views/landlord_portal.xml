@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_menu_landlord" name="Portal layout : Landlord" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li id="portal_breadcrumbs_sale" t-if="page_name == 'landlord' or property" t-attf-class="breadcrumb-item #{'active ' if not property else ''}">
+                <a t-if="property" t-attf-href="/my/landlord?{{ keep_query() }}">Property</a>
+                <t t-else="">Property</t>
+            </li>
+            <li t-if="property" class="breadcrumb-item active">
+                <span t-field="property.name"/>
+            </li>
+        </xpath>
+    </template>
+    
+    <template id="portal_my_home_landlord" name="Landlord" inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_client_category_enable" t-value="True"/>
+            <t t-set="portal_alert_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_client_category" position="inside">
+            <t t-call="portal.portal_docs_entry"  t-if="env.user.partner_id.is_landlord">
+                <t t-set="icon" t-value="'/maintenance/static/description/icon.svg'"/>
+                <t t-set="title">Property</t>
+                <t t-set="url" t-value="'/my/landlord'"/>
+                <t t-set="text">Follow, view or your Property details</t>
+                <t t-set="placeholder_count" t-value="'landlord'"/>
+            </t>
+        </div>
+    </template>
+    
+    <template id="portal_my_landlord_requests" name="landlordLandlord">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Properties</t>
+            </t>
+            <div t-if="not properties" class="alert alert-warning" role="alert">
+                There are currently no properties you own.
+            </div>
+            <t t-if="properties" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Number #</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <t t-foreach="properties" t-as="property">
+                    <tr>
+                        <td><a t-att-href="property.get_portal_url()"><t t-out="property.code"/></a></td>
+                        <td><t t-out="property.name"/></td>
+                        <td><t t-out="property.state"/></td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+    
+    <template id="portal_my_landlord_requests_form" name="Properties" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <div class="row o_portal_sale_sidebar">
+
+                <div id="quote_content" class="col-12 mt-5 mt-lg-0">
+                    <div id="portal_sale_content">
+                        <div id="introduction" t-attf-class="#{'border-bottom-0 pt-0 pb-3' if report_type == 'html' else ''}">
+                            <div class="d-flex gap-2" id="intro_row">
+                                <h2>
+                                    <em t-out="property.code or property.name"/>
+                                </h2>
+                            </div>
+
+                        </div>
+
+                        <div id="content">
+                            <div id="informations" class="row">
+                                <div id="maintenance_info" class="col-12 col-lg-6 mb-4">
+                                    <span id="maintenance_info_title">
+                                        <h5 class="mb-1">Property</h5>
+                                        <hr class="mt-1 mb-2"/>
+                                    </span>
+                                    <table class="table table-borderless table-sm">
+                                        <tbody style="white-space:nowrap" id="maintenance_info_table">
+                                            <tr>
+                                                <th class="ps-0 pb-0">Name:</th>
+                                                <td class="w-100 pb-0 text-wrap"><span t-field="property.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="ps-0 pb-0">Details:</th>
+                                                <td class="w-100 pb-0 text-wrap"><span t-esc="property.get_formatted_address()"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="ps-0 pb-0">Property Number:</th>
+                                                <td class="w-100 pb-0 text-wrap"><span t-field="property.property_number"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="ps-0 pb-0">Type:</th>
+                                                <td class="w-100 pb-0 text-wrap"><span t-field="property.home_type_id"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="ps-0 pb-0">Sub Type:</th>
+                                                <td class="w-100 pb-0 text-wrap"><span t-field="property.subtype_id"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="ps-0 pb-0">Status:</th>
+                                                <td class="w-100 pb-0 text-wrap"><span t-field="property.state"/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+<!--                                        <li class="nav-item" role="presentation">-->
+<!--                                            <a class="nav-link active" id="tenant-tab" data-bs-toggle="tab" href="#tenant" role="tab">Tenant</a>-->
+<!--                                        </li>-->
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link active" id="rent-tab" data-bs-toggle="tab" href="#rent" role="tab">Rental</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="deposite-tab" data-bs-toggle="tab" href="#deposite" role="tab">Deposits</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content pt-3" id="myTabContent">
+<!--                                        <div class="tab-pane fade show active" id="tenant" role="tabpanel">-->
+<!--                                            <table class="table table-bordered table-hover">-->
+<!--                                                <thead>-->
+<!--                                                    <tr>-->
+<!--                                                        <th>Name</th>-->
+<!--                                                        <th>Tenant</th>-->
+<!--                                                        <th>Start Date</th>-->
+<!--                                                        <th>End Date</th>-->
+<!--                                                        <th>Amount</th>-->
+<!--                                                    </tr>-->
+<!--                                                </thead>-->
+<!--                                                <tbody>-->
+<!--                                                    <t t-foreach="property.history_ids" t-as="history_id">-->
+<!--                                                        <tr>-->
+<!--                                                            <td><span t-field="history_id.name"/></td>-->
+<!--                                                            <td><span t-field="history_id.tenant_id"/></td>-->
+<!--                                                            <td><span t-field="history_id.start_date"/></td>-->
+<!--                                                            <td><span t-field="history_id.end_date"/></td>-->
+<!--                                                            <td><span t-field="history_id.amount"/></td>-->
+<!--                                                        </tr>-->
+<!--                                                    </t>-->
+<!--                                                </tbody>-->
+<!--                                            </table>-->
+<!--                                        </div>-->
+                                        <div class="tab-pane fade show active" id="rent" role="tabpanel">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Tenant</th>
+                                                        <th>Start Date</th>
+                                                        <th>End Date</th>
+                                                        <th>Received By</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-foreach="property.history_ids" t-as="history_id">
+                                                        <tr>
+                                                            <td><span t-field="history_id.name"/></td>
+                                                            <td><span t-field="history_id.tenant_id"/></td>
+                                                            <td><span t-field="history_id.start_date"/></td>
+                                                            <td><span t-field="history_id.end_date"/></td>
+                                                            <td><span t-field="history_id.received_by"/></td>
+                                                            <td><span t-field="history_id.amount"/></td>
+                                                        </tr>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane fade" id="deposite" role="tabpanel">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Tenant</th>
+                                                        <th>Amount</th>
+                                                        <th>Received By</th>
+                                                        <th>Bank</th>
+                                                        <th>Remarks</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-foreach="property.deposite_ids" t-as="deposite_id">
+                                                        <tr>
+                                                            <td><span t-field="deposite_id.name"/></td>
+                                                            <td><span t-field="deposite_id.tenant_id"/></td>
+                                                            <td><span t-field="deposite_id.amount"/></td>
+                                                            <td><span t-field="deposite_id.received_by"/></td>
+                                                            <td><span t-field="deposite_id.bank_id"/></td>
+                                                            <td><span t-field="deposite_id.remarks"/></td>
+                                                        </tr>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+
+                    <div id="maintenance_request_communication">
+                        <h3>Communication history</h3>
+                        <t t-call="portal.message_thread"/>
+                    </div>
+                </div>
+
+            </div>
+
+      </xpath>
+   </template>
+
+</odoo>

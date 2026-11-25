@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="property_project_form" model="ir.ui.view">
+        <field name="name">property.project.form</field>
+        <field name="model">property.project</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet string="property project">
+                    <div class="oe_button_box" name="button_box">
+                        <button type="action" name="%(bliss_property_management.building_action)d"
+                                class="oe_stat_button" icon="fa-building-o"
+                                context="{'default_project_id': id}"
+                                domain="[('project_id', '=', id)]">
+                            <field name="building_count" widget="statinfo" string="Buildings"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" required="True"/>
+                            <field name="owner_id" required="True"
+                                   domain="[('contact_type', '=', 'owner')]"
+                                   options="{'no_create': False}"/>
+                            <field name="managed_by" required="True" />
+                            <!-- <field name="maintained_by" /> -->
+                            <field name="maintenance_billing"/>
+                            <field name="analytic_account_id"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                        <group>
+                            <field name="state_id" domain='[("country_id", "=", 2)]' no_open="True" required="True"
+                                   can_create="False" can_write="False" options="{'no_create': True}"/>
+                            <field name="city_id" domain='[("country_id", "=", 2)]' required="True"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Buildings" name="buildings">
+                            <field name="building_ids" context="{'default_project_id': id}">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="building_name" required="1"/>
+                                    <field name="project_id" column_invisible="1"/>
+                                    <field name="building_type_id"/>
+                                    <field name="unit_count"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+                <!-- <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div> -->
+            </form>
+
+        </field>
+    </record>
+
+    <record id="property_project_list" model="ir.ui.view">
+        <field name="name">property.project.list</field>
+        <field name="model">property.project</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <list>
+               <field name="name"/>
+               <field name="owner_id"/>
+                <field name="managed_by"/>
+                <!-- <field name="maintained_by"/> -->
+                <field name="maintenance_billing"/>
+            </list>
+        </field>
+    </record>
+
+    <record id='property_project_kanban' model='ir.ui.view'>
+        <field name="name">property.project.kanban</field>
+        <field name="model">property.project</field>
+        <field name="arch" type="xml">
+            <kanban string="property project">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_card_content">
+                                <field name="name"/>
+                                <field name="owner_id" display="full"/>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="card">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_card_content">
+                                <field name="name"/>
+                                <field name="owner_id" display="full"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

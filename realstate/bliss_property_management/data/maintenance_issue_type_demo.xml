@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="issue_type_ac" model="maintenance.issue.type">
+        <field name="name">AC</field>
+    </record>
+    <record id="issue_subtype_ac_water" model="maintenance.issue.subtype">
+        <field name="name">Water dropping from AC</field>
+        <field name="issue_type_id" ref="issue_type_ac"/>
+    </record>
+    <record id="issue_subtype_ac_cooling" model="maintenance.issue.subtype">
+        <field name="name">Cooling not working</field>
+        <field name="issue_type_id" ref="issue_type_ac"/>
+    </record>
+    <record id="issue_subtype_ac_noise" model="maintenance.issue.subtype">
+        <field name="name">AC making noise</field>
+        <field name="issue_type_id" ref="issue_type_ac"/>
+    </record>
+
+    <record id="issue_type_plumbing" model="maintenance.issue.type">
+        <field name="name">Plumbing</field>
+    </record>
+    <record id="issue_subtype_plumbing_leak" model="maintenance.issue.subtype">
+        <field name="name">Pipe leakage</field>
+        <field name="issue_type_id" ref="issue_type_plumbing"/>
+    </record>
+    <record id="issue_subtype_plumbing_tap" model="maintenance.issue.subtype">
+        <field name="name">Tap not working</field>
+        <field name="issue_type_id" ref="issue_type_plumbing"/>
+    </record>
+
+    <record id="dashboard_card_total" model="maintenance.issue.dashboard">
+        <field name="name">Total Issues</field>
+        <field name="sequence">1</field>
+        <field name="card_type">total</field>
+        <field name="color">1</field>
+    </record>
+    <record id="dashboard_card_pending" model="maintenance.issue.dashboard">
+        <field name="name">Pending Issues</field>
+        <field name="sequence">2</field>
+        <field name="card_type">pending</field>
+        <field name="color">3</field>
+    </record>
+    <record id="dashboard_card_completed" model="maintenance.issue.dashboard">
+        <field name="name">Completed Issues</field>
+        <field name="sequence">3</field>
+        <field name="card_type">completed</field>
+        <field name="color">10</field>
+    </record>
+    <record id="dashboard_card_invoiced" model="maintenance.issue.dashboard">
+        <field name="name">Invoiced (Separate Billing)</field>
+        <field name="sequence">4</field>
+        <field name="card_type">invoiced</field>
+        <field name="color">7</field>
+    </record>
+    <record id="dashboard_card_separate_pending" model="maintenance.issue.dashboard">
+        <field name="name">Separate Billing Pending</field>
+        <field name="sequence">5</field>
+        <field name="card_type">separate_pending</field>
+        <field name="color">2</field>
+    </record>
+    <record id="dashboard_card_employee" model="maintenance.issue.dashboard">
+        <field name="name">Employee-wise Issues</field>
+        <field name="sequence">6</field>
+        <field name="card_type">employee</field>
+        <field name="color">4</field>
+    </record>
+
+</odoo>

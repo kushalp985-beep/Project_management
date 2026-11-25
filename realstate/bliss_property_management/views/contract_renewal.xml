@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="contract_renewal_form" model="ir.ui.view">
+        <field name="name">contract.renewal.form</field>
+        <field name="model">contract.renewal</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_approve_renewal" type="object" string="Approve Renewal" class="btn-primary"
+                            invisible="state_renew  != 'rcnew'"/>
+                    <button name="action_done_renewal" type="object" string="Done" class="btn-primary"
+                            invisible="state_renew  != 'rcrapproved'"/>
+                    <field name="state_renew" widget="statusbar"/>
+                </header>
+                <sheet string="Contract Renewal">
+                    <group>
+                        <group>
+                            <field name="contract_currency_id" invisible="1"/>
+                            <field name="contract_id"/>
+                            <field name="code_renew" required="True"/>
+                            <field name="new_contract_id"/>
+                            <field name="unit_id"/>
+                            <field name="date_start"/>
+                            <field name="date_stop"/>
+                            <field name="start_date_from"/>
+                            <field name="rera_value"/>
+                            <field name="renew_value"/>
+                            <!-- <field name="add_extra_deposit"/>-->
+                            <!-- <field name="extra_security_deposit" invisible="not add_extra_deposit"/>-->
+                        </group>
+                    </group>
+                    <group>
+                        <separator/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="contract_renewal_tree" model="ir.ui.view">
+        <field name="name">contract.renewal.tree</field>
+        <field name="model">contract.renewal</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="contract renew">
+                <field name="contract_currency_id" optional="hide"/>
+                <field name="code_renew" string="Renewal contract code"/>
+                <field name="contract_id"/>
+                <field name="new_contract_id"/>
+                <field name="unit_id"/>
+                <field name="date_start"/>
+                <field name="date_stop"/>
+                <field name="start_date_from"/>
+                <field name="renew_value"/>
+                <field name="rera_value"/>
+                <field name="state_renew" decoration-success="state_renew == 'rcdone'"
+                       decoration-warning="state_renew == 'rcrapproved'"
+                       decoration-muted="state_renew == 'rcnew'" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+
+
+
+
+</odoo>

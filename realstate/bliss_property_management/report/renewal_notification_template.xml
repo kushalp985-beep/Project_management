@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="renewal_page1">
+            <div class="page" id="page1">
+                <div class="container">
+                    <div class="row mx-5 my-0">
+                        <div class="col-12">
+                            <table class="table table-bordered border-dark">
+                                <tbody>
+                                    <tr>
+                                        <td class="align-top col-6">
+                                            <p>Date:
+                                                <span t-esc="doc.date"/>
+                                            </p>
+                                            <p>Ref.No.: ALMULLA0001</p>
+                                            <p>Tenant Name:
+                                                <span t-esc="doc.partner_id.name"/>
+                                            </p>
+                                            <p>Serial No: 01</p>
+                                            <p>Area Name: Al Buteen, Dubai</p>
+                                            <p>Tenant Address:
+                                                <span t-esc="doc.partner_id.street"/>,
+                                                <span t-esc="doc.partner_id.street2"/>,
+                                                <span t-esc="doc.partner_id.city"/>,
+                                                <span t-esc="doc.partner_id.state_id.name"/>,
+                                            </p>
+                                            <p>Tenancy Contract Dated: <span t-esc="doc.start_date_from"/></p>
+                                        </td>
+                                        <td class="align-top col-6" dir="rtl">
+                                            <p>التاريخ : <span t-esc="doc.date"/></p>
+                                            <p>الرقم المرجعي: ALMULLA0001</p>
+                                            <p> اسم المستأجر : <span t-esc="doc.partner_id.name"/> </p>
+                                            <p>رقم المسلسل: 01</p>
+                                            <p>اسم المنطقة: آل بوثين، دبي</p>
+                                            <p>عنوان المستأجر:  <span t-esc="doc.partner_id.street"/>,
+                                                <span t-esc="doc.partner_id.street2"/>,
+                                                <span t-esc="doc.partner_id.city"/>,
+                                                <span t-esc="doc.partner_id.state_id.name"/></p>
+                                            <p> تاريخ عقد الايجار: <span t-esc="doc.start_date_from"/> </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-6">
+                                            <p>Delivered by:</p>
+                                        </td>
+                                        <td class="col-6" dir="rtl">
+                                            <p>التسليم من قبل:</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-6">
+                                            <p>Dear Tenant:</p>
+                                        </td>
+                                        <td class="col-6" dir="rtl">
+                                            <p>السلام عليكم ورحمة اللله وبركاته:</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-6 text-center">
+                                            <u>
+                                                <h3>Renewal Notice</h3>
+                                            </u>
+                                        </td>
+                                        <td class="col-6 text-center">
+                                            <u>
+                                                <h3>خطاب تجديد</h3>
+                                            </u>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-6">
+                                            <p>We refer to your Tenancy Contract, which is due to expire on
+                                                ("__/__/__").
+                                            </p>
+                                            <p>We hereby give you notice that if the Tenancy Contract is renewed, the
+                                                form of the renewed tenancy contract will follow the template enclosed
+                                                with this notice. Without limitation, the amendments to the current
+                                                Tenancy Contract include:
+                                            </p>
+                                            <p>Annual Rent: According to Emiri Decree No. (2) of 2017, issuing the law,
+                                                real estate rent in the Emirate of Ajman, the rent will become AED
+                                                78,000.
+                                            </p>
+                                            <p>VAT Applicable for commercial use premises</p>
+                                        </td>
+                                        <td class="col-6" dir="rtl">
+                                            <p>بالإشارة إلى عقد الإيجار الخاص بك، الذي سينتهي في تاريخ ("__/__/__").</p>
+                                            <p>نرسل لكم هذا الإخطار، أنه في حال تم تجديد عقد الإيجار، فإنه سيتم إلحاق
+                                                صيغة عقد الإيجار المجدد مع هذا الإشعار.
+                                                على سبيل المثال لا الحصر، التعديلات على عقد الإيجار الحالي تتضمن ما يلي:
+                                            </p>
+                                            <p>مبلغ الإيجار السنوي: وفقًا للمرسوم الأميري رقم (2) لسنة 2017، بإصدار
+                                                قانون
+                                                إيجار العقارات في إمارة عجمان، سيصبح الإيجار 78,000 درهم.
+                                            </p>
+                                            <p>تطبق ضريبة القيمة المضافة على العقارات التجارية</p>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-6">
+                                            <p>If you wish to renew your Tenancy Contract, please visit the relevant
+                                                office as detailed as per following address:
+                                            </p>
+                                            <p>Ajman, Liwara 01, Day to Day building</p>
+                                            <p>Office 712 between 10:00 am to
+                                                08:00 pm from Sunday to Thursday (excluding public holidays) bringing
+                                                with you the following:
+                                            </p>
+                                            <ul>
+                                                <li>Copy of valid passport and residence visa of the tenant (if tenant
+                                                    is an individual).
+                                                </li>
+                                                <li>Copy of valid Emirates ID.</li>
+                                                <li>Copy of trade license or certificate of incorporation (if tenant is
+                                                    a company).
+                                                </li>
+                                                <li>Original notarized Power of Attorney in favor of the person who
+                                                    intends to sign the renewed Tenancy Contract on behalf of the Tenant
+                                                    and copy of valid passport, residence visa and Emirates ID of the
+                                                    person who intends to sign the renewed
+                                                    Tenancy Contract on behalf of the tenant.
+                                                </li>
+                                                <li>
+                                                    Payments for renewal rent and renewal charges.
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td class="col-6" dir="rtl">
+                                            <p>إذا رغبتم في تجديد عقد الإيجار، يرجى زيارة المكتب
+                                                في العنوان التالي:
+                                            </p>
+                                            <p>عجمان، ليوارا 01، مبنى دي تو دي، مكتب 712 بين 10:00 صباحاً حتى
+                                                08:00 مساءً من الأحد إلى الخميس (باستثناء ايام العطل الرسمية) مع إحضار
+                                                ما
+                                                يلي:
+                                            </p>
+                                            <p>
+                                                <ul style="margin-right: 25px;">
+                                                    <li>صورة عن جواز السفر الساري المفعول وتأشيرة الاقامة السارية
+                                                        المفعول للمستأجر (إذا كان المستأجر
+                                                        فردًا).
+                                                    </li>
+                                                    <li>صورة عن بطاقة الهوية الإماراتية سارية المفعول.</li>
+                                                    <li>نسخة عن الرخصة التجارية أو شهادة التأسيس (إذا كان المستأجر
+                                                        شركة).
+                                                    </li>
+                                                    <li>أصل الوكالة القانونية الموثقة من الكاتب العدل لصالح الشخص الذي
+                                                        سيقوم بالتوقيع على عقد الإيجار
+                                                        المجدد بالنيابة عن المستاجر و صورة عن جواز السفر الساري المفعول
+                                                        وتأشيرة الإقامة السارية
+                                                        المفعول و صورة عن بطاقة الهوية الإمارتية سارية المفعول للشخص
+                                                        الذي سيقوم بالتوقيع على
+                                                        عقد الإيجار المجدد بالنيابة عن المستأجر.
+                                                    </li>
+                                                    <li>
+                                                        دفعات الإيجار المجدد و رسوم التجديد.
+                                                    </li>
+                                                </ul>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="renewal_page2">
+            <div class="page" id="page2">
+                <div class="container">
+                    <div class="row mx-5 my-0">
+                        <div class="col-12">
+                            <table class="table table-bordered border-dark">
+                                <tbody>
+                                    <tr>
+                                        <td class="align-top col-6">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <span>Prior to the renewal of your Tenancy Contract you are required
+                                                        to pay any outstanding amounts due under your Tenancy Contract
+                                                        and your Tenancy Contract will only be renewed after such
+                                                        amounts have been paid.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-top col-6" dir="rtl">
+                                            <div class="row arabic-font">
+                                                <div class="col-12">
+                                                    <span>قبل تجديد عقد الإيجار الخاص بكم يجب عليكم سداد أي مبالغ مستحقة
+                                                        الدفع
+                                                        بموجب عقد الإيجار الخاص بكم ، ولن يتم تجديد عقد الإيجار الخاص
+                                                        بكم إلا بعد سداد هذه المدفوعات.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-top col-6">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <span>
+                                                        <p>
+                                                            If you do not wish to renew the Tenancy Contract, and will
+                                                            vacate on the Expiry Date, we do require formal written
+                                                            notice
+                                                            from you 90 days earlier of expiry date.
+                                                        </p>
+                                                        <p>
+                                                            However, if you wish to
+                                                            terminate the lease contract before its expiration, we also
+                                                            need
+                                                            an official written notification from you 60 days before the
+                                                            date on which you intend to vacate the property, and you
+                                                            will
+                                                            have to pay the rent amount for two months.
+                                                        </p>
+                                                        <p>
+                                                            Please note that Sewerage NOC and FEWA clearance have to be
+                                                            provided to the office on the Expiry Date and setup an
+                                                            appointment for premises inspection, so that (once you have
+                                                            complied with all your obligations) the outstanding Security
+                                                            Deposit can be returned to you.
+                                                        </p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-top col-6" dir="rtl">
+                                            <div class="row arabic-font">
+                                                <div class="col-12">
+                                                    <span>
+                                                        <p>
+                                                            إذا كنتم لا ترغبون في تجديد عقد الإيجار ، وستقومون بإخلاء
+                                                            العقار في تاريخ الانتهاء ، نحتاج الى اشعار خطي رسمي من طرفكم
+                                                            قبل
+                                                            60 يومًا من تاريخ انتهاء العقد.
+                                                        </p>
+                                                        <p>اما اذا كنتم ترغبون في فسخ
+                                                            عقد الإيجار قبل انتهاء مدته نحتاج ايضا إلى إخطار خطي رسمي من
+                                                            طرفكم قبل 60 يومًا من تاريخ المزمع فيه إخلاء العقار وسيتوجب
+                                                            عليكم دفع مبلغ الايجار لشهرين اثنين.
+                                                        </p>
+                                                        <br/>
+                                                        <br/>
+                                                        <p>
+                                                            يرجى الملاحظة أنه يجب تقديم شهادة لا مانع من الصرف الصحي
+                                                            بالاضافة الى
+                                                            براءة الذمة من الهيئة الاتحادية للماء و الكهرباء (فيوا)
+                                                            في تاريخ الانتهاء مع تحديد موعد لفحص العقار، حيث ان
+                                                            (وعند الأمتثال بجميع التزاماتكم) سيتم استرداد مبلغ التأمين
+                                                            المستحق
+                                                            لكم.
+                                                        </p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-top col-6">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <span>Please be aware that if you remain in possession of the
+                                                        Premises after the Expiry Date you must continue to pay an
+                                                        amount equal to the Rent plus any increase of the Rent which is
+                                                        permitted by Law, which is applicable from the expiry of the
+                                                        Tenancy Contract for every day that you continue to remain in
+                                                        possession of the Premises after the Expiry Dates.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-top col-6" dir="rtl">
+                                            <div class="row arabic-font">
+                                                <div class="col-12">
+                                                    <span>يرجى العلم بأنه إذا استمرت حيازتكم العقار بعد تاريخ الانتهاء ،
+                                                        يتوجب عليكم الاستمرار في دفع مبلغ مساويٍ للإيجار بالإضافة إلى أي
+                                                        زيادة في مبلغ الإيجار المسموح به حسب القانون ، والذي يطبق
+                                                        اعتبارا من
+                                                        انتهاء عقد الإيجار على كل يوم تستمر فيه بحيازة العقار بعد تاريخ
+                                                        الانتهاء.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-top col-6">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <span>
+                                                        <p>We looking forward to hear from you.</p>
+                                                        <p>Yours faithfully</p>
+                                                        <p>For and on behalf of: Landlord Name</p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-top col-6" dir="rtl">
+                                            <div class="row arabic-font">
+                                                <div class="col-12">
+                                                    <span>
+                                                        <p>نتطلع لسماع ردكم</p>
+                                                        <p>وتفضلوا بقبول فائق الاحترام</p>
+                                                        <p>لصالح و بالنيابة عن: اسم المالك</p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="contract_custom_layout">
+            <t t-call="web.html_container">
+                <t t-if="not o" t-set="o" t-value="doc"/>
+                <div class="article w-130 h-100 px-10" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                     t-att-data-oe-lang="o and o.env.context.get('lang')"
+                     style="margin-left:-20px; margin-right:-20px;">
+                    <t t-out="0"/>
+                </div>
+            </t>
+        </template>
+        <template id="renewal_notification_report">
+            <t t-call="bliss_property_management.contract_custom_layout">
+                <t t-call="bliss_property_management.renewal_page1"/>
+                <t t-call="bliss_property_management.renewal_page2"/>
+            </t>
+        </template>
+
+        <template id="renewal_report">
+            <t t-set="full_width" t-value="True"/>
+            <t t-set="data_report_header_spacing" t-value="0"/>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="bliss_property_management.renewal_notification_report" t-lang="doc.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+        <record id="action_renewal_report" model="ir.actions.report">
+            <field name="name">Renewal notification</field>
+            <field name="model">property.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bliss_property_management.renewal_report</field>
+            <field name="report_file">bliss_property_management.renewal_report</field>
+            <field name="binding_model_id" ref="bliss_property_management.model_property_contract"/>
+            <field name="paperformat_id" ref="bliss_property_management.custom_paper_format"/>
+            <field name="print_report_name">'Renewal - %s' % (object.name)</field>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

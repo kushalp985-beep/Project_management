@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+ <!-- noupdate="0"> -->
+     <record id="group_generate_quotation" model="res.groups">
+        <field name="name">Generate Quotation</field>
+    </record>
+
+    <record id="group_send_to_client" model="res.groups">
+        <field name="name">Send To Client</field>
+    </record>
+
+    <record id="group_send_to_vendor" model="res.groups">
+        <field name="name">Send To Vendor</field>
+    </record>
+
+    <record id="group_approved_user" model="res.groups">
+        <field name="name">Approved User</field>
+    </record>
+</data>
+</odoo>

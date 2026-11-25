@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="property_inquiry">
+        <t t-call="web.html_container">
+            <style>
+                .inquiry-page {
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 11px;
+                    color: #212529;
+                    padding: 8px 10px;
+                    line-height: 1.25;
+                }
+                .inquiry-report-title {
+                    text-align: center;
+                    font-size: 17px;
+                    font-weight: bold;
+                    margin: 0 0 8px 0;
+                    width: 100%;
+                }
+                .inquiry-page h2, .inquiry-page h3, .inquiry-page h4 {
+                    margin: 0 0 6px 0;
+                }
+                .inquiry-header-block {
+                    border: 1px solid #1F4E78;
+                    margin-bottom: 10px;
+                    width: 100%;
+                    font-size: 11px;
+                }
+                .inquiry-header-block td {
+                    border: 1px solid #1F4E78;
+                    padding: 5px 7px;
+                    vertical-align: middle;
+                }
+                .inquiry-header-label {
+                    background-color: #1F4E78;
+                    color: #ffffff;
+                    font-weight: bold;
+                    width: 22%;
+                }
+                .inquiry-section-title {
+                    background-color: #1F4E78;
+                    color: #ffffff;
+                    font-weight: bold;
+                    padding: 4px 6px;
+                    margin: 10px 0 4px 0;
+                    font-size: 11px;
+                }
+                .inquiry-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-bottom: 8px;
+                    table-layout: fixed;
+                }
+                .inquiry-table th,
+                .inquiry-table td {
+                    border: 1px solid #333333;
+                    padding: 3px 4px;
+                    vertical-align: middle;
+                    font-size: 10px;
+                    line-height: 1.2;
+                    overflow: hidden;
+                }
+                .inquiry-table thead th {
+                    background-color: #1F4E78;
+                    color: #ffffff;
+                    font-weight: bold;
+                    text-align: center;
+                    font-size: 9.5px;
+                    padding: 3px 2px;
+                }
+                .inquiry-table .text-end {
+                    text-align: right;
+                }
+                .inquiry-table .text-center {
+                    text-align: center;
+                }
+                .inquiry-nowrap {
+                    white-space: nowrap;
+                }
+                .inquiry-cheque-table th,
+                .inquiry-cheque-table td {
+                    font-size: 9.5px;
+                    padding: 2px 2px;
+                }
+                .inquiry-cheque-table thead th {
+                    font-size: 9px;
+                    letter-spacing: -0.2px;
+                }
+                .inquiry-kpi-table td {
+                    border: 1px solid #333333;
+                    padding: 4px 3px;
+                    text-align: center;
+                    width: 14%;
+                }
+                .inquiry-kpi-label {
+                    background-color: #1F4E78;
+                    color: #ffffff;
+                    font-weight: bold;
+                    font-size: 9px;
+                }
+                .inquiry-kpi-value {
+                    font-weight: bold;
+                    font-size: 10px;
+                }
+                .inquiry-totals-row td {
+                    background-color: #FFF2CC;
+                    font-weight: bold;
+                    font-size: 9.5px;
+                }
+                .inquiry-centered-table td {
+                    text-align: center;
+                }
+                .inquiry-page-break {
+                    page-break-before: always;
+                }
+                .inquiry-detail-table td.label {
+                    background-color: #f2f2f2;
+                    font-weight: bold;
+                    width: 28%;
+                }
+            </style>
+            <t t-foreach="pages" t-as="page">
+                <t t-set="contract" t-value="page['contract']"/>
+                <t t-set="unit" t-value="page['unit']"/>
+                <t t-set="financial" t-value="page['financial']"/>
+                <div t-attf-class="inquiry-page #{page_index &gt; 0 and 'inquiry-page-break' or ''}">
+                    <h2 class="inquiry-report-title" t-esc="report_title or 'UNIT RECORDS'"/>
+
+                        <!-- Header block (photo layout) -->
+                        <table class="inquiry-header-block">
+                            <tr>
+                                <td class="inquiry-header-label">Unit</td>
+                                <td t-esc="page['unit_display_name']"/>
+                                <td class="inquiry-header-label">Tenant</td>
+                                <td t-esc="page['tenant_name']"/>
+                            </tr>
+                            <tr>
+                                <td class="inquiry-header-label">Contract Start</td>
+                                <td t-esc="page['contract_start_display']"/>
+                                <td class="inquiry-header-label">Contract End</td>
+                                <td t-esc="page['contract_end_display']"/>
+                            </tr>
+                            <tr>
+                                <td class="inquiry-header-label">Total Rent</td>
+                                <td colspan="3" t-esc="format_amount(contract, financial['total_rent'])"/>
+                            </tr>
+                        </table>
+
+                        <!-- Cheque / Payment grid -->
+                        <div class="inquiry-section-title">Cheque &amp; Payment Details</div>
+                        <table class="inquiry-table inquiry-cheque-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:4%;">#</th>
+                                    <th style="width:7%;">Chq No</th>
+                                    <th style="width:8%;">Chq Date</th>
+                                    <th style="width:8%;">Bank</th>
+                                    <th style="width:10%;">Amount</th>
+                                    <th style="width:8%;">Status</th>
+                                    <th style="width:9%;">Pending</th>
+                                    <th style="width:8%;">Pay Date</th>
+                                    <th style="width:10%;">Received</th>
+                                    <th style="width:7%;">Pay St.</th>
+                                    <th style="width:9%;">Rcpt Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="page['cheque_lines']" t-as="line">
+                                    <tr>
+                                        <t t-if="line['show_cheque_cols']">
+                                            <td class="text-center inquiry-nowrap" t-att-rowspan="line['cheque_rowspan']"
+                                                t-esc="line['installment_no']"/>
+                                            <td class="text-center inquiry-nowrap" t-att-rowspan="line['cheque_rowspan']"
+                                                t-esc="line['cheque_number']"/>
+                                            <td class="text-center inquiry-nowrap" t-att-rowspan="line['cheque_rowspan']"
+                                                t-esc="line['cheque_date_display']"/>
+                                            <td class="inquiry-nowrap" t-att-rowspan="line['cheque_rowspan']" t-esc="line['bank']"/>
+                                            <td class="text-end inquiry-nowrap" t-att-rowspan="line['cheque_rowspan']"
+                                                t-esc="line['cheque_amount_display']"/>
+                                            <td class="text-center inquiry-nowrap" t-att-rowspan="line['cheque_rowspan']"
+                                                t-esc="line['cheque_status']"/>
+                                            <td class="text-end inquiry-nowrap" t-att-rowspan="line['cheque_rowspan']"
+                                                t-esc="line['pending_amount_display']"/>
+                                        </t>
+                                        <td class="text-center inquiry-nowrap" t-esc="line['payment_date_display']"/>
+                                        <td class="text-end inquiry-nowrap" t-esc="line['received_amount_display']"/>
+                                        <td class="text-center inquiry-nowrap" t-esc="line['payment_status']"/>
+                                        <td class="text-center inquiry-nowrap" t-esc="line['receipt_date_display']"/>
+                                    </tr>
+                                </t>
+                                <tr class="inquiry-totals-row">
+                                    <td colspan="4" class="text-end">Totals</td>
+                                    <td class="text-end inquiry-nowrap" t-esc="format_amount(contract, financial['total_rent'])"/>
+                                    <td/>
+                                    <td class="text-end inquiry-nowrap" t-esc="format_amount(contract, financial['total_pending'])"/>
+                                    <td colspan="2" class="text-end inquiry-nowrap">
+                                        Received:
+                                        <span t-esc="format_amount(contract, financial['total_received'])"/>
+                                    </td>
+                                    <td colspan="2" class="text-end inquiry-nowrap">
+                                        Due:
+                                        <span t-esc="format_amount(contract, financial['total_due'])"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Financial summary cards -->
+                        <div class="inquiry-section-title">Financial Summary</div>
+                        <table class="inquiry-kpi-table inquiry-table">
+                            <tr>
+                                <td class="inquiry-kpi-label">Total Rent</td>
+                                <td class="inquiry-kpi-label">Received</td>
+                                <td class="inquiry-kpi-label">Pending</td>
+                                <td class="inquiry-kpi-label">Due</td>
+                                <td class="inquiry-kpi-label">Outstanding</td>
+                                <td class="inquiry-kpi-label">Sec. Deposit</td>
+                                <td class="inquiry-kpi-label">Ret. Deposit</td>
+                            </tr>
+                            <tr>
+                                <td class="inquiry-kpi-value inquiry-nowrap" t-esc="format_amount(contract, financial['total_rent'])"/>
+                                <td class="inquiry-kpi-value inquiry-nowrap" t-esc="format_amount(contract, financial['total_received'])"/>
+                                <td class="inquiry-kpi-value inquiry-nowrap" t-esc="format_amount(contract, financial['total_pending'])"/>
+                                <td class="inquiry-kpi-value inquiry-nowrap" t-esc="format_amount(contract, financial['total_due'])"/>
+                                <td class="inquiry-kpi-value inquiry-nowrap" t-esc="format_amount(contract, financial['outstanding_balance'])"/>
+                                <td class="inquiry-kpi-value inquiry-nowrap" t-esc="format_amount(contract, financial['security_deposit'])"/>
+                                <td class="inquiry-kpi-value inquiry-nowrap" t-esc="format_amount(contract, financial['returned_deposit'])"/>
+                            </tr>
+                        </table>
+
+                        <!-- Property details -->
+                        <div class="inquiry-section-title">Property Details</div>
+                        <table class="inquiry-table inquiry-detail-table">
+                            <tr>
+                                <td class="label">Project</td>
+                                <td t-esc="unit.project_id.name if unit and unit.project_id else ''"/>
+                                <td class="label">Building</td>
+                                <td t-esc="unit.building_id.name if unit and unit.building_id else ''"/>
+                            </tr>
+                            <tr>
+                                <td class="label">Floor</td>
+                                <td t-esc="unit.floor_no if unit else ''"/>
+                                <td class="label">Unit No</td>
+                                <td t-esc="unit.unit_no if unit else ''"/>
+                            </tr>
+                            <tr>
+                                <td class="label">Unit Type</td>
+                                <td t-esc="unit.unit_type_id.name if unit and unit.unit_type_id else ''"/>
+                                <td class="label">Status</td>
+                                <td t-esc="page['unit_state_label']"/>
+                            </tr>
+                            <tr>
+                                <td class="label">Suit Area (Sq.m)</td>
+                                <td t-esc="unit.suit_area_size if unit else ''"/>
+                                <td class="label">Total Area (Sq.m)</td>
+                                <td t-esc="unit.total_area_size if unit else ''"/>
+                            </tr>
+                            <tr>
+                                <td class="label">Parking</td>
+                                <td t-esc="page['parking_count']"/>
+                                <td class="label">Owner</td>
+                                <td t-esc="page['owner'].get('name', '') if page['owner'] else ''"/>
+                            </tr>
+                            <tr>
+                                <td class="label">Current Tenant</td>
+                                <td colspan="3" t-esc="page['tenant_name']"/>
+                            </tr>
+                        </table>
+
+                        <!-- Contract details -->
+                        <div class="inquiry-section-title">Contract Details</div>
+                        <table class="inquiry-table inquiry-detail-table">
+                            <tr>
+                                <td class="label">Code</td>
+                                <td t-esc="contract.code"/>
+                                <td class="label">Type</td>
+                                <td t-esc="page['contract_type']"/>
+                            </tr>
+                            <tr>
+                                <td class="label">Start Date</td>
+                                <td>
+                                    <span t-if="contract.date_start" t-field="contract.date_start" t-options="{'widget': 'date'}"/>
+                                </td>
+                                <td class="label">End Date</td>
+                                <td>
+                                    <span t-if="contract.date_stop" t-field="contract.date_stop" t-options="{'widget': 'date'}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">State</td>
+                                <td t-esc="page['contract_state_label']"/>
+                                <td class="label">Value</td>
+                                <td t-esc="format_amount(contract, contract.value)"/>
+                            </tr>
+                            <tr>
+                                <td class="label">Discount</td>
+                                <td t-esc="contract.discount"/>
+                                <td class="label">Net (Total Value)</td>
+                                <td t-esc="format_amount(contract, contract.total_value)"/>
+                            </tr>
+                            <tr>
+                                <td class="label">VAT</td>
+                                <td t-esc="format_amount(contract, contract.tax_amount)"/>
+                                <td class="label">Deposit</td>
+                                <td t-esc="format_amount(contract, contract.security_deposit)"/>
+                            </tr>
+                            <tr>
+                                <td class="label">Commission %</td>
+                                <td t-esc="contract.commission_value"/>
+                                <td class="label">Ejari Fees</td>
+                                <td t-esc="format_amount(contract, contract.ejari_fees)"/>
+                            </tr>
+                            <tr>
+                                <td class="label">Renewal</td>
+                                <td colspan="3">
+                                    <t t-foreach="page['renewal_records']" t-as="renewal">
+                                        <span t-esc="renewal.new_contract_id.code if renewal.new_contract_id else renewal.display_name"/>
+                                        <t t-if="not renewal_last">, </t>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Tenant details -->
+                        <t t-set="tenant_info" t-value="page['tenant']"/>
+                        <div class="inquiry-section-title">Tenant Details</div>
+                        <table class="inquiry-table inquiry-detail-table">
+                            <tr>
+                                <td class="label">Name</td>
+                                <td t-esc="tenant_info.get('name', '')"/>
+                                <td class="label">Phone</td>
+                                <td t-esc="tenant_info.get('phone', '')"/>
+                            </tr>
+                            <tr>
+                                <td class="label">Email</td>
+                                <td t-esc="tenant_info.get('email', '')"/>
+                                <td class="label">Nationality</td>
+                                <td t-esc="tenant_info.get('nationality', '')"/>
+                            </tr>
+                            <tr>
+                                <td class="label">Emirates ID</td>
+                                <td t-esc="tenant_info.get('emirates_id', '')"/>
+                                <td class="label">Passport</td>
+                                <td t-esc="tenant_info.get('passport', '')"/>
+                            </tr>
+                        </table>
+                        <div class="inquiry-section-title">Contract History (This Unit)</div>
+                        <table class="inquiry-table">
+                            <thead>
+                                <tr>
+                                    <th>Contract</th>
+                                    <th>Unit</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>State</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="not tenant_info.get('contracts')">
+                                    <tr><td colspan="5" class="text-center">No contracts for this unit.</td></tr>
+                                </t>
+                                <t t-foreach="tenant_info['contracts']" t-as="tcontract">
+                                    <tr>
+                                        <td t-esc="tcontract.code"/>
+                                        <td t-esc="tcontract.unit_id.name or tcontract.unit_id.unit_no or ''"/>
+                                        <td>
+                                            <span t-if="tcontract.date_start" t-field="tcontract.date_start" t-options="{'widget': 'date'}"/>
+                                        </td>
+                                        <td>
+                                            <span t-if="tcontract.date_stop" t-field="tcontract.date_stop" t-options="{'widget': 'date'}"/>
+                                        </td>
+                                        <td t-esc="dict(tcontract._fields['state'].selection).get(tcontract.state, tcontract.state)"/>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Owner details -->
+                        <t t-set="owner_info" t-value="page['owner']"/>
+                        <div class="inquiry-section-title" t-if="owner_info">Owner Details</div>
+                        <table class="inquiry-table inquiry-detail-table" t-if="owner_info">
+                            <tr>
+                                <td class="label">Name</td>
+                                <td t-esc="owner_info.get('name', '')"/>
+                                <td class="label">Phone</td>
+                                <td t-esc="owner_info.get('phone', '')"/>
+                            </tr>
+                            <tr>
+                                <td class="label">Total Units</td>
+                                <td t-esc="owner_info.get('total_units', 0)"/>
+                                <td class="label">Occupied / Vacant</td>
+                                <td>
+                                    <span t-esc="owner_info.get('occupied', 0)"/> /
+                                    <span t-esc="owner_info.get('vacant', 0)"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Payment history -->
+                        <div class="inquiry-section-title">Payment History</div>
+                        <table class="inquiry-table inquiry-centered-table">
+                            <thead>
+                                <tr>
+                                    <th>Receipt No</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Journal</th>
+                                    <th>Method</th>
+                                    <th>Reference</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="not page['payment_history']">
+                                    <tr><td colspan="7" class="text-center">No payments recorded.</td></tr>
+                                </t>
+                                <t t-foreach="page['payment_history']" t-as="payment">
+                                    <tr>
+                                        <td class="inquiry-nowrap" t-esc="payment['receipt_no']"/>
+                                        <td class="inquiry-nowrap" t-esc="payment['payment_date_display']"/>
+                                        <td class="inquiry-nowrap" t-esc="payment['amount_display']"/>
+                                        <td t-esc="payment['journal']"/>
+                                        <td t-esc="payment['payment_method']"/>
+                                        <td t-esc="payment['reference']"/>
+                                        <td class="inquiry-nowrap" t-esc="payment['status']"/>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Invoices -->
+                        <div class="inquiry-section-title">Invoices</div>
+                        <table class="inquiry-table inquiry-centered-table">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Paid</th>
+                                    <th>Residual</th>
+                                    <th>Payment State</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="not page['invoices']">
+                                    <tr><td colspan="6" class="text-center">No invoices.</td></tr>
+                                </t>
+                                <t t-foreach="page['invoices']" t-as="inv">
+                                    <tr>
+                                        <td class="inquiry-nowrap" t-esc="inv['number']"/>
+                                        <td class="inquiry-nowrap" t-esc="inv['date_display']"/>
+                                        <td class="inquiry-nowrap" t-esc="inv['amount_display']"/>
+                                        <td class="inquiry-nowrap" t-esc="inv['paid_display']"/>
+                                        <td class="inquiry-nowrap" t-esc="inv['residual_display']"/>
+                                        <td class="inquiry-nowrap" t-esc="inv['payment_state']"/>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Maintenance -->
+                        <div class="inquiry-section-title">Maintenance</div>
+                        <table class="inquiry-table">
+                            <thead>
+                                <tr>
+                                    <th>Reference</th>
+                                    <th>Issue Type</th>
+                                    <th>Complaint Date</th>
+                                    <th>Completion Date</th>
+                                    <th>Employee</th>
+                                    <th>State</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="not page['maintenance']">
+                                    <tr><td colspan="6" class="text-center">No maintenance issues.</td></tr>
+                                </t>
+                                <t t-foreach="page['maintenance']" t-as="maint">
+                                    <tr>
+                                        <td t-esc="maint['reference']"/>
+                                        <td t-esc="maint['issue_type']"/>
+                                        <td class="text-center" t-esc="maint['complaint_date_display']"/>
+                                        <td class="text-center" t-esc="maint['completion_date_display']"/>
+                                        <td t-esc="maint['employee']"/>
+                                        <td t-esc="maint['state']"/>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Timeline -->
+                        <div class="inquiry-section-title">Timeline</div>
+                        <table class="inquiry-table inquiry-centered-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:18%;">Date</th>
+                                    <th style="width:22%;">Event</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="not page['timeline']">
+                                    <tr><td colspan="3" class="text-center">No timeline events.</td></tr>
+                                </t>
+                                <t t-foreach="page['timeline']" t-as="event">
+                                    <tr>
+                                        <td class="inquiry-nowrap" t-esc="event['date_display']"/>
+                                        <td t-esc="event['label']"/>
+                                        <td t-esc="event['description']"/>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Documents -->
+                        <div class="inquiry-section-title">Documents</div>
+                        <table class="inquiry-table">
+                            <thead>
+                                <tr>
+                                    <th>Document Type</th>
+                                    <th>Filename</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="not page['documents']">
+                                    <tr><td colspan="3" class="text-center">No documents on file.</td></tr>
+                                </t>
+                                <t t-foreach="page['documents']" t-as="doc">
+                                    <tr>
+                                        <td t-esc="doc['doc_type']"/>
+                                        <td t-esc="doc['filename']"/>
+                                        <td class="text-center" t-esc="doc['date_display']"/>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

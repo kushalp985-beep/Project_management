@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_maintenance_sla,access.maintenance.sla,model_maintenance_sla,,1,1,1,1
+portal_maintenance_request,portal_maintenance_request,maintenance.model_maintenance_request,base.group_portal,1,1,1,1
+maintenance_portal.access_maintenance_sla,access_maintenance_sla,maintenance_portal.model_maintenance_sla,base.group_user,1,1,1,1
+maintenance_portal.access_maintenance_type,access_maintenance_type,maintenance_portal.model_maintenance_type,base.group_user,1,1,1,1
+access_maintenance_vendor,access_maintenance_vendor,model_maintenance_vendor,base.group_user,1,1,1,1

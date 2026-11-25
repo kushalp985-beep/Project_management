@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="email_template_contract_report" model="mail.template">
+            <field name="name">Contract End Date Report</field>
+            <field name="model_id" ref="bliss_property_management.model_property_contract"/>
+            <field name="email_from">{{ object.company_id.email_formatted }}</field>
+            <field name="email_to">{{ object.partner_id.email }}</field>
+            <field name="subject">Your contract will end soon</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>Dear <t t-esc="object.partner_id.name"/>,
+                        <br/>
+                        <br/>
+                    </p>
+                    <p>This is a reminder that your contract
+                        <strong>
+                            <t t-esc="object.name"/>
+                        </strong>
+                        is set to end on
+                        <strong>
+                            <t t-esc="object.date_stop"/>
+                        </strong>
+                        .
+                    </p>
+                    <p>Please contact us if you have any questions or need further assistance.</p>
+                    <p>Best regards,</p>
+                    <p>
+                        <t t-esc="object.company_id.name"/>
+                    </p>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

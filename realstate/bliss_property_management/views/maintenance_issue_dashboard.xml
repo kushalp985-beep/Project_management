@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_maintenance_issue_dashboard_kanban" model="ir.ui.view">
+        <field name="name">maintenance.issue.dashboard.kanban</field>
+        <field name="model">maintenance.issue.dashboard</field>
+        <field name="arch" type="xml">
+            <kanban class="o_stock_kanban" create="0" records_draggable="0" can_open="0">
+                <field name="name"/>
+                <field name="issue_count"/>
+                <field name="color"/>
+                <field name="card_type"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="px-2">
+                            <div class="fw-bold fs-4">
+                                <field name="name"/>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <button class="btn btn-primary"
+                                            name="action_view_issues"
+                                            type="object">
+                                        <span t-if="record.issue_count.raw_value &gt; 0">
+                                            <field name="issue_count"/>
+                                            <t t-if="record.card_type.raw_value != 'employee'"> Issues</t>
+                                            <t t-else=""> Employees</t>
+                                        </span>
+                                        <span t-else="">Open</span>
+                                    </button>
+                                </div>
+                                <div class="col-6" t-if="record.issue_count.raw_value &gt; 0">
+                                    <div class="row">
+                                        <span class="col-6">Total</span>
+                                        <field class="col-2 text-end" name="issue_count"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_maintenance_issue_dashboard" model="ir.actions.act_window">
+        <field name="name">Maintenance Dashboard</field>
+        <field name="res_model">maintenance.issue.dashboard</field>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="view_maintenance_issue_dashboard_kanban"/>
+        <field name="target">current</field>
+    </record>
+
+</odoo>

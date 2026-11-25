@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_maintenance_issue_report" model="ir.actions.report">
+        <field name="name">Maintenance Issue Report</field>
+        <field name="model">maintenance.unit.issue</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">bliss_property_management.report_maintenance_unit_issue</field>
+        <field name="report_file">bliss_property_management.report_maintenance_unit_issue</field>
+        <field name="binding_model_id" ref="model_maintenance_unit_issue"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Issue - %s' % (object.name)</field>
+        <field name="paperformat_id" ref="bliss_property_management.custom_paper_format"/>
+    </record>
+</odoo>

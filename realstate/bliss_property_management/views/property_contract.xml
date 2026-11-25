@@ -1,0 +1,434 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="action_to_contract" model="ir.actions.act_window">
+        <field name="name">Contract</field>
+        <field name="res_model">property.contract</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('contract_id', '=', active_id)]</field>
+        <field name="context">{'default_contract_id': active_id}</field>
+    </record>
+    <record id="action_to_contract_renew" model="ir.actions.act_window">
+        <field name="name">Contract renewal</field>
+        <field name="res_model">contract.renewal</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('contract_id', '=', active_id)]</field>
+        <field name="context">{'default_contract_id': active_id}</field>
+    </record>
+    <record id="action_to_contract_term" model="ir.actions.act_window">
+        <field name="name">Contract Termination</field>
+        <field name="res_model">contract.termination</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('contract_id', '=', active_id)]</field>
+        <field name="context">{'default_contract_id': active_id}</field>
+    </record>
+    <record id="view_property_unit_media_form" model="ir.ui.view">
+        <field name="name">property.unit.media.form</field>
+        <field name="model">property.unit.media</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="image_1920" widget="image"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="property_unit_media_view_kanban" model="ir.ui.view">
+        <field name="name">property.unit.media.kanban</field>
+        <field name="model">property.unit.media</field>
+        <field name="arch" type="xml">
+            <kanban string="Property Unit Media" default_order="sequence">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="image_1920"/>
+                <field name="sequence" widget="handle"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="card oe_kanban_global_click p-0">
+                            <div class="o_squared_image">
+                                <img class="card-img-top"
+                                     t-att-src="kanban_image('property.unit.media', 'image_1920', record.id.raw_value)"
+                                     t-att-alt="record.name.value"/>
+                            </div>
+                            <div class="card-body p-0">
+                                <h4 class="card-title p-2 m-0 bg-200">
+                                    <small>
+                                        <field name="name"/>
+                                    </small>
+                                </h4>
+                            </div>
+                            <!-- below 100 Kb: good -->
+                            <t t-if="record.image_1920.raw_value.length &lt; 100*1000">
+                                <t t-set="size_status" t-value="'text-bg-success'"/>
+                                <t t-set="message">Acceptable file size</t>
+                            </t>
+                            <!-- below 1000 Kb: decent -->
+                            <t t-elif="record.image_1920.raw_value.length &lt; 1000*1000">
+                                <t t-set="size_status" t-value="'text-bg-warning'"/>
+                                <t t-set="message">Huge file size. The image should be optimized/reduced.</t>
+                            </t>
+                            <!-- above 1000 Kb: bad -->
+                            <t t-else="1">
+                                <t t-set="size_status" t-value="'text-bg-danger'"/>
+                                <t t-set="message">Optimization required! Reduce the image size or increase your
+                                    compression settings.
+                                </t>
+                            </t>
+                            <span t-attf-class="badge #{size_status} o_property_unit_image_size"
+                                  t-esc="record.image_1920.value" t-att-title="message"/>
+                        </div>
+                    </t>
+                    <t t-name="card">
+                        <div class="card oe_kanban_global_click p-0">
+                            <div class="o_squared_image">
+                                <img class="card-img-top"
+                                     t-att-src="kanban_image('property.unit.media', 'image_1920', record.id.raw_value)"
+                                     t-att-alt="record.name.value"/>
+                            </div>
+                            <div class="card-body p-0">
+                                <h4 class="card-title p-2 m-0 bg-200">
+                                    <small>
+                                        <field name="name"/>
+                                    </small>
+                                </h4>
+                            </div>
+                            <!-- below 100 Kb: good -->
+                            <t t-if="record.image_1920.raw_value.length &lt; 100*1000">
+                                <t t-set="size_status" t-value="'text-bg-success'"/>
+                                <t t-set="message">Acceptable file size</t>
+                            </t>
+                            <!-- below 1000 Kb: decent -->
+                            <t t-elif="record.image_1920.raw_value.length &lt; 1000*1000">
+                                <t t-set="size_status" t-value="'text-bg-warning'"/>
+                                <t t-set="message">Huge file size. The image should be optimized/reduced.</t>
+                            </t>
+                            <!-- above 1000 Kb: bad -->
+                            <t t-else="1">
+                                <t t-set="size_status" t-value="'text-bg-danger'"/>
+                                <t t-set="message">Optimization required! Reduce the image size or increase your
+                                    compression settings.
+                                </t>
+                            </t>
+                            <span t-attf-class="badge #{size_status} o_property_unit_image_size"
+                                  t-esc="record.image_1920.value" t-att-title="message"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="action_to_checks" model="ir.actions.act_window">
+        <field name="name">Checks</field>
+        <field name="res_model">account.cheque</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('contract_id', '=', active_id)]</field>
+        <field name="context">{'default_contract_id': active_id}</field>
+    </record>
+    <record id="property_contarct_form" model="ir.ui.view">
+        <field name="name">property.contract.form</field>
+        <field name="model">property.contract</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="maintenance_billing" invisible="1"/>
+                    <field name="days_until_end" invisible="1"/>
+                    <field name="has_renewal" invisible="1"/>
+
+                    <!-- Proposal workflow -->
+                    <button name="action_request_approval" type="object" string="Request Approval"
+                            class="btn-primary" invisible="state != 'proposal'"/>
+                    <button name="action_approve_proposal" string="Approve" type="object"
+                            class="btn-primary" invisible="state != 'pwaiting'"/>
+                    <button name="action_reject_proposal" string="Reject" type="object"
+                            class="btn-secondary" invisible="state != 'pwaiting'"/>
+                    <button name="action_send_proposal" string="Send Proposal" type="object"
+                            class="btn-primary" invisible="state != 'papproved'"/>
+                    <button name="action_confirm_proposal" string="Confirm Proposal" type="object"
+                            class="btn-primary" invisible="state not in ('psent', 'papproved')"/>
+                    <button name="action_convert_to_contract" string="Convert to Contract" type="object"
+                            class="btn-primary" invisible="state != 'pconfirmed'"/>
+
+                    <!-- Contract workflow -->
+                    <button name="action_send_contract" string="Send Contract" type="object"
+                            class="btn-primary" invisible="state != 'contract'"/>
+                    <button name="action_confirm_contract" string="Confirm" type="object"
+                            class="btn-primary" invisible="state != 'csent'"/>
+                    <button name="action_legal_approval" string="Legal Approval" type="object"
+                            class="btn-primary" invisible="state != 'cconfirmed'"/>
+                    <button name="action_fanatical_approval" string="Final Approval" type="object"
+                            class="btn-primary" invisible="state != 'clegalapproved'"/>
+
+                    <!-- Signed / billing -->
+                    <button name="action_print_tenancy_contract" string="Print Tenancy Contract"
+                            type="object" class="btn-secondary" invisible="state != 'signed'"/>
+                    <button name="action_invoice" string="Tenant Invoice" type="object"
+                            class="btn-primary"
+                            invisible="state != 'signed' or maintenance_billing == 'separate'"/>
+                    <button name="action_invoice" string="Owner Bill" type="object"
+                            class="btn-primary"
+                            invisible="state != 'signed' or maintenance_billing != 'separate'"/>
+                    <button name="action_renew_contract" string="Renew" type="object"
+                            class="btn-secondary" invisible="state != 'renewed'" />
+
+                    <!-- Utilities -->
+                    <button name="action_reset_to_proposal" string="Reset to Proposal" type="object"
+                            class="btn-link" invisible="state != 'canceled'"/>
+                    <button name="cancel" string="Cancel" type="object" class="btn-secondary"
+                            invisible="state in ('canceled', 'pwaiting', 'ctermination')"/>
+                    <button name="action_contract_terminate" string="Terminate" type="object"
+                            class="btn-secondary" invisible="state == 'ctermination'"/>
+                    <button name="action_preview" string="Preview" type="object" class="btn-link"/>
+
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="proposal,pwaiting,papproved,contract,cconfirmed,clegalapproved,signed,canceled"/>
+                </header>
+                <sheet string="Property Contract">
+                    <div class="oe_button_box" name="button_box">
+                        <button type="action" name="%(action_to_checks)d" class="oe_stat_button" icon="fa-money">
+                            <field name="checks_count" widget="statinfo" string="Checks"/>
+                        </button>
+                        <button type="action" name="%(action_to_contract_renew)d" class="oe_stat_button"
+                                icon="fa-solid fa-rotate-right">
+                            <field name="contract_renewal_count" widget="statinfo" string="Contract renewal"/>
+                        </button>
+                        <button type="action" name="%(action_to_contract_term)d" class="oe_stat_button" icon="fa-times">
+                            <field name="contract_term_count" widget="statinfo" string="Termination contract"/>
+                        </button>
+                        <button type="object" name="action_view_invoice" class="oe_stat_button" icon="fa-money">
+                            <field name="invoices_count" widget="statinfo"
+                                   string="Invoices"
+                                   invisible="maintenance_billing == 'separate'"/>
+                            <field name="invoices_count" widget="statinfo"
+                                   string="Owner Bills"
+                                   invisible="maintenance_billing != 'separate'"/>
+                        </button>
+                    </div>
+
+                    <field name="kanban_state" widget="state_selection"/>
+                    <widget name="web_ribbon" text="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <field name="active" invisible="1"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" required="1" placeholder="Name..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="unit_info" string="Unit &amp; Parties">
+                            <field name="code"/>
+                            <field name="project_id" options="{'no_create': True}"/>
+                            <field name="maintenance_billing" readonly="1"/>
+                            <field name="owner_id" domain="[('contact_type', '=', 'owner')]"
+                                   options="{'no_create': True}"/>
+                            <field name="company_id" readonly="1" groups="base.group_multi_company"/>
+                            <field name="building_id" domain="[('project_id', '=', project_id)]"
+                                   options="{'no_create': True}"/>
+                            <field name="unit_id"
+                                   domain="[('building_id', '=', building_id), ('state', '=', 'available')]"
+                                   options="{'no_create': True}"/>
+                            <field name="partner_id" domain="[('contact_type', '=', 'tenant')]"
+                                   options="{'no_create': True}"/>
+                            <field name="user_id" widget="many2one_avatar_user" options="{'no_create': True}"/>
+                        </group>
+                        <group name="contract_dates" string="Contract Dates">
+                            <field name="date"/>
+                            <field name="date_start" string="Period" widget="daterange"
+                                   options="{'end_date_field': 'date_stop'}"/>
+                            <field name="date_stop" invisible="1"/>
+                            <field name="start_date_from"/>
+                            <field name="no_of_days"/>
+                            <field name="keys_handover"/>
+                        </group>
+                    </group>
+
+                    <separator string="Rent &amp; Tax"/>
+                    <group>
+                        <group name="pricing_rent" string="Rent Amount">
+                            <field name="contract_currency_id" invisible="1"/>
+                            <field name="period"/>
+                            <field name="period_nbr"/>
+                            <field name="value"/>
+                            <field name="discount" invisible="1"/>
+                            <field name="ejari_fees"/>
+                            <field name="total_value" readonly="1"/>
+                        </group>
+                        <group name="pricing_tax" string="Tax">
+                            <field name="tax_type"/>
+                            <field name="tax_id" widget="many2one" options="{'no_create': True}"/>
+                            <field name="tax_amount" invisible="1" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <separator string="Owner Settlement" invisible="maintenance_billing != 'separate'"/>
+                    <group invisible="maintenance_billing != 'separate'">
+                        <group name="pricing_owner_in" string="Collected">
+                            <field name="total_paid" string="Rent Collected" readonly="1"/>
+                            <field name="management_fee_deducted" string="Management Fee Collected" readonly="1"/>
+                        </group>
+                        <group name="pricing_owner_out" string="Deductions">
+                            <field name="maintenance_charges_deducted" readonly="1"/>
+                            <field name="maintenance_deducted" readonly="1"/>
+                            <field name="owner_payable" readonly="1" class="fw-bold"/>
+                        </group>
+                    </group>
+
+                    <separator string="Payments &amp; Balance"/>
+                    <group>
+                        <group name="pricing_payments" string="Checks &amp; Installments">
+                            <field name="property_type"/>
+                            <field name="payment_check"/>
+                            <field name="checks_no"/>
+                            <field name="bank_id" widget="many2one" options="{'no_create': True}"/>
+                            <field name="journal_id" widget="many2one" options="{'no_create': True}"/>
+                            <!-- <field name="installment_journal_id" widget="many2one" options="{'no_create': True}"/> -->
+                            <field name="first_installment_include_tax"/>
+                            <field name="invoice_payment_term_id"/>
+                        </group>
+                        <group name="pricing_balance" string="Balance &amp; Other Charges">
+                            <field name="total_paid" string="Total Paid" readonly="1"
+                                   invisible="maintenance_billing == 'separate'"/>
+                            <field name="to_be_paid"  invisible="1" readonly="1"/>
+                            <field name="commission_value"/>
+                            <field name="security_deposit"/>
+                            <field name="security_deposit_check"/>
+                            <field name="management_fee" readonly="1"/>
+                            <field name="penalty_amount"/>
+                        </group>
+                    </group>
+
+                    <group string="Notes">
+                        <field name="notes" nolabel="1" placeholder="Internal notes..."/>
+                    </group>
+                    <notebook>
+                        <page string="Attachment">
+                            <field name="attachment_ids"/>
+                        </page>
+                        <page string="Checks">
+                            <field name="can_compute_installments" invisible="1"/>
+                            <button name="add_installments" string="Compute Checks" type="object"
+                                    class="btn-primary"
+                                    invisible="not can_compute_installments"/>
+                            <field name="account_cheque_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="cheque_number"/>
+                                    <field name="cheque_date"/>
+                                    <field name="account_cheque_type" column_invisible="1"/>
+                                    <field name="contract_id" column_invisible="1"/>
+                                    <field name="amount" column_invisible="1"/>
+                                    <field name="tax_amount" column_invisible="1"/>
+                                    <field name="display_tax_amount" optional="show"/>
+                                    <field name="display_total_amount"/>
+                                    <field name="total_amount" column_invisible="1"/>
+                                    <field name="status1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Commission">
+                            <button name="compute_commission" string="Compute Commission" type="object"
+                                    class="btn-primary"></button>
+                            <field name="commission_ids"/>
+                        </page>
+                        <page string="Fees">
+                            <field name="fees_ids"/>
+                        </page>
+                        <page string="Unit Images">
+                            <group name="property_unit_images" string="Extra Property Media">
+                                <field name="media_ids" class="o_property_unit_image_list"
+                                       context="{'default_name': name}" mode="kanban" add-label="Add a Media"
+                                       nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+                <!-- <div class="oe_chatter" name="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                    <field name="activity_ids"/>
+                </div> -->
+            </form>
+        </field>
+    </record>
+    <record id="property_contract_search" model="ir.ui.view">
+        <field name="name">property.contract.search</field>
+        <field name="model">property.contract</field>
+        <field name="arch" type="xml">
+            <search string="Property Contract">
+                <field name="name" string="Contract" filter_domain="['|', ('name', 'ilike', self), ('code', 'ilike', self)]"/>
+                <field name="code"/>
+                <field name="partner_id" string="Tenant"/>
+                <field name="owner_id"/>
+                <field name="project_id"/>
+                <field name="building_id"/>
+                <field name="unit_id"/>
+                <field name="user_id" string="Responsible"/>
+                <field name="state"/>
+                <field name="property_type"/>
+                <field name="date_start"/>
+                <field name="date_stop"/>
+                <separator/>
+                <filter name="filter_active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter name="filter_proposal" string="Proposal"
+                        domain="[('state', 'in', ('proposal', 'pwaiting', 'papproved', 'psent', 'pconfirmed', 'prejected'))]"/>
+                <filter name="filter_contract" string="Contract"
+                        domain="[('state', 'in', ('contract', 'csent', 'cconfirmed', 'clegalapproved', 'signed'))]"/>
+                <filter name="filter_signed" string="Signed" domain="[('state', '=', 'signed')]"/>
+                <filter name="filter_canceled" string="Canceled" domain="[('state', '=', 'canceled')]"/>
+                <filter name="filter_termination" string="Termination" domain="[('state', '=', 'ctermination')]"/>
+                <separator/>
+                <filter name="filter_commercial" string="Commercial" domain="[('property_type', '=', 'commercial')]"/>
+                <filter name="filter_residential" string="Residential" domain="[('property_type', '=', 'residential')]"/>
+                <separator/>
+                <filter name="filter_start_date" string="Start Date" date="date_start"/>
+                <filter name="filter_end_date" string="End Date" date="date_stop"/>
+                <group>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_stage" string="Stage" context="{'group_by': 'stage_id'}"/>
+                    <filter name="group_project" string="Project" context="{'group_by': 'project_id'}"/>
+                    <filter name="group_building" string="Building" context="{'group_by': 'building_id'}"/>
+                    <filter name="group_unit" string="Unit" context="{'group_by': 'unit_id'}"/>
+                    <filter name="group_tenant" string="Tenant" context="{'group_by': 'partner_id'}"/>
+                    <filter name="group_owner" string="Owner" context="{'group_by': 'owner_id'}"/>
+                    <filter name="group_property_type" string="Property Type" context="{'group_by': 'property_type'}"/>
+                    <filter name="group_responsible" string="Responsible" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_start_date" string="Start Date" context="{'group_by': 'date_start'}"/>
+                    <filter name="group_end_date" string="End Date" context="{'group_by': 'date_stop'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="property_contract_tree" model="ir.ui.view">
+        <field name="name">property.contract.tree</field>
+        <field name="model">property.contract</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list string="property contract">
+                <field name="contract_currency_id" column_invisible="1"/>
+                <field name="name" string="Code"/>
+                <field name="partner_id"/>
+                <field name="project_id" optional="show"/>
+                <field name="building_id" optional="show"/>
+                <field name="unit_id" />
+                <field name="owner_id" optional="show"/>
+                <field name="date_start" optional="show"/>
+                <field name="date_stop" optional="show"/>
+                <field name="start_date_from" optional="show"/>
+                <field name="no_of_days" optional="show"/>
+                <field name="is_renew" optional="show"/>
+                <field name="period" string="Rent period"/>
+                <field name="value" string="Rent value"/>
+                <field name="tax_id" optional="show"/>
+                <field name="total_value"/>
+                <field name="total_paid"/>
+                <field name="to_be_paid"/>
+                <field name="state" decoration-primary="state != 'canceled'" decoration-danger="state == 'canceled'"
+                       widget="badge"/>
+            </list>
+        </field>
+    </record>
+</odoo>

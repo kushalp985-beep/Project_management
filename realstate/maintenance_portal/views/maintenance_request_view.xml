@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="maintenance_stage_view_form_inherit_add_field" model="ir.ui.view">
+        <field name="name">maintenance.stage.view.form.inherit.add.field</field>
+        <field name="model">maintenance.stage</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_stage_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="submit_vendor"/>
+                <field name="submited_to_vendor"/>
+                <field name="date_resolution_submited"/>
+                <field name="go_ahed_to_vendor"/>
+                <field name="vendor_quotation_submitted"/>
+                <field name="submit_quote_to_client"/>
+            </field>
+        </field>
+    </record>
+
+      <record id="maintenance_request_view_form_inherit_add_field" model="ir.ui.view">
+        <field name="name">maintenance.request.view.form.inherit.add.field</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="inside">
+                <label for="code" string="Number" invisible="not code"/>
+                <h1>
+                    <field name="code" invisible="not code"/>
+                </h1>
+            </xpath>
+            <xpath expr="//field[@name='maintenance_type']" position="after">
+<!--                <field name="partner_id"/>-->
+                <field name="maintenance_type_id"/>
+                <field name="attachment_ids" widget="many2many_binary"/>
+                <field name="submit_to_vendor" invisible="1"/>
+                <field name="date_resolution" invisible="0"/>
+<!--                <field name="remarks"/>-->
+            </xpath>
+            <xpath expr="//form/header" position="inside">
+<!--                <button name="action_send_to_vendor" string="Send to Vendor" type="object" class="oe_highlight" invisible="not is_action_send_to_vendor"/>-->
+                <field name="submit_to_vendor" invisible="1"/>
+                <field name="date_resolution" invisible="0"/>
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <div class="oe_button_box" name="button_box">
+                        <button name="action_view_sale_orders" type="object" class="oe_stat_button" icon="fa-pencil-square-o" invisible="sale_count == 0">
+                        <field name="sale_count" widget="statinfo" string="Sale Orders"/>
+                    </button>
+                    </div>
+            </xpath>
+            <xpath expr="//button[@name='archive_equipment_request']" position="before">
+                
+                <button name="action_send_approved" string="Approved User" type="object" class="oe_highlight" groups="maintenance_portal.group_approved_user"/>
+                
+                <button name="action_send_to_vendor" string="Send to Vendor" type="object" class="oe_highlight" invisible="stage_status != 'submit_vendor'"/>
+                <button name="action_generate_quotation" string="Generate Quotation" type="object" class="oe_highlight" invisible="stage_status != 'vendor_quotation_submitted' or sale_count"/>
+                <button name="action_send_to_client" string="Send Quote to Client" type="object" class="oe_highlight" invisible="stage_status != 'vendor_quotation_submitted' or not sale_count"/>
+                <button name="action_go_ahead_to_vendor" string="Go Ahead to Vendor" type="object" class="oe_highlight" invisible="stage_status not in ['date_resolution_submited','submit_quote_to_client']"/>
+            </xpath>
+<!--            <xpath expr="//form/header" position="inside">-->
+<!--                <button name="action_send_to_vendor" string="Send to Vendor" type="object" class="oe_highlight" invisible="not is_action_send_to_vendor"/>-->
+<!--            </xpath>-->
+             <xpath expr="//notebook" position="inside">
+                 <page name="Vendor Maintenance">
+                     <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="property_number"/>
+                            <field name="tenant_details"/>
+                            <field name="compliant_nature"/>
+                            <field name="compliant_desc"/>
+                            <field name="attachment"/>
+                            <field name="vendor_code"/>
+                            <field name="vendor_name"/>
+                            <field name="license_number"/>
+                        </group>
+                        <group>
+                            <field name="validity"/>
+                            <field name="trn_number"/>
+                            <field name="address"/>
+                            <field name="authorized_person"/>
+                            <field name="email"/>
+                            <field name="contact_number"/>
+                            <field name="bank_account"/>
+                            <field name="remarks"/>
+                        </group>
+                     </group>
+                     <field name="submit_vendor" invisible="1"/>
+                     <field name="go_ahed_to_vendor" invisible="1"/>
+                     <field name="stage_status" invisible="0"/>
+                 </page>
+                 <page name="Vendor Quote" invisible="not vendor_quote_att">
+                    <group>
+                        <field name="vendor_quote_att"/>
+                    </group>
+                 </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

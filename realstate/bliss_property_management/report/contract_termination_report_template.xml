@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="contract_termination_page">
+        <t t-set="company" t-value="doc.company_id or doc.env.company"/>
+        <t t-set="contract" t-value="doc.contract_id"/>
+        <t t-set="tenant" t-value="contract.partner_id if contract else False"/>
+
+        <div class="page" style="font-family: Arial, sans-serif; font-size: 11px; color: #000;">
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
+                <tr>
+                    <td style="width: 60%; vertical-align: top;">
+                        <div style="font-size: 16px; font-weight: bold;" t-esc="company.name or ''"/>
+                        <div t-if="company.partner_id.street" t-esc="company.partner_id.street"/>
+                        <div>
+                            <t t-if="company.partner_id.city" t-esc="company.partner_id.city"/>
+                            <t t-if="company.partner_id.country_id">, <t t-esc="company.partner_id.country_id.name"/></t>
+                        </div>
+                    </td>
+                    <td style="width: 40%; vertical-align: top; text-align: right; font-size: 12px; line-height: 1.6;">
+                        <div><strong>Doc No:</strong> <t t-esc="doc.name"/></div>
+                        <div><strong>Date:</strong>
+                            <t t-if="doc.termination_date" t-esc="doc.termination_date" t-options="{'widget': 'date'}"/>
+                        </div>
+                        <div><strong>Status:</strong> <span t-field="doc.state_term"/></div>
+                    </td>
+                </tr>
+            </table>
+
+            <div style="text-align: center; font-size: 17px; font-weight: bold; text-decoration: underline; margin: 10px 0 14px 0;">
+                CONTRACT TERMINATION RECORD
+            </div>
+
+            <h4 style="margin: 12px 0 6px 0; border-bottom: 1px solid #000;">Termination Dates</h4>
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 10px;">
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px; width: 25%;"><strong>Termination Ref</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px; width: 25%;"><t t-esc="doc.name"/></td>
+                    <td style="border: 1px solid #000; padding: 5px; width: 25%;"><strong>Termination Date</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px; width: 25%;">
+                        <span t-field="doc.termination_date"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Termination Type</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px;" colspan="3"><span t-field="doc.termination_type"/></td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Contract</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px;"><span t-field="doc.contract_id"/></td>
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Unit</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px;"><span t-field="doc.unit_id"/></td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Tenant</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px;"><span t-if="doc.contract_id" t-field="doc.contract_id.partner_id"/></td>
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Contract Period</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px;">
+                        <span t-field="doc.date_start"/> &amp;  <span t-field="doc.date_stop"/>
+                    </td>
+                </tr>
+            </table>
+
+            <h4 style="margin: 12px 0 6px 0; border-bottom: 1px solid #000;">Termination Penalty</h4>
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 10px;">
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px; width: 50%;"><strong>Contract Value</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px; width: 50%; text-align: right;">
+                        <t t-esc="doc.format_report_currency(doc.value)"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Final Penalty Amount</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">
+                        <t t-esc="doc.format_report_currency(doc.penality_amount)"/>
+                    </td>
+                </tr>
+            </table>
+
+            <h4 style="margin: 12px 0 6px 0; border-bottom: 1px solid #000;">Termination Calculation</h4>
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 10px;">
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px; width: 50%;"><strong>Security Deposit</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px; width: 50%; text-align: right;">
+                        <t t-esc="doc.format_report_currency(doc.security_deposit)"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Inspection Damage Amount</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">
+                        <t t-esc="doc.format_report_currency(doc.inspection_cost)"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Ijari Cancellation Fees</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">
+                        <t t-esc="doc.format_report_currency(doc.ijari_canslation_fees)"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Other Cost</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">
+                        <t t-esc="doc.format_report_currency(doc.other_cost)"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Day Value</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">
+                        <t t-esc="doc.format_report_currency(doc.day_value)"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Consumed Period (days)</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;"><t t-esc="doc.consumed_period"/></td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Consumed Value</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">
+                        <t t-esc="doc.format_report_currency(doc.consumed_value)"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Paid Rent Value</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">
+                        <t t-esc="doc.format_report_currency(doc.total_paid)"/>
+                    </td>
+                </tr>
+                <tr style="font-weight: bold; background-color: #f5f5f5;">
+                    <td style="border: 1px solid #000; padding: 5px;"><strong>Settlement Amount</strong></td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">
+                        <t t-esc="doc.format_report_currency(doc.settlement_amount)"/>
+                    </td>
+                </tr>
+            </table>
+
+            <h4 style="margin: 12px 0 6px 0; border-bottom: 1px solid #000;">Not Paid Cheques</h4>
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 10px;">
+                <thead>
+                    <tr style="background-color: #eee;">
+                        <th style="border: 1px solid #000; padding: 4px;">Name</th>
+                        <th style="border: 1px solid #000; padding: 4px;">Cheque No.</th>
+                        <th style="border: 1px solid #000; padding: 4px;">Cheque Date</th>
+                        <th style="border: 1px solid #000; padding: 4px;">Total Amount</th>
+                        <th style="border: 1px solid #000; padding: 4px;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="doc.not_paid_cheque_ids" t-as="cheque">
+                        <td style="border: 1px solid #000; text-align: center; padding: 4px;"><t t-esc="cheque.name"/></td>
+                        <td style="border: 1px solid #000; text-align: center; padding: 4px;"><t t-esc="cheque.cheque_number"/></td>
+                        <td style="border: 1px solid #000;  text-align: center; padding: 4px;">
+                            <span t-field="cheque.cheque_date"/>
+                        </td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;">
+                            <t t-esc="doc.format_report_currency(cheque.total_amount)"/>
+                        </td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;"><span t-field="cheque.status1"/></td>
+                    </tr>
+                    <tr t-if="len(doc.not_paid_cheque_ids) == 0">
+                        <td colspan="5" style="border: 1px solid #000; padding: 6px; text-align: center;">No unpaid cheques</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="margin: 12px 0 6px 0; border-bottom: 1px solid #000;">Security Deposit</h4>
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 10px;">
+                <thead>
+                    <tr style="background-color: #eee;">
+                        <th style="border: 1px solid #000; padding: 4px; text-align: center;">Name</th>
+                        <th style="border: 1px solid #000; padding: 4px; text-align: center;">Tenant</th>
+                        <th style="border: 1px solid #000; padding: 4px; text-align: center;">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="doc.contract_security_deposit_ids" t-as="sd">
+                        <td style="border: 1px solid #000; text-align: center; padding: 4px;"><t t-esc="sd.name"/></td>
+                        <td style="border: 1px solid #000;  text-align: center; padding: 4px;"><span t-field="sd.partner_id"/></td>
+                        <td style="border: 1px solid #000; text-align: center; padding: 4px; text-align: right;">
+                            <t t-esc="doc.format_report_currency(sd.security_dep)"/>
+                        </td>
+                    </tr>
+                    <tr t-if="len(doc.contract_security_deposit_ids) == 0">
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;">Security Deposit</td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;"><span t-if="doc.contract_id" t-field="doc.contract_id.partner_id"/></td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;">
+                            <t t-esc="doc.format_report_currency(doc.security_deposit)"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="margin: 12px 0 6px 0; border-bottom: 1px solid #000;">Inspection History</h4>
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 10px;">
+                <thead>
+                    <tr style="background-color: #eee;">
+                        <th style="border: 1px solid #000; padding: 4px;">Date</th>
+                        <th style="border: 1px solid #000; padding: 4px;">Paint</th>
+                        <th style="border: 1px solid #000; padding: 4px;">Door</th>
+                        <th style="border: 1px solid #000; padding: 4px;">Lights</th>
+                        <th style="border: 1px solid #000; padding: 4px;">Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="doc.inspection_line_ids" t-as="insp">
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;"><span t-field="insp.inspection_date"/></td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;"><span t-field="insp.paint_condition"/></td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;"><span t-field="insp.door_condition"/></td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;"><span t-field="insp.light_condition"/></td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;"><t t-esc="insp.appliance_remarks or ''"/></td>
+                    </tr>
+                    <tr t-if="len(doc.inspection_line_ids) == 0">
+                        <td colspan="5" style="border: 1px solid #000; padding: 6px; text-align: center;">No inspection records</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+    <template id="report_contract_termination_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="bliss_property_management.contract_termination_page"/>
+            </t>
+        </t>
+    </template>
+</odoo>

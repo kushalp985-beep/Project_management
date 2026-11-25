@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="tenancy_contract_terms_conditions">
+        <style type="text/css">
+            .tenancy-tc-page {
+                page-break-before: always;
+                color: #000;
+                border: 1px solid #666;
+                display: block !important;
+                height: auto !important;
+                overflow: visible !important;
+                font-size: 12px;
+                line-height: 1.5;
+            }
+            .tenancy-tc-row {
+                display: table !important;
+                width: 100%;
+                table-layout: fixed;
+                border-bottom: 1px solid #bbb;
+                height: auto !important;
+            }
+            .tenancy-tc-row > div {
+                display: table-cell !important;
+                width: 50%;
+                vertical-align: top;
+                padding: 8px 10px;
+                white-space: normal !important;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                line-height: 1.5 !important;
+                border-right: 1px solid #bbb;
+                height: auto !important;
+                overflow: visible !important;
+                position: static !important;
+            }
+            .tenancy-tc-row > div:last-child {
+                border-right: none;
+            }
+            .tenancy-tc-en {
+                text-align: left;
+                font-family: Lato, Arial, sans-serif;
+            }
+            .tenancy-tc-ar {
+                text-align: right;
+                font-family: 'KacstOne', 'DejaVu Sans', Tahoma, sans-serif;
+            }
+            .tenancy-tc-title > div {
+                font-size: 17px;
+                font-weight: bold;
+                background: #f2f2f2;
+                padding: 10px;
+            }
+            .tenancy-tc-section > div {
+                font-size: 14px;
+                font-weight: bold;
+                background: #f8f8f8;
+                padding: 8px 10px;
+                border-top: 2px solid #666;
+            }
+            .tenancy-tc-clause > div {
+                font-size: 12px;
+                line-height: 1.5;
+                padding: 8px 10px;
+            }
+        </style>
+        <div class="tenancy-tc-page">
+            <div class="tenancy-tc-row tenancy-tc-title">
+                <div class="tenancy-tc-en">TERMS AND CONDITIONS</div>
+                <div class="tenancy-tc-ar">الشروط ​والأحكام</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-section">
+                <div class="tenancy-tc-en">1 Grant of Lease</div>
+                <div class="tenancy-tc-ar">1 ​منح ​الإيجار</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">1.1 The Landlord leases, and the Tenant accepts a lease of, the Premises for the Term subject to this Contract. By signing this Contract, the Tenant confirms that: (i) the Tenant has inspected the Premises; (ii) the Premises are in good condition; and (iii) the Tenant accepts the Premises on the Commencement Date on an "as is where is" basis.</div>
+                <div class="tenancy-tc-ar">1-1 ​يؤجر ​المؤجر ​ويقبل ​المستأجر ​إيجار ​العين ​المؤجرة ​للمدة ​المذكورة ​في ​هذا ​العقد. ​يؤكد ​المستأجر ​بموجب ​توقيعه ​على ​هذا ​العقد ​بأن: ​(1) ​المستأجر ​قد ​عاين ​العين ​المؤجرة، ​(2) ​العين ​المؤجرة ​بحالة ​جيدة، ​(3) ​المستأجر ​يقبل ​العين ​المؤجرة ​بتاريخ ​البدء ​على ​أساس ​"حالتها ​الحالية ​وفي ​مكانها ​الحالي"</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">1.2 Subject to this Contract and any rules applicable to the Premises and/or the Building/Community ("Rules", which the Tenant acknowledges it has received, read and understood), the Tenant may use: (i) any allocated carpark space(s) (as notified by the Landlord) on a license basis; and (ii) any unallocated car parking at the Building/Community (both for parking cars only). The Landlord reserves the right to allocate and charge for any unallocated car parking at the Building/Community in the future.</div>
+                <div class="tenancy-tc-ar">1-2 ​وفقًًا ​لبنود ​هذا ​العقد ​وأي ​قواعد ​مما ​تنطبق ​على ​العين ​المؤجرة ​و/أو ​البناية/المجمع ​("القواعد" ​التي ​يقر ​باستلامها ​المستأجر ​وقراءتها ​وفهمها). ​يجوز ​للمستأجر ​استخدام ​(أولاً) ​أي ​موقف ​سيارة ​/ ​مواقف ​سيارات ​مخصصة ​(وفقاً ​لإخطار ​المؤجر) ​بموجب ​رخصة ​و(ثانيًًا) ​أي ​موقف ​سيارة ​متوفر ​في ​البناية/ ​المجمع ​دون ​تخصيص ​(كلاهما ​لمواقف ​السيارات ​فقط). ​يحتفظ ​المؤجر ​بالحق ​في ​تخصيص ​وتحصيل ​رسوم ​على ​موقف ​السيارات ​التي ​لم ​يتم ​تخصيصها ​في ​البناية/ ​المجمع ​بالمستقبل.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-section">
+                <div class="tenancy-tc-en">2 Payments</div>
+                <div class="tenancy-tc-ar">2 ​الدفعات</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">2.1 The Tenant will pay the Rent by equal quarterly payments in advance, and all other payments in this Contract as and when applicable by cheque, without demand, deduction or set-off. The Late Payment Fee is payable on all payments under this Contract which are not paid on the due date.</div>
+                <div class="tenancy-tc-ar">2-1 ​يلتزم ​المستأجر ​بسداد ​الإيجار ​مقدماً ​على ​دفعات ​ربع ​سنوية ​متساوية، ​وكل ​الدفعات ​الأخرى ​الواردة ​في ​هذا ​العقد ​عند ​استحقاقها ​بموجب ​شيك، ​يُدفع ​رسم ​السداد ​المتأخر ​على ​كل ​الدفعات ​المستحقة ​بموجب ​هذا ​العقد ​والتي ​لم ​يتم ​تسديدها ​في ​تاريخ ​الاستحقاق. ​وذلك ​دون ​مطالبة ​أو ​خصم ​أو ​مقاصة.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">2.2 All amounts payable under this Contract are exclusive of tax, such as value added tax ("VAT"). If VAT is payable under this Contract, the amount payable for the supply (VAT exclusive) will be increased by the amount of VAT applicable at the prevailing rate at the time the amount is invoiced/supply is made, and the Tenant agrees to pay the same.</div>
+                <div class="tenancy-tc-ar">2-2 ​لا ​تشتمل ​جميع ​المبالغ ​مستحقة ​الدفع ​بموجب ​هذا ​العقد ​على ​الضرائب ​مثل ​ضريبة ​القيمة ​المضافة ​("ضريبة ​القيمة ​المضافة"). ​إذا ​كانت ​ضريبة ​القيمة ​المضافة ​مستحقة ​الدفع ​بموجب ​هذا ​العقد ​سيزيد ​المبلغ ​المستحق ​عن ​توفير ​العين ​المؤجرة ​(غير ​شامل ​ضريبة ​القيمة ​المضافة) ​بمقدار ​مبلغ ​ضريبة ​القيمة ​المضافة ​المطبقة ​بالمعدل ​السائد ​عند ​إصدار ​الفاتورة ​/ ​توفير ​العين ​المؤجرة، ​ويوافق ​المستأجر ​على ​سداد ​تلك ​الزيادة.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">2.3 The Tenant warrants that: (i) an improper payment has not been, and will not be, made to any party or person in relation to this Contract; (ii) all payments made under this Contract are (and will be) made by the Tenant unless the Tenant obtains the Landlord's prior written consent (at its discretion) to a third party making payments on the Tenant's behalf (and in such case, the Tenant warrants that the Tenant has authorized such payment to be made); and (iii) all payments made by the Tenant (or any third party) under this Contract are from legitimate sources and are not directly or indirectly related to proceeds of crime/money laundering.</div>
+                <div class="tenancy-tc-ar">2-3 ​يضمن ​المستأجر ​ما ​يلي: ​(1) ​لم ​ولن ​يتم ​دفع ​دفعة ​غير ​شرعية ​إلى ​أي ​طرف ​أو ​شخص ​فيما ​يتعلق ​بهذا ​العقد؛ ​(2) ​أن ​تُسُدد ​كل ​الدفعات ​التي ​تم ​دفعها ​(أو ​سيتم ​دفعها ​لاحقًًا) ​بموجب ​هذا ​العقد ​من ​قبل ​المستأجر ​ما ​لم ​يحصل ​المستأجر ​على ​موافقة ​خطية ​مسبقة ​من ​المؤجر ​(وفقًًا ​لتقديره) ​على ​قيام ​طرف ​ثالث ​بسداد ​الدفعات ​نيابة ​عن ​المستأجر ​(وفي ​هذه ​الحالة، ​يؤكد ​المستأجر ​قيامه ​بالسماح ​بسداد ​هذه ​الدفعات)؛ ​و ​(3) ​أن ​تكون ​كل ​الدفعات ​التي ​يسددها ​المستأجر ​(أو ​أي ​طرف ​ثالث) ​بموجب ​هذا ​العقد ​من ​مصادر ​مشروعة ​ولا ​تتعلق ​بشكل ​مباشر ​أو ​غير ​مباشر ​بعائدات ​الجرائم ​/ ​غسيل ​الأموال.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-section">
+                <div class="tenancy-tc-en">3 Security Deposit</div>
+                <div class="tenancy-tc-ar">3 ​وديعة ​الضمان</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">3.1 The Security Deposit will be held as security for the Tenant's obligations under this Contract. If the Tenant does not comply with this Contract, the Landlord may deduct any payment or fees due under this Contract and/or all costs and expenses incurred in connection with and/or remedying such breach ("Deductions"), without the requirement for notice or to obtain a judicial order. If Deductions are made and/or if the payments, fees, costs and/or expenses exceed the Security Deposit, the Tenant will immediately reinstate the Security Deposit and/or immediately pay to the Landlord such increased amount.</div>
+                <div class="tenancy-tc-ar">3-1 ​يتم ​الاحتفاظ ​بوديعة ​الضمان ​كضمان ​لتنفيذ ​التزامات ​المستأجر ​بموجب ​هذا ​العقد. ​إذا ​لم ​يلتزم ​المستأجر ​بأحكام ​هذا ​العقد، ​يحق ​للمؤجر ​أن ​يخصم ​أي ​دفعة ​أو ​رسوم ​مستحقة ​بموجب ​هذا ​العقد ​و/أو ​كل ​التكاليف ​والنفقات ​المتكبدة ​في ​ما ​يتعلق ​بمخالفات ​المستأجر ​و/أو ​تصحيحها ​(الخصومات) ​دون ​الحاجة ​إلى ​توجيه ​إشعار ​أو ​الحصول ​على ​أمر ​قضائي. ​إذا ​تم ​إجراء ​الخصومات ​و/أو ​إذا ​كانت ​الدفعات، ​و/أو ​الرسوم، ​و/أو ​التكاليف ​و/أو ​النفقات ​تتجاوز ​مبلغ ​وديعة ​الضمان، ​يلتزم ​المستأجر ​بأن ​يستكمل ​مبلغ ​وديعة ​الضمان ​فورا ​ليعود ​إلى ​مبلغه ​الأصلي ​و/أو ​أن ​يسدد ​فورا ​إلى ​المؤجر ​ذلك ​المبلغ ​الزائد.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">3.2 At the end of the Term (except pursuant to Clause 10.2), if the Tenant has complied with this Contract and has provided the Tenant's nominated bank account details, the Landlord will return the Security Deposit (less any Deductions) within forty-five (45) days. If the Tenant fails to provide the Tenant's nominated bank account details to the Landlord within six (6) months from the termination date, the Tenant waives its right to, and agrees that the Landlord may retain, the Security Deposit (or balance thereof). No interest is payable on the Security Deposit.</div>
+                <div class="tenancy-tc-ar">3-2 ​عند ​انتهاء ​أو ​إنهاء ​هذا ​العقد ​(فيما ​عدا ​الإنهاء ​من ​جانب ​المؤجر ​بموجب ​البند ​10-2)، ​إذا ​كان ​المستأجر ​قد ​التزم ​بأحكام ​هذا ​العقد، ​وقدم ​تفاصيل ​الحساب ​البنكي ​الخاص ​بالمستأجر، ​يرد ​المؤجر ​مبلغ ​وديعة ​الضمان ​(بعد ​إجراء ​أي ​خصومات ​مستحقة) ​خلال ​خمسة ​وأربعين ​(45) ​يوما، ​وإذا ​لم ​يقم ​المستأجر ​بتقديم ​تفاصيل ​الحساب ​البنكي ​الخاص ​به ​إلى ​المؤجر ​خلال ​ستة ​(6) ​شهور ​من ​تاريخ ​الإنهاء، ​يتنازل ​المستأجر ​عن ​حقه ​في ​ذلك ​ويوافق ​على ​أنه ​يجوز ​للمؤجر ​أن ​يحتفظ ​بمبلغ ​وديعة ​الضمان ​(أو ​الرصيد ​المتبقي ​منه)، ​ولا ​تُسُتحق ​أي ​فائدة ​على ​مبلغ ​وديعة ​الضمان.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-section">
+                <div class="tenancy-tc-en">4 Utilities and Outgoings</div>
+                <div class="tenancy-tc-ar">4 ​المرافق ​والمصروفات</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">4.1 The Tenant will pay, and indemnifies the Landlord against the cost of all utilities and services provided to the Premises, and/or outgoings assessed or charged on the Premises or which are payable by the owner or occupier of the Premises ("Utilities"), which include connection, supply and consumption of gas, electricity, telecommunications, water sewage and cooling (including demand/capital and any other charges), and fees and taxes (including any housing fee or tax, or property fees). Full payment will be made without demand, deduction or set-off, and regardless of any deductions that may be applicable under law (if applicable). If paid by the Landlord, the Tenant agrees to reimburse the Landlord for the same upon demand.</div>
+                <div class="tenancy-tc-ar">4-1 ​يلتزم ​المستأجر ​بسداد ​وتعويض ​المؤجر ​عن ​تكاليف ​جميع ​المرافق ​والخدمات ​المقدمة ​إلى ​العين ​المؤجرة ​و/أو ​المصروفات ​التي ​يتم ​فرضها ​أو ​تحصيلها ​بشأن ​العين ​المؤجرة ​والمستحقة ​الدفع ​من ​جانب ​المؤجر ​أو ​شاغل ​العين ​المؤجرة ​(المرافق)، ​وتشمل ​تلك ​النفقات ​دون ​حصر ​توصيل ​وتزويد ​الغاز ​والكهرباء ​والاتصالات ​ونظام ​الصرف ​والتبريد ​(بما ​في ​ذلك ​رسوم ​الطلبات ​والتكاليف ​الرأسمالية ​وغيرها ​من ​النفقات)، ​والرسوم ​والضرائب ​(بما ​في ​ذلك ​أي ​رسوم ​أو ​ضريبة ​سكنية ​أو ​رسوم ​عقارية)، ​سيتم ​سداد ​الدفعة ​بالكامل ​دون ​مطالبة، ​أو ​خصم ​أو ​مقاصة ​وبصرف ​النظر ​عن ​أي ​خصومات ​قد ​تكون ​مطبقة ​بموجب ​القانون ​(إذا ​كان ​معمولا ​به). ​يوافق ​المستأجر ​على ​أنه ​إذا ​تم ​الدفع ​من ​جانب ​المؤجر، ​سيقوم ​المستأجر ​بتعويض ​المؤجر ​عن ​تلك ​التكاليف ​عند ​الطلب.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">4.2 If the Premises does not have a separate utility meter, the Tenant will allow the Landlord access to the Premises to install the same. Once the separate utility meter is installed, the Tenant will take all necessary steps to connect and register the Premises to such meter. The Tenant will pay all registration/connection costs.</div>
+                <div class="tenancy-tc-ar">4-2 ​إذا ​لم ​يكن ​هناك ​عداد ​منفصل ​بالعين ​المؤجرة، ​فإن ​المستأجر ​ملزم ​بالسماح ​للمؤجر ​بدخول ​العين ​المؤجرة ​وتركيب ​العداد ​وبمجرد ​تركيب ​العداد ​يلتزم ​المستأجر ​باتخاذ ​كل ​الخطوات ​اللازمة ​لتوصيل ​وتسجيل ​ذلك ​العداد ​للعين ​المؤجرة. ​كما ​يلتزم ​المستأجر ​بسداد ​جميع ​تكاليف ​التسجيل ​/ ​التوصيل.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-section">
+                <div class="tenancy-tc-en">5 Tenant's Obligations</div>
+                <div class="tenancy-tc-ar">5 ​التزامات ​المستأجر</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">5.1 The Tenant will only use the Premises for the Permitted Use and will not exceed the Occupancy Limit.</div>
+                <div class="tenancy-tc-ar">5-1 ​يلتزم ​المستأجر ​باستخدام ​العين ​المؤجرة ​بموجب ​الاستخدام ​المصرح ​به ​فقط ​وألا ​يتجاوز ​حد ​الإشغال.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">5.2 The Tenant: (i) will keep, maintain and repair the Premises in good condition, at the Tenant's cost; and (ii) will not make any alterations or additions to the Premises whatsoever (including without limitation, installing carpets or wallpaper, signage or antenna/satellite dishes).</div>
+                <div class="tenancy-tc-ar">5-2 ​يلتزم ​المستأجر ​بما ​يلي: ​(1) ​المحافظة ​على ​العين ​المؤجرة ​وصيانتها ​وإصلاحها ​لتبقى ​في ​حالة ​جيدة ​على ​نفقة ​المستأجر، ​(2) ​عدم ​إجراء ​أي ​تعديلات ​أو ​إضافات ​على ​العين ​المؤجرة ​مهما ​كانت ​(بما ​في ​ذلك ​دون ​حصر ​تركيب ​السجاد ​أو ​ورق ​الحائط ​أو ​اللافتات ​أو ​اللاقط ​الهوائي ​أو ​أطباق ​الأقمار ​الصناعية).</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">5.3 The Tenant will not (i) cause any nuisance to other occupiers of the Building/Community, including placing any items outside the Premises; or (ii) cause any damage to the Premises and/or Building/Community; or (iii) use or store any hazardous items (including gas cylinders) at the Premises and/or Building/Community without the Landlord's prior written consent. If any items are left outside the Premises at any time, the Tenant waives all rights to, and agrees that the Landlord may remove and dispose of, such items in the Landlord's entire discretion, at the Tenant's cost, without compensation to the Tenant.</div>
+                <div class="tenancy-tc-ar">5-3 ​يلتزم ​المستأجر ​بعدم ​(1) ​التسبب ​في ​أي ​إزعاج ​للشاغلين ​الآخرين ​في ​البناية/ ​المجمع ​بما ​في ​ذلك ​وضع ​أي ​أغراض ​خارج ​العين ​المؤجرة، ​(2) ​إلحاق ​أي ​ضرر ​بالعين ​المؤجرة ​و/ ​أو ​البناية ​/ ​المجمع، ​أو ​(3) ​استخدام ​أو ​تخزين ​أي ​مواد ​خطرة ​(بما ​في ​ذلك ​أسطوانات ​الغاز) ​في ​العين ​المؤجرة ​و ​/ ​أو ​البناية/ ​المجمع ​دون ​موافقة ​خطية ​مسبقة ​من ​المؤجر. ​في ​حالة ​ترك ​أي ​أغراض ​خارج ​العين ​المؤجرة ​في ​أي ​وقت، ​يتنازل ​المستأجر ​عن ​جميع ​الحقوق ​ويوافق ​على ​أنه ​يجوز ​للمؤجر ​إزالة ​هذه ​العناصر ​والتخلص ​منها ​وفقًًا ​لتقدير ​المؤجر ​بالكامل، ​على ​حساب ​المستأجر، ​دون ​تعويض ​المستأجر ​عن ​ذلك.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">5.4 During the Term the Tenant will at its own cost, obtain and maintain an insurance policy for the Tenant's (and its Occupiers) assets/items at the Premises against loss or damage by fire, theft or flood, and for third party liability (including tenant's liability) to a limit acceptable to the Landlord (and will provide a copy of the same to the Landlord promptly on request). The Tenant agrees not to do or omit to do anything which may make void or voidable, or prejudice any claim under, any policy of insurance maintained by the Tenant and/or the Landlord.</div>
+                <div class="tenancy-tc-ar">5-4 ​يلتزم ​المستأجر ​خلال ​مدة ​العقد ​وعلى ​نفقته ​الخاصة ​بأن ​يحصل ​على ​ويجدد ​وثيقة ​تأمين ​على ​كل ​أصول ​/ ​أغراض ​المستأجر ​(وشاغليه) ​في ​العين ​المؤجرة ​ضد ​الخسارة ​أو ​التلف ​بسبب ​الحريق ​أو ​السرقة ​أو ​الفيضان، ​والمسؤولية ​تجاه ​الغير ​(بما ​في ​ذلك ​مسؤولية ​المستأجر) ​إلى ​حد ​مقبول ​للمؤجر ​(وسوف ​يقدم ​نسخة ​من ​وثيقة ​التأمين ​تلك ​إلى ​المؤجر ​على ​الفور ​عند ​الطلب). ​ويوافق ​المستأجر ​على ​عدم ​فعل ​أو ​الامتناع ​عن ​فعل ​أي ​شيء ​يمكن ​أن ​يبطل ​أي ​وثيقة ​تأمين ​أو ​يعرضها ​للإلغاء ​أو ​يمس ​أي ​مطالبة ​بموجب ​أي ​وثيقة ​تأمين ​يحتفظ ​بها ​المستأجر ​و/أو ​المؤجر.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">5.5 The Tenant will comply with and ensure that the Tenant's occupiers and visitors ("Occupiers") comply with, this Contract, the Rules, the law, and any regulations by relevant authorities. The Tenant agrees that a breach of any Rule is a breach of this Contract and that the Landlord may update the Rules from time to time.</div>
+                <div class="tenancy-tc-ar">5-5 ​يلتزم ​المستأجر ​بالامتثال ​ويضمن ​امتثال ​الشاغلين ​والزوار ​("الشاغلين") ​التابعين ​للمستأجر ​لأحكام ​هذا ​العقد ​والقواعد ​والقانون ​وأي ​قواعد ​أخرى ​صادرة ​عن ​أي ​سلطة ​مختصة، ​ويوافق ​المستأجر ​على ​أن ​أي ​مخالفة ​لأي ​قاعدة ​تعتبر ​مخالفة ​لهذا ​العقد، ​وأنه ​يجوز ​للمؤجر ​تحديث ​القواعد ​من ​وقت ​لآخر.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">5.6 The Tenant will permit the Landlord (and representatives) access to the Premises to: (i) on prior notice to view the condition of, carry out repairs, maintenance and/or alterations to the Premises, Building/Community or any part thereof; and (ii) immediately without notice in an emergency (even in the absence of the Tenant).</div>
+                <div class="tenancy-tc-ar">5-6 ​يلتزم ​المستأجر ​بالسماح ​للمؤجر ​(وممثليه) ​بدخول ​العين ​المؤجرة ​(1) ​بموجب ​إخطار ​مسبق ​لمعاينة ​حالتها ​وتنفيذ ​أي ​إصلاحات ​و/ ​أو ​أعمال ​صيانة ​و/أو ​إجراء ​تعديلات ​على ​العين ​المؤجرة ​أو ​البناية/ ​المجمع ​أو ​أي ​جزء ​منه ​و(2) ​أنه ​يحق ​للمؤجر ​دخول ​العين ​المؤجرة ​على ​الفور ​دون ​إشعار ​في ​حالة ​الطوارئ ​(حتى ​في ​غياب ​المستأجر).</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">5.7 The Landlord has the right to charge, and the Tenant will pay on demand, any fees as set out at Clause 12 and/or as may be set out for violations/penalties in the Rules (if applicable). The Landlord may revise the fees from time to time, by written notice to the Tenant. The Tenant is liable for and will reimburse the Landlord for all costs incurred enforcing this Contract (if required), including legal notices, costs and judicial fees.</div>
+                <div class="tenancy-tc-ar">5-7 ​يحق ​للمؤجر ​تحصيل ​أي ​رسوم ​مبينة ​في ​البند ​رقم ​12 ​و/أو ​حسبما ​يكون ​مبينًًا ​في ​القواعد ​بشأن ​المخالفات ​/ ​الجزاءات ​(إذا ​كانت ​مطبقة) ​ويسددها ​المستأجر ​عند ​الطلب، ​ويجوز ​للمؤجر ​مراجعة ​الرسوم ​من ​وقت ​لآخر ​بموجب ​إشعار ​كتابي ​إلى ​المستأجر. ​ويلتزم ​المستأجر ​كذلك ​بأن ​يسدد ​للمؤجر ​جميع ​التكاليف ​المتكبدة ​في ​تنفيذ ​هذا ​العقد ​(إذا ​كانت ​مطلوبة) ​بما ​في ​ذلك ​التكاليف ​القانونية ​والرسوم ​القضائية.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-section">
+                <div class="tenancy-tc-en">6 Maintenance</div>
+                <div class="tenancy-tc-ar">6 ​الصيانة</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">6.1 The Landlord is only responsible to provide major maintenance to the Premises as the Landlord determines necessary, unless the damage is caused by the Tenant or its Occupiers and/or as a result of the Tenant's failure to comply with this Contract (in which case, the Landlord will repair or require the Tenant to repair such damage as determined necessary by the Landlord, all at the Tenant's cost). The Tenant is responsible to provide all other cleaning, maintenance and repairs at the Premises. The Tenant will not claim any compensation for any damage to the Premises which: (i) is caused by the Tenant or its Occupiers; or (ii) occurs as a result of an accident or natural disasters, or non-notification by the Tenant to the Landlord in due time to prevent such damage. If required by the Landlord, the Tenant will only use maintenance providers approved by the Landlord.</div>
+                <div class="tenancy-tc-ar">6-1 ​يكون ​المؤجر ​مسؤولا ​فقط ​عن ​إجراء ​الصيانة ​الرئيسية ​للعين ​المؤجرة ​حسبما ​يقرر ​المؤجر، ​إلا ​إذا ​كان ​الضرر ​قد ​وقع ​بسبب ​المستأجر ​أو ​الشاغلين ​التابعين ​للمستأجر ​و/أو ​نتيجة ​لفشل ​المستأجر ​في ​الامتثال ​للعقد ​(في ​هذه ​الحالة ​سيقوم ​المؤجر ​بإصلاح ​ذلك ​الضرر ​أو ​يطلب ​من ​المستأجر ​إصلاح ​الضرر ​حسبما ​يراه ​المؤجر ​ضروريا ​ويكون ​كل ​ذلك ​على ​نفقة ​المستأجر). ​ويكون ​المستأجر ​مسؤولاً ​عن ​إجراء ​جميع ​أعمال ​الصيانة ​والتنظيف ​والإصلاح ​الأخرى ​بالعين ​المؤجرة. ​لن ​يطالب ​المستأجر ​بأي ​تعويض ​عن ​أضرار ​تلحق ​بالعين ​المؤجرة ​والتي ​(1) ​يكون ​المستأجر ​أو ​شاغلو ​العين ​المؤجرة ​التابعين ​للمستأجر ​سببا ​فيها، ​أو ​(2) ​تحدث ​نتيجة ​حادثة ​أو ​كارثة ​طبيعية ​أو ​لعدم ​إخطار ​المستأجر ​المؤجر ​عن ​حدوث ​الضرر ​في ​الوقت ​المناسب ​لمنع ​حدوثه. ​إذا ​طلب ​المؤجر ​ذلك، ​يستخدم ​المستأجر ​مزودي ​خدمات ​الصيانة ​المعتمدين ​من ​جانب ​المؤجر ​فقط.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-section">
+                <div class="tenancy-tc-en">7 Renewal</div>
+                <div class="tenancy-tc-ar">7 ​التجديد</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">7.1 The Landlord has the right to amend this Contract by giving the Tenant two (2) months written notice prior to the Expiry Date.</div>
+                <div class="tenancy-tc-ar">7-1 ​يحق ​أن ​يعدل ​المؤجر ​هذا ​العقد ​بعد ​توجيه ​إشعار ​كتابي ​مسبق ​إلى ​المستأجر ​مدته ​شهرين ​(2) ​على ​الأقل ​قبل ​تاريخ ​الانتهاء.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">7.2 If the Tenant does not wish to renew this Contract, the Tenant will provide the Landlord with at least two (2) months written notice prior to the Expiry Date (three (3) months prior written notice is required if the Tenant is not an individual). The Tenant acknowledges that by failing to provide the Landlord with such notice, loss and damage will be directly caused to the Landlord (such as delays in reinstating the Premises and/or re-leasing the Premises). If the Tenant does not provide such notice, in lieu of such notice being provided, the Tenant agrees to pay compensation to the Landlord equal to two (2) months' Rent (or three (3) months' Rent, if the Tenant is not an individual).</div>
+                <div class="tenancy-tc-ar">7-2 ​في ​حال ​عدم ​رغبة ​المستأجر ​في ​تجديد ​هذا ​العقد، ​يجب ​على ​المستأجر ​توجيه ​إشعار ​كتابي ​مسبق ​إلى ​المؤجر ​لا ​تقل ​مدته ​عن ​شهرين ​(2) ​قبل ​تاريخ ​الانتهاء ​(إذا ​لم ​يكن ​المستأجر ​شخصا ​يكون ​مطلوبا ​توجيه ​إشعار ​كتابي ​مسبق ​مدته ​ثلاثة ​(3) ​أشهر). ​يوافق ​المستأجر ​على ​أنه ​في ​حال ​عدم ​توجيه ​ذلك ​الإخطار ​سيتكبد ​المؤجر ​خسارة ​ويلحق ​به ​الضرر ​(مثل ​التأخير ​إعادة ​العين ​المؤجرة ​إلى ​حالتها ​الأولى ​و/ ​أو ​إعادة ​تأجير ​العين ​المؤجرة). ​وإذا ​لم ​يوجه ​المستأجر ​ذلك ​الإشعار ​وعوضا ​عن ​توجيهه ​يوافق ​المستأجر ​بأن ​يدفع ​تعويضا ​إلى ​المؤجر ​يساوي ​مبلغ ​الإيجار ​عن ​شهرين ​(2) ​(أما ​إذا ​لم ​يكن ​المستأجر ​شخصا ​يكون ​التعويض ​مساويا ​لمبلغ ​الإيجار ​عن ​ثلاثة ​(3) ​أشهر).</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">7.3 If the Tenant remains in occupation of the Premises after the Expiry Date, this Contract will be automatically renewed for a period equal to the Term (unless otherwise agreed). If this Contract is renewed, the Tenant agrees: (i) that the form of this Contract will be updated to the Landlord's then standard form of (renewal) contract (including any notified amendments, if any); (ii) that the Rent will not decrease but will be increased to the maximum permitted by law; and (iii) to pay the Administration Fee. If the Landlord agrees to renew this Contract for a period less than Term, the Tenant agrees that the renewed rent may be subject to a premium as determined by the Landlord (at the Landlord's sole discretion).</div>
+                <div class="tenancy-tc-ar">7-3 ​إذا ​ظل ​المستأجر ​شاغلاً ​للعين ​المؤجرة ​بعد ​تاريخ ​الانتهاء، ​فسيتم ​تجديد ​هذا ​العقد ​تلقائيًًا ​لمدة ​تساوي ​مدة ​العقد ​(ما ​لم ​يتم ​الاتفاق ​على ​خلاف ​ذلك). ​إذا ​تم ​تجديد ​هذا ​العقد، ​يوافق ​المستأجر ​على ​أنه ​سيتم ​تحديث ​نموذج ​هذا ​العقد ​بحسب ​نموذج ​تجديد ​العقد ​الذي ​يستخدمه ​المؤجر ​في ​حينه ​(بما ​في ​ذلك ​أي ​تعديلات ​تم ​الإخطار ​بها ​إن ​وجدت)، ​(2) ​أنه ​لن ​يتم ​تخفيض ​قيمة ​الإيجار ​ولكن ​ستتم ​زيادة ​قيمة ​الإيجار ​إلى ​الحد ​الأقصى ​الذي ​يسمح ​به ​القانون، ​(3) ​بأن ​يدفع ​الرسم ​الإداري. ​أما ​إذا ​وافق ​المؤجر ​على ​تجديد ​هذا ​العقد ​لفترة ​أقل ​من ​مدة ​العقد، ​يوافق ​المستأجر ​على ​أن ​الإيجار ​الجديد ​قد ​يخضع ​لتعويض ​على ​النحو ​الذي ​يحدده ​المؤجر ​(وفقًًا ​لتقدير ​المؤجر).</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">7.4 If the Tenant does not sign the renewal contract by the Expiry Date, the Tenant will pay the Late Renewal Fee (in addition to the Administration Fee). If the Tenant remains in occupation of the Premises after the Expiry Date (but does not enter a renewal contract), the Tenant will pay the Holding-Over Fee (in addition to the Rent calculated on a pro rata daily basis).</div>
+                <div class="tenancy-tc-ar">7-4 ​إذا ​لم ​يوقع ​المستأجر ​عقد ​تجديد ​بحلول ​تاريخ ​الانتهاء، ​يدفع ​المستأجر ​رسوم ​تأخير ​التجديد ​(بالإضافة ​إلى ​الرسم ​الإداري). ​وفي ​حالة ​إذا ​بقي ​المستأجر ​شاغلاً ​للعين ​المؤجرة ​بعد ​تاريخ ​الانتهاء ​(ولكن ​لم ​يبرم ​عقد ​تجديد)، ​يدفع ​المستأجر ​رسوم ​إشغال ​العين ​المؤجرة ​(بالإضافة ​إلى ​قيمة ​الإيجار ​المحسوبة ​بالنسبة ​والتناسب ​على ​أساس ​يومي).</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-section">
+                <div class="tenancy-tc-en">8 End of Term</div>
+                <div class="tenancy-tc-ar">8 ​نهاية ​مدة ​العقد</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">8.1 At the end of the Term (unless renewed), the Tenant will: (i) return all keys and security/access cards to the Premises and/or Building/Community; (ii) settle all final Utilities invoices and provide the Landlord with evidence of such payment; (iii) vacate, remove belongings, and return the Premises to the Landlord in good condition as existed when the Tenant first received handover and possession of the Premises, fair wear and tear excepted, to the Landlord's satisfaction (including cleaning, returning any painted surfaces to their original colour and condition, removal of any nails, hooks, screws, tacks and plaster over any holes in the wall, woodwork or doors). If the Tenant fails to inspect the Premises with the Landlord and/or countersign a condition report prepared by the Landlord, the Tenant agrees (and is deemed) to accept such condition report without objection.</div>
+                <div class="tenancy-tc-ar">8-1 ​بنهاية ​مدة ​هذا ​العقد، ​يلتزم ​المستأجر ​بما ​يلي ​(1) ​إعادة ​جميع ​المفاتيح ​وبطاقات ​الدخول/البطاقات ​الأمنية ​الخاصة ​بالعين ​المؤجرة ​و/أو ​البناية/ ​المجمع، ​(2) ​تسوية ​جميع ​فواتير ​المرافق ​وتقديم ​ما ​يثبت ​سدادها ​إلى ​المؤجر، ​(3) ​إخلاء ​العين ​المؤجرة ​وإزالة ​كل ​ما ​يخص ​المستأجر ​وتسليمها ​للمؤجر ​في ​حالة ​جيدة ​كما ​كانت ​عليها ​في ​تاريخ ​البدء ​عند ​استلامها ​باستثناء ​البلي ​والاستهلاك ​المعقول ​بالحالة ​التي ​يرضى ​المؤجر ​عنها ​(بما ​في ​ذلك ​أعمال ​النظافة ​وإعادة ​أي ​أسطح ​مدهونة ​إلى ​لونها ​الأصلي ​وحالتها ​الأصلية ​وإزالة ​أية ​أدوات ​تعليق ​أو ​مسامير ​من ​الثقوب ​في ​الحائط ​أو ​الأعمال ​الخشبية ​أو ​الأبواب). ​أما ​إذا ​فشل ​المستأجر ​في ​معاينة ​العين ​المؤجرة ​مع ​المؤجر ​و/أو ​توقيع ​تقرير ​حالة ​العين ​المؤجرة ​الذي ​أعده ​المؤجر، ​يوافق ​المستأجر ​(ويُعتبر ​أنه) ​قد ​قبل ​تقرير ​حالة ​العين ​المؤجرة ​عند ​الإخلاء ​المعد ​من ​جانب ​المؤجر ​دون ​اعتراض.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">8.2 If the Tenant fails to comply with Clause 8.1, the Tenant: (i) agrees that the Landlord may reinstate the Premises to the condition required under this Contract at the Tenant's cost; (ii) waives all rights to, and agrees that the Landlord may remove and dispose of, any items left inside (or outside) the Premises as the Landlord determines is appropriate and without compensation to the Tenant, without the requirement for notice or judicial order; and (iii) acknowledges that the Tenant remains liable to comply with this Contract (including making all payments due) until the Premises are returned to the Landlord in accordance with this Contract and the Landlord is able to re-lease the Premises.</div>
+                <div class="tenancy-tc-ar">8-2 ​إذا ​أخفق ​المستأجر ​في ​الامتثال ​للبند ​8-1، ​فإن ​المستأجر: ​(1) ​يوافق ​على ​أنه ​يجوز ​للمؤجر ​إعادة ​العين ​المؤجرة ​إلى ​الحالة ​المطلوبة ​بموجب ​هذا ​العقد ​على ​نفقة ​المستأجر؛ ​(2) ​يتنازل ​عن ​جميع ​الحقوق ​ويوافق ​على ​أنه ​يجوز ​للمؤجر ​إزالة ​أي ​عناصر ​متبقية ​داخل ​(أو ​خارج) ​العين ​المؤجرة ​والتخلص ​منها ​حسبما ​يراه ​المؤجر ​مناسبًًا ​ودون ​تعويض ​المستأجر، ​دون ​الحاجة ​إلى ​إشعار ​أو ​أمر ​قضائي؛ ​و ​(3) ​يقر ​بأن ​المستأجر ​يظل ​مسؤولاً ​عن ​الامتثال ​لهذا ​العقد ​(بما ​في ​ذلك ​سداد ​جميع ​الدفعات ​المستحقة) ​حتى ​يتم ​إعادة ​العين ​المؤجرة ​إلى ​المؤجر ​بموجب ​أحكام ​هذا ​العقد ​وقيام ​المؤجر ​بإعادة ​تأجيرها ​مرة ​ثانية.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-section">
+                <div class="tenancy-tc-en">9 Breach</div>
+                <div class="tenancy-tc-ar">9 ​المخالفة</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">9.1 If the Tenant breaches this Contract, the Tenant agrees: (i) that all payments under this Contract will automatically become due and the Landlord has the right to set-off any payments or cheques held against any payments due; (ii) to reimburse the Landlord against all costs, losses and liabilities incurred in respect of the Tenant's breach (including for example the cost of reinstating the Premises to the condition required by this Contract (such as removing any unauthorised alterations or additions to the Premises) and paying an apportionment of Rent calculated on a daily rate until such reinstatement works are completed); and (iii) without limitation to the foregoing, or Clauses 3 or 5.7, the Landlord may terminate this Contract in accordance with Clause 10.</div>
+                <div class="tenancy-tc-ar">9-1 ​إذا ​خالف ​المستأجر ​أحكام ​هذا ​العقد، ​يوافق ​المستأجر ​(1) ​على ​أن ​تصبح ​جميع ​الدفعات ​بموجب ​هذا ​العقد ​مستحقة ​تلقائيا ​ويحق ​للمؤجر ​مقاصة ​أي ​دفعات ​أو ​شيكات ​في ​حوزته ​مقابل ​الدفعات ​المستحقة، ​(2) ​أن ​يرد ​إلى ​المؤجر ​ويعوضه ​عن ​جميع ​التكاليف ​والخسائر ​والالتزامات ​التي ​يتكبدها ​المؤجر ​في ​تصحيح ​مخالفة ​المستأجر ​(بما ​في ​ذلك ​لكن ​دون ​حصر ​تكلفة ​إعادة ​العين ​المؤجرة ​إلى ​حالتها ​المطلوبة ​بموجب ​هذا ​العقد ​(ويشمل ​ذلك ​إزالة ​أي ​تعديلات ​أو ​إضافات ​غير ​مصرح ​بها ​بالعين ​المؤجرة) ​وسداد ​مبلغ ​متناسب ​من ​قيمة ​الإيجار ​المحتسب ​بمعدل ​يومي ​حتى ​انتهاء ​أعمال ​إعادة ​العين ​المؤجرة ​إلى ​حالتها ​الأولى)، ​(3) ​دون ​الحد ​من ​أحكام ​البند ​السابق ​أو ​البند ​3 ​أو ​5-7، ​يجوز ​للمؤجر ​أن ​ينهي ​عقد ​الإيجار ​هذا ​بموجب ​البند ​رقم ​10.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-section">
+                <div class="tenancy-tc-en">10 Termination</div>
+                <div class="tenancy-tc-ar">10 ​الإنهاء</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">10.1 The Tenant may terminate this Contract prior to the Expiry Date, subject to providing two (2) months prior written notice (three (3) months prior written notice is required if the Tenant is not an individual), paying the Early Termination Fee, and complying with this Contract.</div>
+                <div class="tenancy-tc-ar">10-1 ​يجوز ​للمستأجر ​إنهاء ​عقد ​الإيجار ​قبل ​تاريخ ​الانتهاء ​مع ​مراعاة ​توجيه ​إشعار ​خطي ​مسبق ​مدته ​شهرين ​(2) ​(أما ​إذا ​لم ​يكن ​المستأجر ​شخصا ​يكون ​مطلوبا ​توجيه ​إشعار ​كتابي ​مسبق ​مدته ​ثلاثة ​(3) ​أشهر)، ​وأن ​يدفع ​رسم ​الإنهاء ​المبكر ​وأن ​يلتزم ​بأحكام ​هذا ​العقد.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">10.2 The Landlord may immediately terminate this Contract and evict the Tenant from the Premises, without the need to obtain the Tenant's consent or a judicial order, if the Tenant: (i) breaches any term of this Contract and such breach is not remedied within thirty (30) days of written notice from the Landlord to do so; (ii) uses the Premises for illegal or immoral uses; (iii) intentionally or by the Tenant's negligence, causes damage and/or endangers the safety of the Premises and/or Building/Community; (iv) is adjudged bankrupt or becomes insolvent; or (v) if the Landlord is satisfied that the Premises have been abandoned, at the Landlord's discretion (all without requirement for written notice). The Early Termination Fee is payable if this Contract is terminated by the Landlord prior to the Expiry Date.</div>
+                <div class="tenancy-tc-ar">10-2 ​يجوز ​للمؤجر ​أن ​يقوم ​بإنهاء ​هذا ​العقد ​وإخلاء ​المستأجر ​من ​العين ​المؤجرة ​على ​الفور ​ودون ​الحاجة ​إلى ​الحصول ​على ​موافقة ​المستأجر ​أو ​أي ​أمر ​قضائي ​في ​حال ​قيام ​المستأجر ​بما ​يلي ​(1) ​مخالفة ​أي ​بند ​من ​بنود ​هذا ​العقد ​وعدم ​تصحيح ​تلك ​المخالفة ​خلال ​ثلاثين ​(30) ​يوما ​من ​تاريخ ​توجيه ​إشعار ​كتابي ​من ​المؤجر ​يطالبه ​بذلك، ​(2) ​استخدام ​العين ​المؤجرة ​استخداما ​غير ​قانوني ​أو ​غير ​أخلاقي، ​(3) ​التسبب ​عمدا ​أو ​بإهمال ​المستأجر ​في ​وقوع ​أضرار ​بالعين ​المؤجرة ​و/ ​أو ​تعريض ​سلامة ​العين ​المؤجرة ​و ​/أو ​البناية ​/ ​المجمع ​للخطر، ​(4) ​صدور ​قرار ​وحكم ​بإفلاسه ​أو ​أصبح ​معسرا، ​أو ​(5) ​إذا ​اقتنع ​المؤجر ​(بمحض ​اختياره) ​بأن ​العين ​المؤجرة ​قد ​أصبحت ​مهجورة ​(ويكون ​كل ​ذلك ​دون ​الحاجة ​لتوجيه ​إشعار ​كتابي). ​كما ​يتم ​دفع ​رسوم ​الإنهاء ​المبكر ​في ​حال ​إنهاء ​هذا ​العقد ​من ​قِبل ​المؤجر ​قبل ​تاريخ ​الانتهاء.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">10.3 If this Contract is terminated by the Landlord, without prejudice to the Landlord's rights under this Contract (including at Clauses 8 and/or 9) or at law, and without requirement for notice or to obtain a judicial order, the Tenant agrees that the Landlord may: (i) retain all monies paid by the Tenant (including the Security Deposit) to the date of termination; (ii) claim against the Tenant for all damage and losses incurred by the Landlord; and (iii) re-enter and repossess the Premises, without compensation to the Tenant.</div>
+                <div class="tenancy-tc-ar">10-3 ​إذا ​تم ​إنهاء ​هذا ​العقد ​من ​جانب ​المؤجر، ​دون ​المساس ​بحقوق ​المؤجر ​بموجب ​هذا ​العقد ​(بما ​يشمل ​البنود ​8 ​و/أو ​9) ​أو ​بموجب ​القانون ​ودون ​شرط ​توجيه ​إشعار ​أو ​الحصول ​على ​أمر ​قضائي، ​يوافق ​المستأجر ​على ​أنه ​يجوز ​للمؤجر ​القيام ​بما ​يلي ​(1) ​الاحتفاظ ​بالأموال ​التي ​دفعها ​المستأجر ​(بما ​في ​ذلك ​وديعة ​الضمان) ​حتى ​تاريخ ​الإنهاء، ​(2) ​مطالبة ​المستأجر ​بالتعويض ​عن ​جميع ​الأضرار ​والخسائر ​التي ​تكبدها ​المؤجر، ​(3) ​إعادة ​دخول ​العين ​المؤجرة ​مرة ​أخرى ​واسترداد ​حيازتها ​دون ​تعويض ​المستأجر ​عن ​ذلك.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-section">
+                <div class="tenancy-tc-en">11 Waiver of Liability and Indemnification</div>
+                <div class="tenancy-tc-ar">11 ​الإعفاء ​من ​المسؤولية ​والتعويض</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">11.1 The Tenant's use of the Premises and Building/Community (including any carpark space) is at the Tenant's own risk and the Landlord (or Landlord's representatives) are not responsible or liable in any way whatsoever for any loss, damage or injury to any person or property howsoever caused.</div>
+                <div class="tenancy-tc-ar">11-1 ​يكون ​استخدام ​المستأجر ​للعين ​المؤجرة ​والبناية/ ​المجمع ​(بما ​في ​ذلك ​استخدام ​أي ​موقف ​سيارات) ​على ​مسؤوليته ​الخاصة ​ولا ​يكون ​المؤجر ​(أو ​ممثلوه) ​مسؤولا ​/ ​مسؤولين ​بأي ​شكل ​مهما ​كان ​عن ​أي ​خسارة ​أو ​ضرر ​أو ​إصابة ​تقع ​لأي ​شخص ​أو ​ممتلكات ​مهما ​كان ​السبب ​وراء ​ذلك.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">11.2 The Tenant will indemnify, defend and hold harmless the Landlord (and Landlord's affiliates and representatives) from and against all losses, liabilities, damages, claims, costs and expenses incurred or suffered (including resulting from claims by third parties) during the Term whatsoever, including without limitation in relation to any breach of this Contract, or any damage to property or injury or fatality caused to any person directly or indirectly by any act or omission of the Tenant and/or its Occupiers, or that arises out of or is related to this Contract and/or the occupation or use of the Premises by the Tenant and/or its Occupiers.</div>
+                <div class="tenancy-tc-ar">11-2 ​يلتزم ​المستأجر ​بتعويض ​المؤجر ​(وممثليه ​وتابعيه) ​والدفاع ​عنه ​والاستمرار ​في ​تعويضه ​عن ​وضد ​كل ​الخسائر ​والالتزامات ​والأضرار ​والمطالبات ​والتكاليف ​والنفقات ​مهما ​كانت ​التي ​يتكبدها ​أو ​يتحملها ​(بما ​في ​ذلك ​ما ​يكون ​ناجما ​عن ​مطالبات ​الغير) ​خلال ​مدة ​العقد، ​ويشمل ​ذلك ​دون ​حصر ​ما ​يتعلق ​بأي ​مخالفة ​لأحكام ​هذا ​العقد ​أو ​أي ​أضرار ​تلحق ​بأي ​ممتلكات ​أو ​وقوع ​إصابة ​أو ​وفاة ​لأي ​شخص ​بشكل ​مباشر ​أو ​غير ​مباشر ​نتيجة ​لتصرف ​المستأجر ​أو ​امتناعه ​عن ​التصرف ​أو ​التي ​قد ​تنشأ ​عن ​أو ​تتعلق ​بهذا ​العقد ​و/أو ​إشغال ​أو ​استخدام ​العين ​المؤجرة ​من ​جانب ​المستأجر ​و/أو ​شاغليه.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">11.3 The Landlord will not be liable to the Tenant in relation to: (i) interruption of any utilities during periods of inspection, maintenance or repair of the same; (ii) breakdown of, or defects in, any utilities, conduits and/or services serving the Premises; (iii) damage caused by an act or omission by the Tenant or its Occupiers; or (iv) events beyond the reasonable control of the Landlord.</div>
+                <div class="tenancy-tc-ar">11-3 ​لا ​يكون ​المؤجر ​مسؤولا ​تجاه ​المستأجر ​فيما ​يتعلق: ​(1) ​بانقطاع ​الخدمة ​عن ​أي ​مرافق ​خلال ​فترات ​المعاينة ​أو ​الصيانة ​أو ​الإصلاح ​لتلك ​المرافق، ​(2) ​بأي ​توقف ​أو ​قصور ​أي ​مرافق ​و/أو ​تمديدات ​و/أو ​خدمات ​تخدم ​العين ​المؤجرة، ​(3) ​بالضرر ​الذي ​يقع ​نتيجة ​لتصرف ​المستأجر ​أو ​شاغلي ​العين ​المؤجرة ​التابعين ​للمستأجر، ​(4) ​بالحالات ​التي ​تقع ​خارج ​السيطرة ​المعقولة ​للمؤجر.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">11.4 In no circumstances will the Landlord be liable to the Tenant for any direct or indirect loss of profit or revenue or any punitive, special, indirect, incidental or consequential loss of any nature whatsoever, howsoever incurred, including without limitation, any loss of data, opportunity, contracts, business, or goodwill.</div>
+                <div class="tenancy-tc-ar">11-4 ​لن ​يكون ​المؤجر ​مسؤولا ​بأي ​حال ​تجاه ​المستأجر ​عن ​أي ​خسارة ​مباشرة ​أو ​غير ​مباشرة ​لأرباح ​أو ​عوائد ​أو ​أي ​خسارة ​جزائية ​أو ​خاصة ​أو ​غير ​مباشرة ​أو ​عارضة ​أو ​لاحقة ​مهما ​كانت ​طبيعتها ​ومهما ​كانت ​كيفية ​حدوثها ​بما ​في ​ذلك ​على ​دون ​حصر ​أي ​فقدان ​لمعلومات ​أو ​فرصة ​أو ​عقود ​أو ​أعمال ​أو ​سمعة ​تجارية.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-section">
+                <div class="tenancy-tc-en">12 Fees</div>
+                <div class="tenancy-tc-ar">12 ​الرسوم</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">Without limiting the Landlord's rights under this Contract, the Rules or at law, the Tenant will pay the following fees as agreed compensation to the Landlord (which the Tenant agrees in each case is reasonable and is non-refundable) as and when applicable as set out below:</div>
+                <div class="tenancy-tc-ar">دون ​الحد ​من ​حقوق ​المؤجر ​بموجب ​هذا ​العقد ​(أو ​القواعد) ​أو ​بموجب ​القانون، ​يلتزم ​المستأجر ​بسداد ​الرسوم ​التالية ​كتعويض ​متفق ​عليه ​إلى ​المؤجر ​(ويوافق ​المستأجر ​على ​أن ​تلك ​الرسوم ​عادلة ​ومنصفة ​وغير ​قابلة ​للاسترداد) ​كما ​وعندما ​يكون ​معمولا ​بها ​على ​النحو ​المبين ​أدناه:</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">12.1 Ejari Fee: All fees required to register this Contract on the Ejari register (including the Landlord's Ejari administration processing fees); payable on or before the Effective Date.</div>
+                <div class="tenancy-tc-ar">12-1 ​رسم ​إيجاري: ​كل ​الرسوم ​(بما ​في ​ذلك ​رسم ​إداري ​المستحق ​للمؤجر ​لإنجاز ​معاملة ​إيجاري) ​المطلوبة ​لتسجيل ​هذا ​العقد ​في ​سجل ​إيجاري ​المستحقة ​في ​تاريخ ​السريان ​أو ​قبله.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">12.2 Bounced Cheque Fee: AED 1,000; payable if a cheque does not provide cleared funds.</div>
+                <div class="tenancy-tc-ar">12-2 ​رسم ​شيك ​مرتجع: ​1000 ​درهم ​إماراتي ​(المستحق ​عندما ​لا ​يتم ​صرف ​شيك ​بأموال ​قابلة ​للتحصيل).</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">12.3 Cheque Deferral Fee: the higher of AED 250 or the Late Payment Fee; payable if the Landlord agrees to delay presentation of a cheque, at the Tenant's request.</div>
+                <div class="tenancy-tc-ar">12-3 ​رسم ​تأجيل ​شيك: ​مبلغ ​250 ​درهم ​إماراتي ​أو ​مبلغ ​رسم ​السداد ​المتأخر ​أيهما ​أكبر، ​المستحق ​الدفع ​في ​حال ​موافقة ​المؤجر ​على ​تأجيل ​تقديم ​الشيك ​للصرف ​بناء ​على ​طلب ​المستأجر.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">12.4 Replace Cheque Fee: AED 250; payable if the Landlord agrees to replace a cheque, at the Tenant's request.</div>
+                <div class="tenancy-tc-ar">12-4 ​رسم ​استبدال ​شيك: ​250 ​درهم ​إماراتي ​يستحق ​الدفع ​في ​حال ​موافقة ​المؤجر ​على ​استبدال ​شيك ​بناء ​على ​طلب ​المستأجر.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">12.5 Early Termination Fee: Equal to two (2) months' Rent (or three (3) months' Rent; if the Tenant is not an individual); payable if the Tenant provides notice to terminate this Contract and/or vacates the Premises prior to the Expiry Date.</div>
+                <div class="tenancy-tc-ar">12-5 ​رسم ​الإنهاء ​المبكر: ​يعادل ​مبلغ ​الإيجار ​لمدة ​شهرين ​(2) ​(أما ​إذا ​لم ​يكن ​المستأجر ​شخصا ​يكون ​الرسم ​معادلا ​لإيجار ​ثلاثة ​(3) ​أشهر) ​ويكون ​مستحق ​الدفع ​إذا ​وجه ​المستأجر ​إشعاراً ​لإنهاء ​هذا ​العقد ​و/ ​أو ​إخلاء ​العين ​المؤجرة ​قبل ​تاريخ ​الانتهاء.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">12.6 Late Payment Fee: Calculated at the rate of 15% per annum on a pro rata daily basis for each day that a payment under this Contract is not paid on the due date (until the date that payment (and applicable Late Payment Fee) is made in cleared funds).</div>
+                <div class="tenancy-tc-ar">12-6 ​رسم ​السداد ​المتأخر: ​يتم ​احتسابه ​بمعدل ​15% ​سنوياً ​على ​أساس ​تناسبي ​يومي ​عن ​كل ​يوم ​تأخير ​عن ​سداد ​أي ​دفعة ​بموجب ​هذا ​العقد ​في ​تاريخ ​الاستحقاق ​(حتى ​تاريخ ​سداد ​الدفعة ​ورسم ​السداد ​المتأخر ​المعمول ​بها) ​وتكون ​من ​أموال ​قابلة ​للتحصيل.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">12.7 Late Renewal Fee: Calculated as AED 50 (per unit) per day; payable for each day that the signed renewal contract and/or payments thereunder are not received, if this Contract is renewed.</div>
+                <div class="tenancy-tc-ar">12-7 ​رسم ​التجديد ​المتأخر: ​يتم ​احتسابه ​بمعدل ​50 ​درهم ​إماراتي ​يوميا ​عن ​كل ​يوم ​تأخير ​(لكل ​وحدة)، ​ويتم ​دفعه ​عن ​كل ​يوم ​لا ​يتم ​فيه ​استلام ​عقد ​التجديد ​الموقع ​و ​/ ​أو ​الدفعات ​بموجبه، ​في ​حال ​تم ​تجديد ​هذا ​العقد.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">12.8 Administration Fee: AED 500; payable (i) if this Contract is renewed; and (ii) upon each request by the Tenant for variation, consent and issuance of any no objection or certification letter.</div>
+                <div class="tenancy-tc-ar">12-8 ​رسم ​إداري: ​مبلغ ​500 ​درهم ​إماراتي ​يستحق ​الدفع ​(1) ​في ​حال ​تجديد ​العقد ​و(2) ​عند ​كل ​طلب ​من ​المستأجر ​لتغيير ​أو ​موافقة ​أو ​إصدار ​أي ​شهادة ​عدم ​ممانعة ​أو ​رسائل.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">12.9 Holding-Over Fee: AED 50 per day (in addition to the Rent) calculated on a pro rata daily basis for each day that the Tenant remains in the Premises after the Expiry Date, until the Tenant has: (i) signed the renewal contract; or (ii) vacated the Premises in accordance with this Contract.</div>
+                <div class="tenancy-tc-ar">12-9 ​رسوم ​الإشغال ​بعد ​انتهاء ​المدة: ​(50 ​درهم ​إماراتي ​في ​اليوم) ​(بالإضافة ​إلى ​قيمة ​الإيجار) ​محسوبة ​على ​أساس ​تناسبي ​يومي ​لكل ​يوم ​يبقى ​فيه ​المستأجر ​شاغلاً ​للعين ​المؤجرة ​بعد ​تاريخ ​الانتهاء ​حتى ​يقوم ​المستأجر ​(1) ​بتوقيع ​عقد ​تجديد؛ ​أو ​(2) ​إخلاء ​العين ​المؤجرة ​وفقاً ​لهذا ​العقد.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-section">
+                <div class="tenancy-tc-en">13 General</div>
+                <div class="tenancy-tc-ar">13 ​أحكام ​عامة</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">13.1 The Landlord may assign, transfer or dispose of its interest in the Premises and/or this Contract to a third party without notice or the consent of the Tenant. The Tenant may not assign, transfer, sublease/sublet or share, mortgage, or grant any other security interest over the Premises and/or this Contract without the Landlord's prior written approval.</div>
+                <div class="tenancy-tc-ar">13-1 ​يجوز ​للمؤجر ​أن ​يتنازل ​أو ​ينقل ​أو ​يتصرف ​في ​مصلحته ​في ​العين ​المؤجرة ​و/أو ​هذا ​العقد ​إلى ​طرف ​ثالث ​دون ​توجيه ​إشعار ​إلى ​المستأجر ​أو ​الحصول ​على ​موافقته. ​لا ​يجوز ​أن ​يتنازل ​المستأجر ​أو ​ينقل ​أو ​يؤجر ​من ​الباطن ​أو ​يتقاسم ​أو ​يرهن ​أو ​يمنح ​أي ​حصة ​ضمان ​آخر ​على ​العين ​المؤجرة ​و/أو ​هذا ​العقد ​دون ​موافقة ​كتابية ​مسبقة ​من ​المؤجر.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">13.2 This Contract forms the entire agreement between the parties in respect of the lease of the Premises. The Tenant agrees that the Tenant has not entered into this Contract in reliance on any representation, warranty or statement made by or on behalf of the Landlord. Except as provided for herein, no variation or amendment to this Contract shall be binding on a party unless it is written and signed by both parties.</div>
+                <div class="tenancy-tc-ar">13-2 ​يشكل ​هذا ​العقد ​كامل ​ما ​اتفق ​عليه ​الطرفان ​فيما ​يتعلق ​بالعين ​المؤجرة، ​ويوافق ​المستأجر ​على ​أنه ​لم ​يقم ​بتحرير ​هذا ​العقد ​اعتمادا ​على ​أي ​تصريحات ​أو ​ضمان ​أو ​بيان ​(سواء ​كان ​شفهيا ​أو ​كتابيا ​أو ​ضمنيا) ​من ​جانب ​المؤجر ​أو ​نيابة ​عنه. ​باستثناء ​ما ​ينص ​عليه ​هذا ​العقد، ​لن ​يكون ​أي ​تغيير ​أو ​تعديل ​لهذا ​العقد ​ملزما ​لأي ​من ​الطرفين ​إلا ​إذا ​تم ​الاتفاق ​عليه ​كتابيا ​والتوقيع ​عليه ​من ​قبل ​الطرفين.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">13.3 If any provision in this Contract is held to be illegal, void, invalid or unenforceable for any reason, the legality, validity and enforceability of the remainder of this Contract will not be affected. No party shall be deemed to have waived any right resulting from any failure to perform by another party unless it has made such waiver specifically in writing.</div>
+                <div class="tenancy-tc-ar">13-3 ​إذا ​أصبح ​أي ​حكم ​من ​أحكام ​هذا ​العقد ​غير ​قانوني ​أو ​باطلا ​أو ​غير ​ساري ​المفعول ​أو ​غير ​قابل ​للتنفيذ ​لأي ​سبب، ​عندئذ ​لن ​تتأثر ​قانونية ​وسريان ​وقابلية ​تنفيذ ​غيره ​من ​أحكام ​هذا ​العقد. ​ولن ​يُعتبر ​أي ​من ​الطرفين ​أنه ​قد ​تنازل ​عن ​أي ​حق ​ناجم ​عن ​أي ​تقصير ​في ​أداء ​من ​جانب ​طرف ​آخر ​إلا ​إذا ​كان ​قد ​قام ​بهذا ​التنازل ​كتابيا ​بشكل ​محدد.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">13.4 Expiry or termination of this Contract is without prejudice to any existing breaches of this Contract by either party. The following clauses shall survive expiry or termination: Clauses 2.3, 3.2, 4, 5.7, 8, 9, 10, 11, 12 and 13.</div>
+                <div class="tenancy-tc-ar">13-4 ​يكون ​إنهاء ​هذا ​العقد ​وانتهائه ​دون ​مساس ​بأي ​مخالفات ​قائمة ​ارتكبها ​أي ​من ​الطرفين. ​تستمر ​البنود ​التالية ​سارية ​رغم ​الإنهاء: ​البنود ​أرقام ​2-3، ​3-2، ​4، ​5-7، ​8، ​9، ​10، ​11، ​12، ​13.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">13.5 The Landlord may, from time to time, appoint and/or authorise a managing agent to perform all rights and obligations of the Landlord under this Contract. The Tenant shall co-operate with the Landlord's nominated agent at all times.</div>
+                <div class="tenancy-tc-ar">13-5 ​يجوز ​للمؤجر ​أن ​يعين/يخوّل ​من ​حين ​لآخر ​وكيلا ​إداريا ​لأداء ​حقوقه ​والتزاماته ​بموجب ​هذا ​العقد. ​يتعاون ​المستأجر ​مع ​الوكيل ​المعين ​من ​جانب ​المؤجر ​في ​كل ​الأوقات.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">13.6 The Tenant agrees to provide on demand to the Landlord's satisfaction valid identification for the Tenant and its Occupiers, and if the Tenant is a corporate, copies of all requested corporate documentation.</div>
+                <div class="tenancy-tc-ar">13-6 ​يوافق ​المستأجر ​على ​أن ​يقدم ​للمؤجر ​عند ​الطلب ​بطاقات ​هوية ​سارية ​للمستأجر ​وشاغليه، ​وإذا ​كان ​المستأجر ​شركة، ​يوافق ​المستأجر ​على ​أن ​يقدم ​نسخ ​ثبوتية ​من ​كل ​مستندات ​التأسيس ​المطلوبة ​(إلى ​المؤجر ​بما ​يرضى ​المؤجر).</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">13.7 The Tenant confirms that the address and electronic contact details (email) set out above are correct, and are the Tenant's legal address to which the Landlord will send all correspondence and judicial/legal notices under this Contract.</div>
+                <div class="tenancy-tc-ar">13-7 ​يؤكد ​المستأجر ​على ​أن ​العنوان ​وبيانات ​الاتصال ​الإلكتروني ​(البريد ​الإلكتروني) ​المبينة ​أعلاه ​صحيحة ​وتمثل ​العنوان ​القانوني ​الذي ​يمكن ​للمؤجر ​توجيه ​جميع ​المراسلات ​والإشعارات ​القانونية ​والقضائية ​إليه ​بموجب ​هذا ​العقد.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">13.8 The Tenant agrees that the Landlord may obtain a credit report from the relevant authority (currently Al Etihad Credit Bureau) at the Tenant's cost.</div>
+                <div class="tenancy-tc-ar">13-8 ​يوافق ​المستأجر ​على ​أنه ​يجوز ​للمؤجر ​أن ​يحصل ​على ​تقرير ​ائتماني ​من ​السلطة ​المختصة ​(حاليا ​الاتحاد ​للمعلومات ​الائتمانية) ​على ​نفقة ​المستأجر.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">13.9 This Contract may be signed: (i) in hard copy or electronically in accordance with the Landlord's procedures and requirements; and/or (iii) in one or more counterparts, all of which taken together shall constitute one (1) instrument.</div>
+                <div class="tenancy-tc-ar">13-9 ​يجوز ​توقيع ​هذا ​العقد: ​(1) ​في ​نسخة ​ورقية ​أو ​إلكترونيًًا ​وفقًًا ​للإجراءات ​المتبعة ​من ​قِبل ​المؤجر ​ووفقًًا ​لمتطلباته؛ ​و ​/ ​أو ​(3) ​في ​نسخة ​واحدة ​أو ​أكثر، ​وتشكل ​جميع ​تلك ​النسخ ​مجتمعة ​مستندا ​واحدًًا.</div>
+            </div>
+            <div class="tenancy-tc-row tenancy-tc-clause">
+                <div class="tenancy-tc-en">13.10 This Contract will be governed by the laws of Dubai, UAE. Disputes relating to this Contract will be referred to the Dubai Rental Disputes Settlement Center, or such replacement body with jurisdiction to resolve landlord and tenant issues in Dubai, UAE.</div>
+                <div class="tenancy-tc-ar">13-10 ​يخضع ​هذا ​العقد ​لقوانين ​إمارة ​دبي ​وقوانين ​دولة ​الإمارات ​العربية ​المتحدة. ​وتحال ​المنازعات ​التي ​تتعلق ​بهذا ​العقد ​إلى ​مركز ​فض ​المنازعات ​الإيجارية ​أو ​أي ​هيئة ​بديلة ​لديها ​اختصاص ​لحل ​المنازعات ​التي ​تنشأ ​بين ​المؤجر ​والمستأجر ​في ​دبي، ​الإمارات ​العربية ​المتحدة.</div>
+            </div>
+        </div>
+    </template>
+</odoo>

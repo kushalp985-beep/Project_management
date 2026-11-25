@@ -1,0 +1,149 @@
+<odoo>
+    <record id="building_action" model="ir.actions.act_window">
+        <field name="name">Building</field>
+        <field name="res_model">property.building</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="unit_action" model="ir.actions.act_window">
+        <field name="name">Units</field>
+        <field name="res_model">property.unit</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+    <record id="contract_action" model="ir.actions.act_window">
+        <field name="name">Contract</field>
+        <field name="res_model">property.contract</field>
+    </record>
+    <record id="contract_action_contract" model="ir.actions.act_window">
+        <field name="name">Contract</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', 'not in', ['proposal', 'pwaiting', 'papproved', 'psent', 'pconfirmed',
+            'prejected'])]
+        </field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_proposal" model="ir.actions.act_window">
+        <field name="name">Proposal</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', '=', 'proposal')]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_waiting_for_approval" model="ir.actions.act_window">
+        <field name="name">Waiting for Approval</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', '=', 'pwaiting')]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_proposal_approved" model="ir.actions.act_window">
+        <field name="name">Proposal Approved</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', '=', 'papproved')]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_proposal_sent" model="ir.actions.act_window">
+        <field name="name">Proposal Sent</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', '=', 'psent')]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_proposal_confirmed" model="ir.actions.act_window">
+        <field name="name">Proposal Confirmed</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', '=', 'pconfirmed')]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_proposal_rejected" model="ir.actions.act_window">
+        <field name="name">Proposal Rejected</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', '=', 'prejected')]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_new_contract" model="ir.actions.act_window">
+        <field name="name">New Contract</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', '=', 'contract')]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_contract_sent" model="ir.actions.act_window">
+        <field name="name">Contract Sent</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', '=', 'csent')]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_confirmed" model="ir.actions.act_window">
+        <field name="name">Confirmed</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', '=', 'cconfirmed')]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_legal_approved" model="ir.actions.act_window">
+        <field name="name">Legal Approved</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', '=', 'clegalapproved')]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_signed" model="ir.actions.act_window">
+        <field name="name">Signed</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', '=', 'signed')]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_canceled" model="ir.actions.act_window">
+        <field name="name">Canceled</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', '=', 'canceled')]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="project_action" model="ir.actions.act_window">
+        <field name="name">Project</field>
+        <field name="res_model">property.project</field>
+    </record>
+    <record id="buildingType_action" model="ir.actions.act_window">
+        <field name="name">Building Type</field>
+        <field name="res_model">property.building.type</field>
+    </record>
+    <record id="buildingUsage_action" model="ir.actions.act_window">
+        <field name="name">Building Usage</field>
+        <field name="res_model">property.building.usage</field>
+    </record>
+    <record id="unitSubtype_action" model="ir.actions.act_window">
+        <field name="name">Unit Subtype</field>
+        <field name="res_model">property.unit.subtype</field>
+    </record>
+    <record id="unitType_action" model="ir.actions.act_window">
+        <field name="name">Unit Type</field>
+        <field name="res_model">property.unit.type</field>
+    </record>
+    <record id="unitUsage_action" model="ir.actions.act_window">
+        <field name="name">Unit Usage</field>
+        <field name="res_model">property.unit.usage</field>
+    </record>
+    <record id="action_tenant_contacts" model="ir.actions.act_window">
+        <field name="name">Tenants</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="domain">[('contact_type', '=', 'tenant')]</field>
+    </record>
+    <record id="contract_action_to_be_renewed" model="ir.actions.act_window">
+        <field name="name">Contracts to be Renewed</field>
+        <field name="res_model">property.contract</field>
+        <field name="domain">[('state', '=', 'berenew')]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_renewal" model="ir.actions.act_window">
+        <field name="name">Contract Renewal</field>
+        <field name="res_model">contract.renewal</field>
+        <field name="domain">[('state_renew', 'in', ['rcnew','rcrapproved','rcdone'])]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="contract_action_termination" model="ir.actions.act_window">
+        <field name="name">Contract Termination</field>
+        <field name="res_model">contract.termination</field>
+        <field name="domain">[('state_term', 'in', ['new', 'tapproved', 'bill_check', 'inspection_checked'])]</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="facility_action" model="ir.actions.act_window">
+        <field name="name">Facilities</field>
+        <field name="res_model">property.facilities</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

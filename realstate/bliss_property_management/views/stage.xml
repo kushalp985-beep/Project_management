@@ -1,0 +1,116 @@
+<odoo>
+    <data noupdate="1">
+
+        <!-- Proposal Flow -->
+        <record id="stage_proposal" model="property.contract.stage">
+            <field name="name">Proposal</field>
+            <field name="sequence">1</field>
+            <field name="state">proposal</field>
+            <field name="color">1</field>
+        </record>
+
+        <record id="stage_pwaiting" model="property.contract.stage">
+            <field name="name">Waiting for Approval</field>
+            <field name="sequence">2</field>
+            <field name="state">pwaiting</field>
+            <field name="color">2</field>
+        </record>
+
+        <record id="stage_papproved" model="property.contract.stage">
+            <field name="name">Proposal Approved</field>
+            <field name="sequence">3</field>
+            <field name="state">papproved</field>
+            <field name="color">3</field>
+        </record>
+
+        <record id="stage_psent" model="property.contract.stage">
+            <field name="name">Proposal Sent</field>
+            <field name="sequence">4</field>
+            <field name="state">psent</field>
+            <field name="color">4</field>
+        </record>
+
+        <record id="stage_pconfirmed" model="property.contract.stage">
+            <field name="name">Proposal Confirmed</field>
+            <field name="sequence">5</field>
+            <field name="state">pconfirmed</field>
+            <field name="color">5</field>
+        </record>
+
+        <record id="stage_prejected" model="property.contract.stage">
+            <field name="name">Proposal Rejected</field>
+            <field name="sequence">6</field>
+            <field name="state">prejected</field>
+            <field name="color">9</field>
+            <field name="fold">1</field>
+        </record>
+
+        <!-- Contract Flow -->
+        <record id="stage_contract" model="property.contract.stage">
+            <field name="name">New Contract</field>
+            <field name="sequence">7</field>
+            <field name="state">contract</field>
+            <field name="color">6</field>
+        </record>
+
+        <record id="stage_csent" model="property.contract.stage">
+            <field name="name">Contract Sent</field>
+            <field name="sequence">8</field>
+            <field name="state">csent</field>
+            <field name="color">7</field>
+        </record>
+
+        <record id="stage_cconfirmed" model="property.contract.stage">
+            <field name="name">Confirmed</field>
+            <field name="sequence">9</field>
+            <field name="state">cconfirmed</field>
+            <field name="color">8</field>
+        </record>
+
+        <record id="stage_legal" model="property.contract.stage">
+            <field name="name">Legal Approved</field>
+            <field name="sequence">10</field>
+            <field name="state">clegalapproved</field>
+            <field name="color">10</field>
+        </record>
+
+        <record id="stage_signed" model="property.contract.stage">
+            <field name="name">Signed</field>
+            <field name="sequence">11</field>
+            <field name="state">signed</field>
+            <field name="color">12</field>
+        </record>
+
+        <record id="stage_canceled" model="property.contract.stage">
+            <field name="name">Canceled</field>
+            <field name="sequence">12</field>
+            <field name="state">canceled</field>
+            <field name="color">13</field>
+            <field name="fold">1</field>
+        </record>
+
+        <!-- Renewal Flow -->
+        <record id="stage_berenew" model="property.contract.stage">
+            <field name="name">To Be Renew</field>
+            <field name="sequence">13</field>
+            <field name="state">berenew</field>
+            <field name="color">14</field>
+        </record>
+
+        <record id="stage_renewed" model="property.contract.stage">
+            <field name="name">Renewed</field>
+            <field name="sequence">14</field>
+            <field name="state">renewed</field>
+            <field name="color">15</field>
+        </record>
+
+        <record id="stage_ctermination" model="property.contract.stage">
+            <field name="name">Termination</field>
+            <field name="sequence">15</field>
+            <field name="state">ctermination</field>
+            <field name="color">11</field>
+            <field name="fold">1</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="tenancy_contract_page">
+        <t t-set="company" t-value="doc.company_id"/>
+        <t t-set="company_partner" t-value="company.partner_id"/>
+        <t t-set="tenant" t-value="doc.partner_id"/>
+        <t t-set="unit" t-value="doc.unit_id"/>
+        <t t-set="installment_cheques" t-value="doc._get_rent_installment_cheques().sorted(key=lambda c: (c.cheque_date or False, c.id))"/>
+        <t t-set="office_commission" t-value="doc.commission_value and (doc.value * doc.commission_value / 100.0) or 0.0"/>
+        <t t-set="account_total" t-value="(doc.value or 0.0) + office_commission"/>
+        <t t-set="contract_status" t-value="'Renew' if doc.is_renew else ('New' if doc.state == 'signed' else doc.state)"/>
+        <t t-set="contract_type" t-value="'Renew' if doc.is_renew else 'New'"/>
+        <t t-set="report_date" t-value="doc.date or doc.date_start"/>
+        <t t-set="tenant_phone" t-value="tenant.phone"/>
+        <t t-set="broker_name" t-value="doc.user_id.name if doc.user_id else False"/>
+
+        <div class="page tenancy-contract-page" style="font-family: Arial, sans-serif; font-size: 11px; color: #000;">
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">
+                <tr>
+                    <td style="width: 22%; vertical-align: top;"/>
+                    <td style="width: 56%; vertical-align: top; text-align: center; padding: 0 8px;">
+                        <div style="font-size: 17px; font-weight: bold; line-height: 1.35; margin-bottom: 4px;"
+                             t-esc="company.name or ''"/>
+                        <div style="font-size: 12px; line-height: 1.4;" t-if="company_partner.street"
+                             t-esc="company_partner.street"/>
+                        <div style="font-size: 12px; line-height: 1.4;">
+                            <t t-if="company_partner.city" t-esc="company_partner.city"/>
+                            <t t-if="company_partner.country_id">, <t t-esc="company_partner.country_id.name"/></t>
+                        </div>
+                        <div style="font-size: 12px; line-height: 1.4; margin-top: 2px;">
+                            <t t-if="company.phone">Tel: <t t-esc="company.phone"/></t>
+                            <t t-if="company.phone"> , </t>
+                            Fax: <t t-esc="company.company_registry or ''"/>
+                        </div>
+                    </td>
+                    <td style="width: 22%; vertical-align: top; text-align: right; font-size: 13px; line-height: 1.6; padding-top: 2px;">
+                        <div style="font-size: 13px; margin-bottom: 3px;">
+                            <span style="font-weight: bold;">Status :</span>
+                            <t t-esc="contract_status"/>
+                        </div>
+                        <div style="font-size: 13px; margin-bottom: 3px;">
+                            <span style="font-weight: bold;">Doc No :</span>
+                            <t t-esc="doc.code or 'code'"/>
+                        </div>
+                        <div style="font-size: 13px;">
+                            <span style="font-weight: bold;">Date :</span>
+                            <t t-if="report_date" t-esc="report_date" t-options="{'widget': 'date'}"/>
+                            <t t-else="">date</t>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div style="text-align: center; font-size: 18px; font-weight: bold; text-decoration: underline; margin: 12px 0 14px 0;">
+                TENANCY CONTRACT
+            </div>
+
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 10px;">
+                <tr>
+                    <td colspan="6" style="border: 1px solid #000; padding: 4px 6px;">
+                        Tower Name :
+                        <t t-esc="doc.building_id.building_name if doc.building_id else ''"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border: 1px solid #000; padding: 4px 6px;">
+                        Unit No :
+                        <t t-esc="unit.unit_no if unit and unit.unit_no else ''"/>
+                    </td>
+                    <td colspan="2" style="border: 1px solid #000; padding: 4px 6px;">
+                        Unit Type :
+                        <t t-esc="unit.unit_type_id.name if unit and unit.unit_type_id else ''"/>
+                    </td>
+                    <td colspan="2" style="border: 1px solid #000; padding: 4px 6px;">
+                        Floor :
+                        <t t-esc="unit.floor_no if unit and unit.floor_no else ''"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="border: 1px solid #000; padding: 4px 6px;">
+                        Tanent Name :
+                        <t t-esc="tenant.name if tenant else ''"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="border: 1px solid #000; padding: 4px 6px;">
+                        Chq. Payee Name :
+                        <t t-esc="tenant.name if tenant else ''"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border: 1px solid #000; padding: 4px 6px;">
+                        Phone No :
+                        <t t-esc="tenant_phone if tenant_phone else ''"/>
+                    </td>
+                    <td colspan="3" rowspan="2" style="border: 1px solid #000; padding: 4px 6px; text-align: center; vertical-align: middle;">
+                        <div>Length of Tenancy</div>
+                        <div style="margin-top: 8px;">
+                            <t t-if="doc.no_of_days" t-esc="str(doc.no_of_days) + ' days'"/>
+                            <t t-else="">length_of_tenancy</t>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border: 1px solid #000; padding: 4px 6px;">
+                        EID :
+                        <t t-esc="tenant.emirateId_number if tenant and tenant.emirateId_number else ''"/>
+                        <span style="margin-left: 20px;">Nationality :
+                            <t t-esc="tenant.nationality.name if tenant and tenant.nationality else ''"/>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border: 1px solid #000; padding: 4px 6px;">
+                        Contract Type <t t-esc="contract_type"/>
+                    </td>
+                    <td colspan="2" style="border: 1px solid #000; padding: 4px 6px;">
+                        Contract Start Date
+                        <t t-if="doc.date_start" t-esc="doc.date_start" t-options="{'widget': 'date'}"/>
+                        <t t-else="">date_start</t>
+                    </td>
+                    <td colspan="2" style="border: 1px solid #000; padding: 4px 6px;">
+                        End Date
+                        <t t-if="doc.date_stop" t-esc="doc.date_stop" t-options="{'widget': 'date'}"/>
+                        <t t-else="">date_stop</t>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border: 1px solid #000; padding: 4px 6px;">
+                        Original Amount :
+                        <t t-esc="doc.format_report_currency(doc.value)"/>
+                    </td>
+                    <td colspan="2" style="border: 1px solid #000; padding: 4px 6px;">
+                        Discount :
+                        <t t-esc="doc.discount or 0.0"/>
+                    </td>
+                    <td colspan="2" style="border: 1px solid #000; padding: 4px 6px;">
+                        Net Amount :
+                        <t t-esc="doc.format_report_currency(doc.total_value)"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border: 1px solid #000; padding: 4px 6px;">
+                        Previous Rent : 
+                    </td>
+                    <td colspan="3" style="border: 1px solid #000; padding: 4px 6px;">
+                        Base Rent :
+                        <t t-esc="doc.format_report_currency(doc.value)"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border: 1px solid #000; padding: 4px 6px;">
+                        Living Purpose: 
+                    </td>
+                    <td colspan="2" style="border: 1px solid #000; padding: 4px 6px;">
+                        Adv. Source: 
+                    </td>
+                    <td colspan="2" style="border: 1px solid #000; padding: 4px 6px;">
+                        Broker:
+                        <t t-esc="broker_name if broker_name else ''"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="border: 1px solid #000; padding: 4px 6px;">
+                        Notes:
+                        <t t-esc="doc.notes if doc.notes else ''"/>
+                    </td>
+                </tr>
+            </table>
+
+            <div style="font-weight: bold; margin: 6px 0 4px 0;">Account Details</div>
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 10px;">
+                <thead>
+                    <tr style="background-color: #f2f2f2;">
+                        <th style="border: 1px solid #000; padding: 4px; width: 8%;">S No</th>
+                        <th style="border: 1px solid #000; padding: 4px; width: 62%;">Particulars</th>
+                        <th style="border: 1px solid #000; padding: 4px; width: 30%; text-align: right;">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;">1</td>
+                        <td style="border: 1px solid #000; padding: 4px;">Rent</td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                            <t t-esc="doc.format_report_currency(doc.value)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;">2</td>
+                        <td style="border: 1px solid #000; padding: 4px;">Ejari Fees</td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                        
+                            <t t-esc="doc.format_report_currency(doc.ejari_fees)"/>
+                        
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;">3</td>
+                        <td style="border: 1px solid #000; padding: 4px;">Office Commission</td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                <t t-if="doc.commission_value" t-esc="doc.format_report_currency(office_commission)"/>
+                            <t t-else=""></t>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border: 1px solid #000; padding: 4px; font-weight: bold;">TOTAL</td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: right; font-weight: bold;">
+                            <t t-esc="doc.format_report_currency(account_total)"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="font-weight: bold; margin: 6px 0 4px 0;">Payment Details</div>
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 10px;">
+                <thead>
+                    <tr style="background-color: #f2f2f2;">
+                        <th style="border: 1px solid #000; padding: 4px;">S No</th>
+                        <th style="border: 1px solid #000; padding: 4px;">DocID</th>
+                        <th style="border: 1px solid #000; padding: 4px;">ChequeNO</th>
+                        <th style="border: 1px solid #000; padding: 4px;">Che Date</th>
+                        <th style="border: 1px solid #000; padding: 4px;">PayeeBank</th>
+                        <th style="border: 1px solid #000; padding: 4px; text-align: right;">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="installment_cheques" t-as="cheque">
+                        <tr>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: center;" t-esc="cheque_index + 1"/>
+                            <td style="border: 1px solid #000; padding: 4px;" t-esc="cheque.sequence or cheque.id"/>
+                            <td style="border: 1px solid #000; padding: 4px;" t-esc="cheque.cheque_number"/>
+                            <td style="border: 1px solid #000; padding: 4px;">
+                                <t t-if="cheque.cheque_date" t-esc="cheque.cheque_date" t-options="{'widget': 'date'}"/>
+                            </td>
+                            <td style="border: 1px solid #000; padding: 4px;">
+                                <t t-esc="doc.bank_id.name if doc.bank_id else ''"/>
+                            </td>
+                            <td style="border: 1px solid #000; padding: 4px; text-align: right;">
+                                <t t-esc="doc.format_report_currency(cheque.display_total_amount)"/>
+                            </td>
+                        </tr>
+                    </t>
+                    <tr t-if="not installment_cheques">
+                        <td style="border: 1px solid #000; padding: 4px; text-align: center;">1</td>
+                        <td style="border: 1px solid #000; padding: 4px;">doc_id</td>
+                        <td style="border: 1px solid #000; padding: 4px;">cheque_number</td>
+                        <td style="border: 1px solid #000; padding: 4px;">cheque_date</td>
+                        <td style="border: 1px solid #000; padding: 4px;">payee_bank</td>
+                        <td style="border: 1px solid #000; padding: 4px; text-align: right;">amount</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table style="width: 100%; border-collapse: collapse; margin-top: 8px;">
+                <tr>
+                    <td style="width: 75%; vertical-align: top; padding: 4px 0;">
+                        Amount In Words:
+                        <t t-if="doc.contract_currency_id and doc.total_value">
+                            <t t-esc="doc.contract_currency_id.amount_to_text(doc.total_value)"/>
+                        </t>
+                        <t t-else="">amount_in_words</t>
+                    </td>
+                    <td style="width: 25%; text-align: right; font-weight: bold; vertical-align: top; padding: 4px 0;">
+                        <t t-esc="doc.format_report_currency(doc.total_value)"/>
+                    </td>
+                </tr>
+            </table>
+
+            <table style="width: 100%; border-collapse: collapse; margin-top: 40px;">
+                <tr>
+                    <td style="width: 33%; text-align: center; padding-top: 30px; border-top: 1px solid #000;">
+                        Customer Name &amp; Signature
+                    </td>
+                    <td style="width: 34%; text-align: center; padding-top: 30px; border-top: 1px solid #000;">
+                        Prepared By
+                        <div style="margin-top: 6px;" t-esc="broker_name or ''"/>
+                    </td>
+                    <td style="width: 33%; text-align: center; padding-top: 30px; border-top: 1px solid #000;">
+                        Received By
+                        <div style="margin-top: 6px;"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <t t-call="bliss_property_management.tenancy_contract_terms_conditions"/>
+    </template>
+
+    <template id="report_tenancy_contract_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="bliss_property_management.tenancy_contract_page"/>
+            </t>
+        </t>
+    </template>
+</odoo>
