@@ -206,3 +206,11 @@ class PropertyInquiryWizard(models.TransientModel):
                 'date_to': self.date_to,
             },
         )
+
+    def action_print_xlsx(self):
+        self.ensure_one()
+        contracts = self._get_contracts()
+
+        return self.env['report.bliss_property_management.property_inquiry'].action_print_xlsx(
+            contracts
+        )   

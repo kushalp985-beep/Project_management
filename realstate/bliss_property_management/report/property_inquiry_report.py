@@ -3,6 +3,9 @@ import json
 
 from odoo import _, api, models
 from odoo.exceptions import UserError
+import io
+import base64
+import xlsxwriter
 
 
 class PropertyInquiryReport(models.AbstractModel):
@@ -107,4 +110,90 @@ class PropertyInquiryReport(models.AbstractModel):
             'date_from': data.get('date_from') or (wizard.date_from if wizard else False),
             'date_to': data.get('date_to') or (wizard.date_to if wizard else False),
             'format_amount': lambda contract, amount: contract.format_report_currency(amount),
+        }
+
+    @api.model
+    def action_print_xlsx(self, contracts):
+        output = io.BytesIO()
+        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+
+        title_format = workbook.add_format({
+            'bold': True,
+            'font_size': 14,
+            'bg_color': '#D9EAD3',
+        })
+        header_format = workbook.add_format({
+            'bold': True,
+            'border': 1,
+            'bg_color': '#D9EAD3',
+        })
+        cell_format = workbook.add_format({
+            'border': 1,
+            'text_wrap': True,
+            'valign': 'top',
+        })
+
+        def write_value(sheet, row, label, value):
+            if hasattr(value, '_name') and hasattr(value, 'ids'):
+                value = ', '.join(value.mapped('display_name'))
+
+            if isinstance(value, dict):
+                for key, val in value.items():
+                    row = write_value(
+                        sheet, row, f'{label} / {key}', val
+                    )
+                return row
+
+            if isinstance(value, (list, tuple)):
+                for index, val in enumerate(value, 1):
+                    row = write_value(
+                        sheet, row, f'{label} / {index}', val
+                    )
+                return row
+
+            if value is None or value is False:
+                value = ''
+            elif not isinstance(value, (str, int, float, bool)):
+                value = str(value)
+
+            sheet.write(row, 0, str(label), header_format)
+            sheet.write(row, 1, value, cell_format)
+            return row + 1
+
+        for index, contract in enumerate(contracts, 1):
+            page = self._build_page(contract)
+
+            sheet = workbook.add_worksheet(f'Unit {index}')
+            sheet.set_column('A:A', 35)
+            sheet.set_column('B:B', 55)
+
+            sheet.merge_range('A1:B1', 'UNIT RECORDS', title_format)
+            sheet.write('A3', 'Information', header_format)
+            sheet.write('B3', 'Details', header_format)
+
+            row = 3
+            for key, value in page.items():
+                row = write_value(
+                    sheet,
+                    row,
+                    key.replace('_', ' ').title(),
+                    value,
+                )
+
+            sheet.freeze_panes(3, 0)
+
+        workbook.close()
+        output.seek(0)
+
+        attachment = self.env['ir.attachment'].create({
+            'name': 'Unit_Records.xlsx',
+            'type': 'binary',
+            'datas': base64.b64encode(output.read()),
+            'mimetype': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        })
+
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'/web/content/{attachment.id}?download=true',
+            'target': 'self',
         }

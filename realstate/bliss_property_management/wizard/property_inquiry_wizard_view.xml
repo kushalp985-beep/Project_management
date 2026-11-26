@@ -38,6 +38,8 @@
                 <footer>
                     <button name="action_print_pdf" type="object" string="Print PDF"
                             class="btn-primary" data-hotkey="q"/>
+                    <button name="action_print_xlsx" type="object" string="Print XLSX"
+                            class="btn-secondary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
