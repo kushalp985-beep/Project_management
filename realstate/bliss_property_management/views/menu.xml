@@ -3,7 +3,7 @@
 
     <!-- Root menu -->
     <menuitem id="real_state_menu"
-              name="Real state"
+              name="Real State"
               web_icon="bliss_property_management,static/description/icon.png"/>
 
     <!-- Dashboard -->

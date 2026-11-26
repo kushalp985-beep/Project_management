@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+import io
+import base64
+import xlsxwriter
+
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
@@ -23,6 +27,9 @@ class UnitSummaryReportWizard(models.TransientModel):
         string='Unit',
         domain="['|', ('building_id', '=', building_id), ('building_id.project_id', '=', project_id)]",
     )
+
+    xlsx_file = fields.Binary(string='Excel File', attachment=False)
+    xlsx_filename = fields.Char(string='Excel Filename')
 
     @api.onchange('project_id')
     def _onchange_project_id(self):
@@ -132,3 +139,102 @@ class UnitSummaryReportWizard(models.TransientModel):
                 'report_title': 'Unit Summary Report',
             },
         )
+
+    def action_print_xlsx(self):
+        self.ensure_one()
+
+        contracts = self._get_contracts()
+        lines = self._get_report_lines(contracts)
+        totals = self._get_totals(lines)
+
+        output = io.BytesIO()
+        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+        sheet = workbook.add_worksheet('Unit Summary')
+
+        title_format = workbook.add_format({
+            'bold': True,
+            'font_size': 16,
+            'align': 'center',
+        })
+        header_format = workbook.add_format({
+            'bold': True,
+            'border': 1,
+            'bg_color': '#D9EAF7',
+        })
+        cell_format = workbook.add_format({'border': 1})
+        amount_format = workbook.add_format({
+            'border': 1,
+            'num_format': '#,##0.00',
+        })
+        total_format = workbook.add_format({
+            'bold': True,
+            'border': 1,
+            'num_format': '#,##0.00',
+        })
+
+        show_management_fee = totals['show_management_fee']
+
+        headers = ['Building', 'Unit']
+        if show_management_fee:
+            headers.append('Management Fee')
+        headers.extend(['Paid Amount', 'Unpaid Amount'])
+
+        sheet.merge_range(0, 0, 0, len(headers) - 1,
+                          'Unit Summary Report', title_format)
+
+        for col, header in enumerate(headers):
+            sheet.write(2, col, header, header_format)
+
+        row = 3
+        for line in lines:
+            col = 0
+            sheet.write(row, col, line['building_name'], cell_format)
+            col += 1
+            sheet.write(row, col, line['unit_name'], cell_format)
+            col += 1
+
+            if show_management_fee:
+                sheet.write_number(
+                    row, col, line['management_fee'], amount_format
+                )
+                col += 1
+
+            sheet.write_number(row, col, line['paid_amount'], amount_format)
+            col += 1
+            sheet.write_number(row, col, line['unpaid_amount'], amount_format)
+            row += 1
+
+        sheet.write(row, 0, 'Total', header_format)
+
+        if show_management_fee:
+            sheet.write_number(
+                row, 2, totals['total_management_fee'], total_format
+            )
+            paid_col, unpaid_col = 3, 4
+        else:
+            paid_col, unpaid_col = 2, 3
+
+        sheet.write_number(row, paid_col, totals['total_paid'], total_format)
+        sheet.write_number(row, unpaid_col, totals['total_unpaid'], total_format)
+
+        sheet.set_column(0, 1, 22)
+        sheet.set_column(2, len(headers) - 1, 18)
+
+        workbook.close()
+        output.seek(0)
+
+        filename = 'Unit_Summary_Report.xlsx'
+        self.write({
+            'xlsx_file': base64.b64encode(output.read()),
+            'xlsx_filename': filename,
+        })
+
+        return {
+            'type': 'ir.actions.act_url',
+            'url': (
+                '/web/content?model=unit.summary.report.wizard'
+                '&id=%s&field=xlsx_file&filename_field=xlsx_filename'
+                '&download=true' % self.id
+            ),
+            'target': 'self',
+        }
