@@ -171,6 +171,7 @@ class PropertyInquiryWizard(models.TransientModel):
             if self.date_to and move.date and move.date <= self.date_to:
                 return True
         return not (self.date_from or self.date_to)
+        
 
     def _get_contracts(self):
         self.ensure_one()
