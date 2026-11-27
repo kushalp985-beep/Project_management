@@ -34,6 +34,27 @@
             <field name="sequence">20</field>
         </record>
 
+        <record id="res_groups_privilege_bliss_property_management" model="res.groups.privilege">
+            <field name="name">Bliss Property Management</field>
+            <field name="sequence">20</field>
+            <field name="category_id" ref="module_category_bliss_property_management"/>
+        </record>
+
+        <record id="group_bliss_property_admin" model="res.groups">
+            <field name="name">Bliss Property Admin</field>
+            <field name="sequence">10</field>
+            <field name="privilege_id" ref="res_groups_privilege_bliss_property_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_bliss_property_user" model="res.groups">
+            <field name="name">Bliss Property User</field>
+            <field name="sequence">20</field>
+            <field name="privilege_id" ref="res_groups_privilege_bliss_property_management"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+    
+
         <record id="user_company_rule" model="ir.rule">
 			<field name="name">Account Cheque</field>
 			<field name="model_id" ref="model_account_cheque"/>
